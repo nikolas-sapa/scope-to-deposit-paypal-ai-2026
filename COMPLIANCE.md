@@ -7,7 +7,7 @@ Checked 2026-10-08, Europe/Athens. Status: preparation only, not submission read
 | Requirement | Current finding |
 | --- | --- |
 | Submission window | October 1–November 12, 2026; deadline 12:00 PST, 22:00 Athens |
-| Eligibility | Legal majority; geographic and organizer/judge/conflict exclusions apply to every participant. Human attestation pending |
+| Eligibility | Human confirmed adult age and Greece in another build chat. Entrant type, organizer/judge/conflict/support exclusions and ownership declarations remain unconfirmed |
 | Required platform | Meaningful PayPal sandbox integration plus AI; sponsor tools optional |
 | Development provenance | New project or significant update within window; record actual tools and changes |
 | Cursor | No mandatory Cursor clause found in four reviewed event pages |
@@ -34,7 +34,7 @@ Sources: [rules](https://paypalaihackathon.devpost.com/rules), [overview](https:
 
 | Check | Evidence/result | Remaining prerequisite |
 | --- | --- | --- |
-| Workspace | Empty project directory, no existing source, Git repo or `.env` | Approve design, then implement |
+| Workspace | Local preflight Git repo now exists on `hackathon/paypal-preflight`; no application source or `.env` | Approve design, then implement |
 | PayPal network | Unauthenticated sandbox OAuth endpoint GET returned HTTP 401 | Sandbox merchant app credentials and buyer access; authenticated OAuth check |
 | AI access | Existing `GEMINI_API_KEY`; model-list GET returned HTTP 200 with 45 generation-capable models | Approve provider/model and usage budget; real generation/evaluation |
 | GitHub | `gh auth status` successful | Human-selected remote and publication approval |
@@ -43,12 +43,14 @@ Sources: [rules](https://paypalaihackathon.devpost.com/rules), [overview](https:
 | Required skills | Brainstorming found in installed superpowers 6.2.0 plugin cache | Approved design/spec before writing-plans/implementation |
 | Context7 | No callable Context7 tools found | Enable required docs access before framework code |
 | Global references | Referenced skill catalog, MCP guide, agent governance absent at supplied paths | Reported missing; supplied AGENTS instructions retained |
-| Personal eligibility | Asked, no attestation yet | Residence, majority, entrant type, conflict/support confirmation |
+| Personal eligibility | Adult age and Greece confirmed by human, relayed by coordinating chat | Entrant type, conflict/support and ownership declarations; no identity documents needed |
 
 No authenticated PayPal call, checkout, capture, real webhook, evaluation, screenshot, fresh-checkout setup, code audit, push, deployment or submission completed.
 
 ## Preparation evidence
 
 Luna API lookup: six primary-source questions in session `work/paypal-api-research.md`. Sol independent security preflight: quote immutability, ownership, capture verification, durable idempotency, timeout reconciliation, webhook authentication, AI and secret boundaries. Independent spec review raised four material findings: revision overlap, cancellation race, webhook acknowledgement durability, authentic-but-mismatched evidence. SPEC.md addresses all four with explicit invariants and numerical checks. Preparation review only; final code/security review still required.
+
+Resumed preparation: JUDGE_ACCESS.md specifies custody and T08 account-provisioning-only exclusion. EVALUATION_DESIGN.md and 30 synthetic cases prepare measurable checks without calling a model or payment API. Follow-up Sol spec review found five further ambiguities; SPEC.md now covers approval rejection, capability expiry races, finite retry retention/lost-create recovery, provider-backed capture counts and authentication bypass checks. HANDOFF.md preserves architecture options and conditional worker ownership. No runtime test result inferred from these artifacts.
 
 Refresh event pages before implementation and again before submission. Keep final submitted build and access stable throughout judging.
