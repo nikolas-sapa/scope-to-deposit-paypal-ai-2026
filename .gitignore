@@ -9,3 +9,9 @@ playwright-report/
 test-results/
 .superpowers/
 .DS_Store
+# Private owner access and SQLite runtime artifacts, including custom locations.
+**/owner-access.json
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal

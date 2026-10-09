@@ -49,17 +49,17 @@ Server context `HttpContext`: request, DatabaseSync connection, Config, UTC cloc
 
 **Interfaces:** signatures in CONTRACTS.md. Auth bootstrap/login/logout/owner+buyer guards; openDatabase/transaction/getDatabase; create/list/get/save/approve engagement. Payment issue/create/capture not implemented here.
 
-- [ ] Add failing real-SQLite tests, including:
+- [x] Add failing real-SQLite tests, including:
 ```ts
 expect(() => transaction(db, () => Promise.resolve())).toThrow();
 // assert 10 cross-owner operations denied, 10 auth bypass requests denied,
 // 10 frozen-revision mutations denied, 10 unapproved checkout prerequisites denied.
 ```
-- [ ] Run `npm test -- tests/server`, observe missing-module/function failures.
-- [ ] Implement config with fixed sandbox, exact Host/Origin, opaque sessions (15-minute anonymous, 8-hour owner), random 32-byte token/CSRF/capability hashes, scrypt N=131072 r=8 p=1 maxmem256MiB, login throttling and bounded concurrent hashing. Setup provisions private local access file with restrictive permissions, never prints passwords.
-- [ ] Implement bounded drafts, optimistic version edits and server-authoritative approval. SQL triggers/guards must reject immutable rewrites even through direct DB tests. Explicit incomplete drafts can save; approval cannot.
-- [ ] Run task tests/typecheck; require numerical local checks, real database persistence/reopen check, 0 leaks in representative errors. Save evidence/report in work/PLAN/task-2-report.md.
-- [ ] Main verifies files/tests, commits, generates diff package; independent Sol task review checks spec compliance and quality. Fix material findings before payment packet.
+- [x] Run `npm test -- tests/server`, observe missing-module/function failures.
+- [x] Implement config with fixed sandbox, exact Host/Origin, opaque sessions (15-minute anonymous, 8-hour owner), random 32-byte token/CSRF/capability hashes, scrypt N=131072 r=8 p=1 maxmem256MiB, login throttling and bounded concurrent hashing. Setup provisions private local access file with restrictive permissions, never prints passwords.
+- [x] Implement bounded drafts, optimistic version edits and server-authoritative approval. SQL triggers/guards must reject immutable rewrites even through direct DB tests. Explicit incomplete drafts can save; approval cannot.
+- [x] Run task tests/typecheck; require numerical local checks, real database persistence/reopen check, 0 leaks in representative errors. Save evidence/report in work/PLAN/task-2-report.md.
+- [x] Main verifies files/tests, commits, generates diff package; independent Sol task review checks spec compliance and quality. Fix material findings before payment packet.
 
 ## Task 3: Sandbox payment/evidence services, Sol backend
 
