@@ -75,12 +75,12 @@ expect(() => transaction(db, () => Promise.resolve())).toThrow();
 
 ## Task 4: Real AI extraction boundary, Sol backend
 
-**Files:** create src/server/extraction.ts; tests/server/extraction.test.ts. Depends approved shared contract; can run independently after Task 2; main manages scheduling.
+**Files:** create src/server/extraction.ts; tests/server/extraction.test.ts. Depends approved shared contract; independent preparation and scoped checks run alongside Task 2; main manages scheduling. Integrated application checks follow all server modules.
 
-- [ ] Write tests that real Zod rejects unexpected monetary/privilege fields and hostile outputs; 10 hostile cases cause 0 privileged actions/secret context disclosures.
-- [ ] Implement Gemini REST adapter using selected model/key, structured response schema, strict validation and bounded input/output. `extractScope(ctx,brief): Promise<ScopeExtraction>` returns facts/questions only; no model tools or payment credentials. Model output never saves/approves commercial terms automatically.
-- [ ] Gate actual generation with AI_USAGE_ENABLED, false by default until explicit approved usage. Missing permission/config returns CONFIG_REQUIRED. No fixture is displayed as real extraction.
-- [ ] Run tests with labeled transport fixtures and real validator; genuine 20-case T01 requires approved usage. Save report; main verifies/reviews/commits.
+- [x] Write tests that real Zod rejects unexpected monetary/privilege fields and hostile outputs; 10 hostile cases cause 0 privileged actions/secret context disclosures.
+- [x] Implement Gemini REST adapter using selected model/key, structured response schema, strict validation and bounded input/output. `extractScope(ctx,brief): Promise<ScopeExtraction>` returns facts/questions only; no model tools or payment credentials. Model output never saves/approves commercial terms automatically.
+- [x] Gate actual generation with AI_USAGE_ENABLED, false by default until explicit approved usage. Missing permission/config returns CONFIG_REQUIRED. No fixture is displayed as real extraction.
+- [x] Run tests with labeled transport fixtures and real validator; genuine 20-case T01 requires approved usage. Save report; main verifies/reviews/commits.
 
 ## Task 5: Owner and buyer UI, Luna frontend
 
