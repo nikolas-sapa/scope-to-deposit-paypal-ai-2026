@@ -15,7 +15,7 @@ export interface ProviderOrder {
   provenance: "REAL_SANDBOX" | "LOCAL_FIXTURE";
 }
 export interface VerifiedWebhook { eventId: string; eventType: string; resourceId: string; orderId: string | null; rawBody: string; bodyHash: string }
-export interface ProviderOperation { requestId: string; payload: Record<string, unknown>; orderId?: string }
+export interface ProviderOperation { requestId: string; payload: Record<string, unknown>; retryUntil: number; orderId?: string }
 export interface PayPalGateway {
   createOrder(operation: ProviderOperation): Promise<ProviderOrder>;
   getOrder(orderId: string): Promise<ProviderOrder>;

@@ -3,7 +3,8 @@ import { dirname, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import type { Config } from "./context";
 
-const databases = new Map<string, DatabaseSync>();
+const globalState = globalThis as typeof globalThis & { scopeDatabases?: Map<string, DatabaseSync> };
+const databases = globalState.scopeDatabases ??= new Map<string, DatabaseSync>();
 
 export function openDatabase(path: string): DatabaseSync {
   const file = path === ":memory:" ? path : resolve(path);

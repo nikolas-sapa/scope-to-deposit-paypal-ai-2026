@@ -65,13 +65,13 @@ expect(() => transaction(db, () => Promise.resolve())).toThrow();
 
 **Files:** create src/server/paypal.ts, payments.ts, webhooks.ts; tests/server/paypal.test.ts, payments.test.ts, webhooks.test.ts. Depends Task 2 reviewed. Exact services in CONTRACTS.md.
 
-- [ ] Write controlled failure/race tests for T02/T03/T09–T13/T17–T20, using real SQLite and explicitly mocked provider transport. Count provider capture IDs independently of local state transitions.
-- [ ] Run focused tests and observe missing service failures.
-- [ ] Implement OAuth caching, create/get/capture Orders v2, registered-webhook postback verification. Use fixed sandbox URL, 15-second timeout, generic redacted errors, stable keys persisted before calls. Confirmed Orders retention 6h; no retry after deadline. Approval link must use PayPal sandbox HTTPS host.
-- [ ] Implement owner issueCheckout with reserved guarded attempt and 24-hour hashed fragment capability; buyer creates/captures only after valid capability+CSRF/Origin. Operation lease serialized in SQLite, no transaction across await. Any dispatched uncertain operation retains engagement guard; do not suppress evidence when capability expires after dispatch.
-- [ ] Implement private verified-evidence application, durable webhook receipt processing, same-ID/different-body rejection, restart reconciliation. Webhook never independently dispatches capture. Unknown create remains guarded if key retention expires.
-- [ ] Run targeted tests/typecheck; real sandbox configuration absent is a tested explicit unavailable response, never a mock payment UI. Save report/evidence. Authenticated API and T05/T15 remain NOT RUN until access exists.
-- [ ] Main verifies, commits, sends diff to independent Sol review; material fixes before final acceptance.
+- [x] Write controlled failure/race tests for T02/T03/T09–T13/T17–T20, using real SQLite and explicitly mocked provider transport. Count provider capture IDs independently of local state transitions.
+- [x] Run focused tests and observe missing service failures.
+- [x] Implement OAuth caching, create/get/capture Orders v2, registered-webhook postback verification. Use fixed sandbox URL, 15-second timeout, generic redacted errors, stable keys persisted before calls. ProviderOperation propagates persisted retryUntil; gateway checks margin after OAuth before POST. Confirmed Orders retention 6h; no retry after deadline. Approval link must use PayPal sandbox HTTPS host.
+- [x] Implement owner issueCheckout with reserved guarded attempt and 24-hour hashed fragment capability; return capabilityId for the existing owner revocation route; buyer creates/captures only after valid capability+CSRF/Origin. Operation lease serialized in SQLite, no transaction across await. Any dispatched uncertain operation retains engagement guard; do not suppress evidence when capability expires after dispatch.
+- [x] Implement private verified-evidence application, durable webhook receipt processing, same-ID/different-body rejection, restart reconciliation. Webhook never independently dispatches capture. Unknown create remains guarded if key retention expires.
+- [x] Run targeted tests/typecheck; real sandbox configuration absent is a tested explicit unavailable response, never a mock payment UI. Save report/evidence. Authenticated provider API and T05/T15 remain NOT RUN until access exists.
+- [x] Main verifies, obtains independent Sol code/security approval and commits. Review findings fixed before backend handoff; full product acceptance remains pending.
 
 ## Task 4: Real AI extraction boundary, Sol backend
 
@@ -96,10 +96,10 @@ expect(() => transaction(db, () => Promise.resolve())).toThrow();
 
 **Files:** create src/app/layout.tsx, page.tsx, pay/page.tsx, api/[...path]/route.ts; src/server/http.ts; scripts/check-access.ts, evaluate.ts; tests/e2e/workflow.spec.ts. Depend services and UI. Worker drafts README under main-assigned packet after commands exist.
 
-- [ ] Implement exact route matrix, strict Zod request inputs, authenticated owner/buyer guards, safe errors and security response headers. All mutations require Origin+CSRF except PayPal-authenticated webhook. Node runtime, no caching of sensitive responses.
-- [ ] Wire local startup/setup/health/readiness and controlled scheduler/recovery with no duplicate hot-reload instances. Record server-only secrets boundary; no raw logging.
+- [x] Implement exact route matrix, strict Zod request inputs, authenticated owner/buyer guards, safe errors and security response headers. All mutations require Origin+CSRF except PayPal-authenticated webhook. Node runtime, no caching of sensitive responses.
+- [x] Wire local startup/setup/health/readiness and controlled scheduler/recovery with no duplicate hot-reload instances. Record server-only secrets boundary; no raw logging.
 - [ ] Run build/typecheck/tests, then actual browser auth/manual quote/approval/missing-provider/cancellation-observation checks with 0 console errors. Use isolated contexts for ownership and screenshot actual state. Check browser bundle for private credential names/values.
-- [ ] Check-access obtains OAuth only if secure PayPal config exists; no create/capture during access preflight. Evaluation runner saves REAL_MODEL per-case results only with usage enabled, otherwise NOT RUN.
+- [x] Check-access obtains OAuth only if secure PayPal config exists; no create/capture during access preflight. Evaluation runner saves REAL_MODEL per-case results only with usage enabled, otherwise NOT RUN.
 - [ ] Complete test ledger: local checks marked local; T01 genuine model, T05 three sandbox payments, T15 authentic event and other provider claims stay NOT RUN if prerequisites absent. No passing suite repeated without new changes/concerns.
 
 ## Task 7: Independent review and deliverables
@@ -113,5 +113,7 @@ expect(() => transaction(db, () => Promise.resolve())).toThrow();
 - [ ] Main final acceptance/commits. No remote/publish/deploy/registration/submission/spend without authorization; deployment if later approved must reach Ready and live URL verification.
 
 ## Plan self-review
+
+Sol backend closeout: 139/139 tests, canonical TypeScript, production build and 15/15 actual production HTTP checks pass. Independent code/security approval includes final Next URL-normalization fix. Task 6 browser/page integration and Task 7 whole-product review/deliverables remain open for Luna. RESULTS.md records local provenance and genuine checks still NOT RUN. No remote configured; commits remain local.
 
 T01/T14 -> Task 4/6; T02–T07/T09–T13/T15/T17–T20 -> Tasks 2/3/6; T08/T16 -> Tasks 5/6/7. Every shared record/route/signature is defined before dispatch in CONTRACTS.md. Dependencies and owned paths do not overlap; main alone owns route adapters/manifests/schema. Missing external access blocks only genuine checks, never causes fixture passes to be reported as integration. User delegated architecture decisions, so no further architecture choice prompt.

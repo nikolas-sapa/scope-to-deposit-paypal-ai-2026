@@ -24,7 +24,7 @@ export interface EngagementDto {
   quote: ApprovedQuote | null; payment: PaymentDto | null; createdAt: number;
 }
 export interface AuthResponse { authenticated: boolean; username: string | null; csrfToken: string }
-export interface CheckoutLink { checkoutUrl: string; expiresAt: number }
+export interface CheckoutLink { capabilityId: string; checkoutUrl: string; expiresAt: number }
 export interface CheckoutDto { payment: PaymentDto; approvalUrl: string | null }
 export interface BuyerDto { quote: ApprovedQuote; payment: PaymentDto }
 export interface HealthDto { sandboxOnly: true; paypalConfigured: boolean; webhookConfigured: boolean; aiConfigured: boolean; aiUsageEnabled: boolean }

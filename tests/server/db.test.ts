@@ -2,7 +2,7 @@ import { spawnSync } from "node:child_process";
 import { existsSync, mkdtempSync, readFileSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { getConfig } from "../../src/server/config";
 import { getDatabase, openDatabase, transaction } from "../../src/server/db";
 
@@ -59,6 +59,27 @@ describe("real SQLite connection and transaction boundaries", () => {
     const second = getDatabase(config);
     expect(second === first).toBe(false);
     second.close();
+  });
+
+  it("preserves one connection across module reloads and equivalent resolved paths", async () => {
+    const directory = mkdtempSync(join(tmpdir(), "scope-db-reload-"));
+    const config = { ...getConfig({ NODE_ENV: "test" }), databasePath: join(directory, "scope.sqlite") };
+    const first = getDatabase(config);
+    const connections = new Set([first]);
+    try {
+      first.exec("CREATE TABLE reload_probe (value INTEGER); INSERT INTO reload_probe VALUES (1)");
+      vi.resetModules();
+      const reloaded = await import("../../src/server/db");
+      const second = reloaded.getDatabase({ ...config, databasePath: `${directory}/unused/../scope.sqlite` });
+      connections.add(second);
+      expect(second === first).toBe(true);
+      expect(second.prepare("SELECT value FROM reload_probe").get()).toEqual({ value: 1 });
+      second.exec("INSERT INTO reload_probe VALUES (2)");
+      expect(first.prepare("SELECT COUNT(*) AS count FROM reload_probe").get()).toEqual({ count: 2 });
+    } finally {
+      for (const connection of connections) if (connection.isOpen) connection.close();
+      rmSync(directory, { recursive: true, force: true });
+    }
   });
 });
 

@@ -29,7 +29,7 @@ All labels below are proposed documentation/config labels only. **None is confir
 
 ## Safe preflight sequence
 
-1. Confirm a human-approved architecture and sandbox-only access mode. Confirm owner, merchant account, and buyer account custody. No account changes by this handoff.
+1. Architecture A and local sandbox-only access selected under delegated authority. Confirm owner, merchant account, and buyer account custody. No account changes by this handoff.
 2. Confirm a sandbox Business account and REST app already exist, or obtain separate approval for provisioning. Keep app secret with its owner. Give judges their own Personal buyer account; never share its password.
 3. Before any checkout, verify OAuth token issuance with the sandbox client-credentials flow, then make a non-mutating authenticated Orders `GET` only when a valid sandbox order ID exists. Distinguish 401 credential/authentication failure from 403 permission failure. Record status and redacted request metadata, never token or Authorization header.
 4. Confirm authorized Orders create/get/capture permissions and merchant binding using PayPal’s sandbox API logs and returned order/capture details. Do not infer access from an unauthenticated endpoint response or simulator event.
@@ -55,7 +55,7 @@ Only PayPal account and buyer-account provisioning are outside the 15-minute fre
 4. Whether the selected app can create, retrieve, and capture orders for the intended merchant, or complete three genuine buyer-approved deposits.
 5. Whether a public HTTPS webhook endpoint can be hosted, registered, reached by PayPal, and verified for a real sandbox capture event.
 6. Whether local judge access or private hosted judge access will be selected and approved; no credentials or private access channel issued.
-7. Whether a fresh checkout meets T08’s timing. No app exists yet; implementation and timing not authorized.
+7. Whether a fresh checkout meets T08’s timing. Implementation authorized; fresh-checkout timing not measured yet.
 8. Whether any of T05, T08, or T15 acceptance criteria pass. All three are **NOT RUN**.
 
 ## Primary references

@@ -75,18 +75,20 @@ Owner requests authenticated by server-issued `scope_session` cookie. Every brow
 | POST /api/buyer/cancel | empty | PaymentDto observation only, buyer mutation |
 | POST /api/webhooks/paypal | raw provider event | 204 durable verified receipt or 400/401/503 |
 
-Paid only after verified COMPLETED capture. Unknown/pending HTTP202; ordinary success200; create201 permitted. Errors `{error:{code,message}}`. JSON body unknown fields rejected. Captures accept no buyer money/order field. Health booleans reflect configuration only, never account verification.
+Paid only after verified COMPLETED capture. Unknown/pending HTTP202; ordinary success200; create201 permitted. Errors `{error:{code,message}}`. JSON body unknown fields rejected. Browser JSON body cap 1MiB; webhook raw body cap 256KiB, both enforced while streaming. Captures accept no buyer money/order field. Health booleans reflect configuration only, never account verification.
 
 ## Authentication and buyer flow
 
 Anonymous session 15 minutes; owner session 8 hours; buyer capability 24 hours and revocable. Login rotates tokens; logout invalidates session. Random secrets hashed in DB. Cookie HttpOnly session, SameSite=Strict, Path=/, Secure only with HTTPS; explicit HTTP loopback allowed. Exact Host and Origin configured. Scrypt N131072/r8/p1/maxmem256MiB, salt16bytes/key64bytes, bounded concurrency and failed-login throttling.
 
-Checkout link `${APP_ORIGIN}/pay#<capability>`; buyer page puts token in tab sessionStorage and sends header only. No fragment sent to server or PayPal; Referrer-Policy no-referrer. PayPal return/cancel URLs `/pay?approved=1` and `/pay?canceled=1`, no capability. Same tab preserves capability. Reconciliation/webhooks independent from expired/revoked capability after provider dispatch.
+Owner CheckoutLink includes non-secret `capabilityId` for the authorized DELETE /api/capabilities/:id revocation route. Checkout link `${APP_ORIGIN}/pay#<capability>`; buyer page puts token in tab sessionStorage and sends header only. No fragment sent to server or PayPal; Referrer-Policy no-referrer. PayPal return/cancel URLs `/pay?approved=1` and `/pay?canceled=1`, no capability. Same tab preserves capability. Reconciliation/webhooks independent from expired/revoked capability after provider dispatch.
 
 ## Payment invariants
 
-Issue reserves attempt and stable operation keys before external calls. SQLite engagement-wide unique guard and one immutable paid_deposits record. Operation first dispatch/lease persisted before network, 15s transport timeout, lease30s. Confirmed create/capture key retention21600000ms (6h); no new keys/order after expiry or lost create uncertainty. Retry identical operation only within deadline. No async transaction; positive verified payment evidence cannot regress due to late response/cancel.
+Issue reserves attempt and stable operation keys before external calls. SQLite engagement-wide unique guard and one immutable paid_deposits record. Operation first dispatch/lease persisted before network, 15s transport timeout, lease30s. Confirmed create/capture key retention21600000ms (6h); no new keys/order after expiry or lost create uncertainty. Retry identical operation only within deadline. ProviderOperation carries the persisted retryUntil internally; gateway rechecks a conservative deadline margin after OAuth and immediately before each create/capture POST. Expired transport dispatch retains the original operation and engagement guard. No async transaction; positive verified payment evidence cannot regress due to late response/cancel.
 
 Single purchase unit for approved deposit, configured merchant payee, intentCAPTURE, no live origin or client price. Fixed sandbox approval URL allowlist. Canonical provider normalization requires exact related order, merchant, gross cents, USD and completed capture; status alone insufficient. Missing binding evidence fails closed.
+
+Internal server-only `reconcileWebhookReceipt(ctx, verifiedReceipt)` may connect webhook processing to targeted canonical-order GET/evidence application. It has no HTTP route or client export; input must come from verified persisted receipt processing, never browser data. It never dispatches capture.
 
 Verify webhook through registered PayPal postback endpoint; require SUCCESS before receipt. Raw signed body retained privately in DB, never public evidence; log/error redaction. Event ID/body hash divergence rejected. Persist before204, replay processed receipt safe, pending receipt resumes. Webhook/reconcile never start capture. Tests may inject explicit transport fixtures through HttpContext.provider, labeled LOCAL_FIXTURE; product has no mock-payment mode.

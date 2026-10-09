@@ -1,70 +1,42 @@
-# Implementation handoff, awaiting design approval
+# Scope to Deposit implementation handoff
 
-Preparation artifact only. No stack, schema, dependency or deployment choice selected. No application source exists. PLAN.md follows explicit approval of SPEC.md and architecture; this handoff is not permission to implement.
+Architecture authorized through delegated decisions: Next.js App Router, native SQLite, USD integer cents, sandbox only. Contracts in CONTRACTS.md; numerical acceptance checks in SPEC.md; implementation and ownership in PLAN.md.
 
-## Decisions preserved
+Current phase: Sol backend complete. Independent code/security reviews, including final framework configuration, approved. 139 local tests and production build pass; actual production HTTP 15/15 checks pass. Luna UI/browser phase follows. No browser automation assigned to Sol.
 
-| Option | Benefit | Cost/tradeoff |
+## Model ownership
+
+| Work | Assigned model | Files/responsibility |
 | --- | --- | --- |
-| A: Next.js + SQLite (recommended) | One local server; compact judge setup | Hosting requires later persistent-storage decision |
-| B: React/Vite + Node API + SQLite | Explicit browser/server boundary | Extra build/runtime setup |
-| C: Next.js + managed Postgres/auth | Shared hosted access easier | Vendor, account, hosting and cost decisions |
+| Authenticated owner and quote services | gpt-6.1-sol | src/server/config.ts, db.ts, auth.ts, errors.ts, engagements.ts; setup-owner script and tests |
+| Payment/evidence services | gpt-6.1-sol | src/server/paypal.ts, payments.ts, webhooks.ts and tests |
+| AI extraction boundary | gpt-6.1-sol | src/server/extraction.ts and tests |
+| Integration and decisions | Coordinator | Shared contracts/schema/manifests; HTTP routes, maintenance, local check scripts; commits |
+| Independent code/security review | gpt-6.1-sol | Read-only, backend review before handoff; integrated review after UI changes as needed |
+| Owner/buyer interface | gpt-6-luna | src/ui/**; page/layout wiring under coordinator-assigned ownership |
+| All browser work | gpt-6-luna only | Actual browser workflow and screenshots; no fixture payment claims |
+| Delivery drafts | gpt-6-luna | Assigned README/submission/demo/checklist files, grounded in verified results |
 
-USD-only integer cents remains a proposal. Initial deposit must be positive and no greater than server-computed approved quote total. AI provider/model and usage budget remain unselected; existing Gemini key has only passed metadata access. No spend authorized.
+Workers preserve other edits, do not spawn, commit, push, publish, deploy, change access or spend. Main owns integration and commits. No Git remote configured; local commits cannot be pushed yet.
 
-## Shared behavioral contract
+## Invariants carried forward
 
-1. Extraction accepts synthetic brief text and returns validated draft facts plus blocking ambiguity questions. Evidence must ground facts in the source. It cannot set authoritative money, approve quotes, identify owners, create/capture orders, or change paid status.
-2. Owner operations derive identity from authenticated server context. Every operation checks resource ownership. Money comes from validated owner edits, never extraction output or buyer input.
-3. Approval snapshots exact revision, commercial terms, approving owner and timestamp. Blocking ambiguities must be resolved. Existing snapshots and their attempt bindings never mutate.
-4. Buyer capability grants minimal access to one approved revision/attempt. It does not grant owner privileges. Explicit buyer continuation precedes sandbox order creation; PayPal buyer approval precedes capture. Check capability validity before dispatch; expiry/revocation never suppresses evidence from dispatched operations or releases their guard.
-5. Payment service checks explicit revision approval and resolved ambiguities before every create/capture dispatch, then persists intended payload and separate stable create/capture request IDs before network calls. Operations serialize under an engagement-wide deposit guard. At most one capture-eligible attempt exists across all revisions, and at most one deposit can become paid. Retry identical keys/payloads only within confirmed retention; lost create response or expired retention remains guarded until authoritative reconciliation/reviewed resolution.
-6. Evidence must bind completed capture to exact configured merchant, order, amount and currency. Provider capture ID cannot belong to multiple engagements. Callback query parameters, approval redirects and cancellation observations grant no evidence authority.
-7. Unknown/pending outcomes block replacement charges. Reconcile the original attempt. Cancellation cannot overwrite verified completed capture. A new draft revision cannot bypass the engagement deposit guard.
-8. Authenticate webhook before payment effects. Deduplicate event IDs and capture IDs. Acknowledge only after durable verified receipt or committed evidence transaction; persisted unapplied receipts resume after restart. Browser capture responses, webhook and reconciliation converge on one paid transition.
+- AI supplies facts/questions only. No model tools, money authority or approval; initial question answers null.
+- Server authenticates owner and buyer scope, checks ownership and immutable quote bindings, and validates integer money.
+- One guarded attempt and one paid deposit per engagement across all revisions. Uncertain/pending/expired-retention outcomes never authorize replacement.
+- Persist operation keys/payloads before dispatch; reconcile original order. Completed capture must match order, merchant, gross deposit and USD.
+- Browser return/cancel is observation only. Verified evidence wins races and remains applicable after capability expiry/revocation.
+- Authenticate webhook and persist receipt before acknowledgement. Deduplicate event/capture identities and resume pending receipts.
+- LOCAL_FIXTURE checks are not genuine PayPal/AI acceptance evidence. RESULTS.md records actual checks and limits.
 
-## Conditional work ownership
+## Luna prerequisites
 
-These are reserved module responsibilities for PLAN.md, not files created or framework contracts chosen. Main confirms exact filenames after architecture selection. Workers cannot alter shared contracts or manifests.
+Use locked DTOs/routes, five retained official shadcn primitives from session work/ui-sources, Geist Sans, #006bff accent, no orange or emoji. Client cannot invent paid state or submit authoritative order/amount. Capability stays in fragment/tab sessionStorage and X-Checkout-Token header, never PayPal URL.
 
-| Work packet | Requested model/role | Exclusive proposed paths | Prerequisites and completion gate |
-| --- | --- | --- | --- |
-| Integration shell/storage contract | Main Sol | Route/framework adapters, schema specification, manifests/lockfiles, PLAN.md, TASKS.md | Approved stack; Context7; verified package versions; explicit interfaces |
-| Payments and owner/buyer boundaries | gpt-6.1-sol, high, backend | `src/payments/**`, `src/auth/**`, `tests/payments/**`, `tests/auth/**` | Approved auth/data contract and real sandbox access; T02–T07, T09–T13, T15, T17–T20 |
-| Brief/quote/status interface | gpt-6-luna, medium, frontend | `src/ui/**` | Approved routes/types and design tokens; T16; no payment invariants or schema edits |
-| Extraction and evaluation | gpt-6-luna, medium, bounded worker | `src/extraction/**`, `tests/extraction/**`, `fixtures/**` | Approved model/schema/budget; T01/T14; fixtures are inputs, not proof of a working model |
-| Code review | gpt-6.1-sol, high, typescript-reviewer | Read-only | Runnable integrated implementation; material findings fixed |
-| Security review | gpt-6.1-sol, high, security-reviewer | Read-only | Runnable integrated implementation; auth/payment/secrets/replay/agent audit |
-| Delivery drafts | gpt-6-luna, medium | Main-assigned README/submission/demo files only | Main-verified actual results; no claims from mocks alone |
+Handle missing integrations honestly. Owner CheckoutLink includes capabilityId for revocation. Keep buyer approval and pending/uncertain states clear. Open exactly configured APP_ORIGIN, loopback127.0.0.1 by default; strict Host/Origin checks reject aliases. Implement manual scope/quote workflow even while AI generation is disabled. Verify actual running UI; paid-state screenshot requires genuine provider evidence.
 
-Maximum main plus three children. No child spawning. Main integrates edits, owns all commits/pushes and external approvals. Workers preserve concurrent edits and touch only assigned files. Any unclear contract stops that packet for main clarification; Luna escalates after one substantive failure. Reviews start after runnable dependencies exist.
+## External checks still needing inputs
 
-## Sequence after approval
+PayPal sandbox app credentials, Business merchant and separate Personal buyer access remain unavailable. Real captures and authentic webhook checks require these plus approved HTTPS webhook access/registration. Existing Gemini model-list access succeeded, but real generation remains disabled pending authorized usage/budget. Human entrant/ownership declarations and eventual repository/video publication/submission remain pending.
 
-Tests precede implementation planning in SPEC.md. Next: writing-plans skill, finalized schemas/routes/auth and test packets, dependency version checks, sandbox OAuth/permission preflight, then payment path before UI polish. Context7 documentation access is required before framework code. No secrets appear in agent handoffs, logs, public source or submission artifacts.
-
-Complete independent implementation packets only after their dependencies pass. Main then runs all applicable T01–T20, three genuine sandbox approvals/captures, authentic webhook verification, UI screenshots and timed fresh checkout. Count provider captures across all scenario orders and lifetime separately from local state transitions. Real payment/recovery claims require genuine sandbox operations, not fixtures. Commission independent code/security review, fix material findings, then draft submission from evidence. No passing test is rerun absent a change/failure/remaining concern.
-
-## Current verifiable preparation
-
-- Local Git preflight exists; no remote selected, no push/publication.
-- Adult age and Greece facts confirmed by human in coordinating build chat. No unconfirmed declaration inferred.
-- PayPal unauthenticated endpoint reachable in earlier preflight; this is not OAuth/account evidence.
-- Existing `GEMINI_API_KEY` passed model-list access in earlier preflight. Generation and evaluation remain NOT RUN.
-- Required skills context retained. No Context7 callable tools found; no framework code written.
-- Architecture-neutral access/evaluation documents and synthetic data can be prepared without Context7, PayPal credentials or model spending. Executable application, actual model evaluation and genuine sandbox evidence cannot yet be completed.
-
-## Exact remaining inputs
-
-| Input/action | Why needed | Safe form |
-| --- | --- | --- |
-| Select A/B/C and approve SPEC.md, including USD-only scope and owner/buyer/payment boundaries | Required architecture and brainstorming design gate | Architecture letter plus approval/amendments |
-| Enable Context7 docs access | Mandatory before framework implementation | Connected callable tools; no API key pasted in chat |
-| Identify secure existing sandbox app credential location | OAuth and real Orders access | Local path or variable names only; proposed names documented in JUDGE_ACCESS.md |
-| Confirm sandbox Business merchant and separate Personal buyer access | Three genuine checkout/capture checks | Access/custody confirmation; password entered only in PayPal sandbox |
-| Approve AI provider/model and usage budget | Real extraction and 20-case evaluation | Provider/model plus explicit spending cap or authorized free tier |
-| Confirm entrant type, conflict/support exclusions and original-work ownership | Eligibility/submission compliance | Attestation; adult/Greece need not be repeated |
-| Later approve HTTPS webhook access/registration | Real authenticated event delivery for T15 | Approved endpoint/app and secure webhook configuration |
-| Later choose license/remote and approve external publication/submission | Public repository/video/access required for final submission | Review concrete completed artifacts before approval |
-
-No registration, submission, deployment, publication, messages, paid generation or live transactions authorized. Sandbox implementation/testing remains within requested scope once design and necessary access are settled.
+No account changes, paid generation, live money, deployment, publication, submission or messages authorized. Continue reversible local implementation and checks within current scope.
