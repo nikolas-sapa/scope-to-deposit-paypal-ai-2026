@@ -12,11 +12,14 @@ Main owns coordination, consequential decisions, contracts, manifests/lockfiles,
 | P07 | P04 | gpt-6-luna, medium, worker | EVALUATION_DESIGN.md, fixtures/synthetic-briefs.json | 20 ordinary + 10 hostile unique cases; all 20 tests mapped; results NOT RUN | Complete; main structural checks 30/30, protocol synchronized |
 | P08 | P04, P06–P07 for final review | gpt-6.1-sol, high, security-reviewer | Read-only spec/access review | Approved-before-payment boundaries and all 20 tests reviewed; actionable ambiguities identified | Complete; five ambiguities resolved; final T12 wording finding fixed by main |
 | P09 | P06–P08 | Main | HANDOFF.md, PREPARATION_RESULTS.md, PAYPAL_API_RESEARCH.md, COMPLIANCE.md, SPEC.md, TASKS.md | Reviewed architecture-neutral handoff; exact remaining actions; no implementation assumptions | Complete; local commit, no remote/publication |
-| P05 | P04 approval | Main | PLAN.md, approved interfaces | Test-first sequence, exact schema/routes, exclusive file ownership | Waiting for design/spec approval |
+| P05 | Human-delegated architecture/product decision | Main, Sol security contract proposal | PLAN.md, CONTRACTS.md, src/shared/contracts.ts, src/server/context.ts, src/server/schema.sql | Test-first sequence, exact schema/routes, exclusive file ownership | Complete; A/USD adopted, locked contract |
 | A01 | P01, human access | Main | Session work/access evidence | Sandbox OAuth succeeds; safe API permission check; buyer available | Blocked on credentials/access |
 | A02 | Human vendor/budget choice | Main | AI config/dependencies | Chosen provider metadata plus real generation succeeds | Metadata access only; selection pending |
-| I01 | P05, A01 | gpt-6.1-sol, high, backend | Payment/auth modules and tests, exact paths fixed in P05 | T02–T15 payment/security subset; no authority from browser/AI | Not dispatched |
-| I02 | P05 | gpt-6-luna, medium, frontend | Brief/quote UI modules, exact paths fixed in P05 | T16 plus approved contracts/design tokens | Not dispatched |
+| I00 | P05, Context7 lookup | Main | Manifests/lockfile, framework/test config, shared contract/schema | Pinned installation, 0 contract type errors, real SQLite schema probe | In progress |
+| I01a | I00 | gpt-6.1-sol, high, backend | PLAN Task2 auth/config/db/engagement modules, setup script and tests | T06/T09 local rejection counts, persistence and immutable schema | Ready to dispatch after install |
+| I01b | I01a reviewed | gpt-6.1-sol, high, backend | PLAN Task3 paypal/payments/webhooks and tests | Replay/race/recovery checks; actual sandbox checks require A01 | Not dispatched |
+| I01c | I00 | gpt-6.1-sol, high, backend | PLAN Task4 extraction module/test | Strict AI boundary; real generation requires A02 | Not dispatched |
+| I02 | I01a reviewed, shared contract | gpt-6-luna, medium, frontend | src/ui/** only | T16 plus locked contracts/design tokens; no fake integrations | Not dispatched |
 | I03 | P05 | gpt-6-luna, medium | Synthetic fixtures/evaluation runner, exact paths fixed in P05 | 20 briefs, fixed rubric, 10 hostile cases, actual results | Not dispatched |
 | V01 | Integrated implementation, access | Main | Integration/evidence | T01–T20; genuine 3 sandbox flows and authentic webhook | Not run |
 | R01 | Runnable integrated code | gpt-6.1-sol, high, typescript-reviewer | Read-only code audit | Material findings recorded/resolved; relevant code review | Not dispatched |
@@ -25,6 +28,6 @@ Main owns coordination, consequential decisions, contracts, manifests/lockfiles,
 | D02 | D01 and final verification | Main | Final source/artifact review | License, fresh-checkout <15 min, redacted evidence, human-action list | Pending |
 | E01 | D02, human approval | Main | Selected remote/deployment/submission | Authorized push/publication; if deployed Ready plus live URL check | Not authorized, no remote selected |
 
-Brainstorming sequence: explore complete; visual companion unnecessary so far; adult/Greece facts confirmed, other declarations pending; architecture options presented; design/spec draft prepared for review. Implementation remains behind explicit architecture/spec approval. No unanswered eligibility declaration blocks harmless preparation.
+Brainstorming sequence complete through delegated coordinator decision: human assigned product/architecture authority; A/USD selected and spec/plan/contracts adopted. Adult/Greece facts confirmed, other declarations pending. Context7 anonymous docs access works. No unanswered eligibility declaration blocks independent implementation. External-action/spending boundaries unchanged.
 
 Every future dispatch supplies exact owned paths, stable contracts, named checks, official constraints and secret variable names only. Preserve others' changes; no independent manifest/lockfile/deployment edits. Main verifies worker claims. Evidence/logs stay in session work/; final deliverables stay here.

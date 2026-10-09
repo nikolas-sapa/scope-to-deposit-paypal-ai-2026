@@ -1,6 +1,6 @@
 # Scope-to-deposit specification
 
-Status: proposed design for approval. No implementation authorized by architecture/spec approval yet. Product working title: Scope to Deposit. Final name optional.
+Status: implementation authorized by delegated product/architecture decision. Human said "you are the boss you make decisions" on 2026-10-08. Coordinator adopted reviewed design, A (Next.js + local SQLite), USD-only and sandbox-only boundaries. External action/spending permissions unchanged. Product name: Scope to Deposit.
 
 ## Test specification, before implementation plan
 
@@ -50,10 +50,10 @@ Live money, automatic refunds/payouts, tax advice, split payments, outreach, rea
 
 ## Proposed design boundaries
 
-Architecture decision pending. Recommended: one TypeScript Next.js app with local SQLite. Alternatives: React/Vite plus Node API with SQLite; Next.js with managed Postgres/auth. No dependency installation or schema commitment before selection.
+Selected architecture: one TypeScript Next.js app with local SQLite. Coordinator selected A under human-delegated authority. Exact module/schema/route contracts are locked in CONTRACTS.md; PLAN.md defines implementation/file ownership. Hosted storage/auth choices remain outside this local build.
 
 - Extraction service returns draft facts/questions only. No payment tools, secrets, arbitrary URL fetching or execution in model context.
-- Quote service validates human-entered money. Initial proposal: USD-only, integer cents, positive deposit not exceeding quote total, no tax calculation. Approve currency scope with architecture/spec; broaden only if requested.
+- Quote service validates human-entered money: USD-only, integer cents and quantities, positive deposit not exceeding quote total, no tax calculation. Limits: 100 items, quantity1–1000, unitCents0–100000000, totalCents<=100000000000; check safe-integer arithmetic. Broaden currency only if requested.
 - Owner identity derives from authenticated server session. Proposed local judge mode binds loopback by default and uses privately provisioned demo owners/passwords, password hashing, expiring server-issued HttpOnly session cookies, logout invalidation, CSRF checks and resource ownership on every API route. Exposure requires a later approved hosted access/security decision.
 - Buyer capability is random, narrowly scoped to one immutable quote and checkout attempt, stored hashed, expires and can be revoked. No owner APIs available to buyer. Redact capability from logs/referrers. Validity gates initiation of buyer create/capture requests; expiry/revocation does not cancel in-flight operations, clear engagement guard or suppress authenticated evidence. Reconciliation/webhooks operate independently of buyer capability.
 - Payment service alone creates/captures orders. Enforce explicit approval of immutable revision with no blocking ambiguities server-side before provider dispatch. Persist request IDs and intended payloads before calls; separate create/capture keys; serialize competing operations. Timeout/5xx leaves create or capture uncertain. Retry only identical operation/payload/key within confirmed endpoint retention. After retention expires, never invent a new key/order or infer failure from missing evidence; retain guard until authoritative reconciliation or reviewed resolution. Lost create response may leave no local order ID and remains guarded.
@@ -79,8 +79,8 @@ Exact route schemas follow approved architecture in PLAN.md. Owner operations co
 
 ## Access/design decisions requiring human input
 
-1. Architecture A/B/C and proposed owner/buyer boundaries.
-2. Proposed USD-only initial scope and quote approval/payment states.
+1. Architecture A and owner/buyer boundaries selected by delegated coordinator; no further choice required.
+2. USD-only scope and quote approval/payment states adopted in locked contract.
 3. AI provider/model and approved usage budget. Existing Gemini metadata access verified; generation not performed.
 4. Secure sandbox app credentials, business merchant, separate personal buyer; eventual webhook HTTPS access and registration authorization.
 5. Entrant eligibility and later license/remote/publication choice.
@@ -95,4 +95,4 @@ UI requirements: Geist Sans, accent #006bff, no orange, no emoji. Verify actual 
 
 [Orders integration](https://developer.paypal.com/api/rest/integration/orders-api), [capture](https://developer.paypal.com/api/orders/v2/orders-capture/), [idempotency](https://developer.paypal.com/api/rest/reference/idempotency/), [webhook verification](https://developer.paypal.com/api/webhooks/v1/verify-webhook-signature-post), [simulator limits](https://developer.paypal.com/api/rest/webhooks/simulator/), [sandbox accounts](https://developer.paypal.com/sandbox-testing/accounts).
 
-Design self-review plus independent Sol reviews: acceptance criteria separated from implementation; non-goals explicit; unknown/pending distinct from terminal unpaid outcomes; payment evidence wins over cancellation observation; engagement-wide guard covers all revisions; webhook receipt durable before acknowledgement; authentic evidence binds to exact attempt. Initial four findings and five follow-up ambiguities addressed, including approval rejection, capability races, finite retry retention/lost-create recovery, provider-backed counts and authentication bypass checks. Unresolved decisions are approval gates, not assumed choices. PLAN.md follows design approval. No implementation audit performed.
+Design self-review plus independent Sol reviews: acceptance criteria separated from implementation; non-goals explicit; unknown/pending distinct from terminal unpaid outcomes; payment evidence wins over cancellation observation; engagement-wide guard covers all revisions; webhook receipt durable before acknowledgement; authentic evidence binds to exact attempt. Initial four findings and five follow-up ambiguities addressed, including approval rejection, capability races, finite retry retention/lost-create recovery, provider-backed counts and authentication bypass checks. Product/architecture delegated decision recorded; external access/spend inputs remain unconfirmed. PLAN.md now follows adopted design. No implementation audit performed.

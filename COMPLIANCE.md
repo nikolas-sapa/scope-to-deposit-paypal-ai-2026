@@ -34,14 +34,14 @@ Sources: [rules](https://paypalaihackathon.devpost.com/rules), [overview](https:
 
 | Check | Evidence/result | Remaining prerequisite |
 | --- | --- | --- |
-| Workspace | Local preflight Git repo now exists on `hackathon/paypal-preflight`; no application source or `.env` | Approve design, then implement |
+| Workspace | Dedicated local branch `hackathon/paypal-preflight`; shared contracts/schema and scaffold now created; no private `.env` | Implementation in progress |
 | PayPal network | Unauthenticated sandbox OAuth endpoint GET returned HTTP 401 | Sandbox merchant app credentials and buyer access; authenticated OAuth check |
 | AI access | Existing `GEMINI_API_KEY`; model-list GET returned HTTP 200 with 45 generation-capable models | Approve provider/model and usage budget; real generation/evaluation |
 | GitHub | `gh auth status` successful | Human-selected remote and publication approval |
 | Build tools | Node 25.8.1, npm 11.11.0 available | Verify chosen packages/runtime support before install |
 | Models | Explicit Luna/medium research and Sol/high security preflight spawned successfully | Main exact model ID not exposed; GPT-6 identity cannot confirm gpt-6.1-sol |
-| Required skills | Brainstorming found in installed superpowers 6.2.0 plugin cache | Approved design/spec before writing-plans/implementation |
-| Context7 | No callable Context7 tools found | Enable required docs access before framework code |
+| Required skills | Brainstorming and writing-plans applied; human delegated product/architecture decisions; A/USD adopted | Subagent-driven implementation, task reviews and final verification |
+| Context7 | Anonymous official CLI ctx7@0.5.12 successfully fetched framework/library docs | No login/config changes; pinned-version compatibility checked during build |
 | Global references | Referenced skill catalog, MCP guide, agent governance absent at supplied paths | Reported missing; supplied AGENTS instructions retained |
 | Personal eligibility | Adult age and Greece confirmed by human, relayed by coordinating chat | Entrant type, conflict/support and ownership declarations; no identity documents needed |
 
@@ -53,4 +53,6 @@ Luna API lookup: six primary-source questions in session `work/paypal-api-resear
 
 Resumed preparation: JUDGE_ACCESS.md specifies custody and T08 account-provisioning-only exclusion. EVALUATION_DESIGN.md and 30 synthetic cases prepare measurable checks without calling a model or payment API. Follow-up Sol spec review found five further ambiguities; SPEC.md now covers approval rejection, capability expiry races, finite retry retention/lost-create recovery, provider-backed capture counts and authentication bypass checks. HANDOFF.md preserves architecture options and conditional worker ownership. No runtime test result inferred from these artifacts.
 
-Refresh event pages before implementation and again before submission. Keep final submitted build and access stable throughout judging.
+Rules/overview refreshed again before implementation on 2026-10-08. Product/architecture authority delegated by human; PLAN.md and CONTRACTS.md select A/USD without expanding spending/external-action permissions. Pinned dependency versions respect existing npm date cutoff. Inherited GEMINI_API_KEY metadata lists selected gemini-3.8-flash; generation disabled pending authorized usage. Node25.8.1 real native SQLite transaction probe succeeded. UI primitive sources/license fetched from official shadcn registry. No authenticated PayPal/model-generation result inferred.
+
+Refresh event pages again before submission. Keep final submitted build and access stable throughout judging.
