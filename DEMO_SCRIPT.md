@@ -1,18 +1,20 @@
 # Demo script, 150 seconds
 
-**Recording status: not recorded.** This script shows the verified local workflow and says plainly where external integrations are unavailable. Do not substitute a fixture or redirect for genuine payment evidence.
+**Recording status: local silent, captioned draft recorded and reviewed.** The unpublished MP4 is `../release/scope-to-deposit-local-demo-draft.mp4` (158.88 seconds, 1440×1000, H.264, no audio). The owner session is established privately before capture; no password appears. Persistent labels disclose “Local demo draft,” “Synthetic brief,” and “AI + real PayPal evidence not run.” This shows verified local behavior only.
 
-| Time | Screen/action | Voiceover |
+| Time | Screen/action | Caption |
 | --- | --- | --- |
-| 0:00–0:12 | Title and project name | “Scope to Deposit gives freelancers a clear path from a client brief to a human-approved quote and deposit request.” |
-| 0:12–0:28 | Sign in to the local owner workspace | “Owner access is local and private. The interface uses the configured loopback origin and keeps credentials out of the browser bundle.” |
-| 0:28–0:46 | Create an engagement; load synthetic brief | “This example is synthetic. The brief is just source material. It does not set the price or approve anything.” |
-| 0:46–1:03 | Review goal, deliverables, timing, assumptions, and question | “The scope stays editable. Blocking questions need a confirmed answer before approval.” |
-| 1:03–1:20 | Enter one line item and a deposit | “The freelancer sets bounded USD line items. The server recomputes the total in integer cents.” |
-| 1:20–1:34 | Show approval disabled with blocker; answer it | “An unresolved blocker keeps approval unavailable. Once resolved, the freelancer explicitly approves.” |
-| 1:34–1:48 | Approve quote; show revision and frozen summary | “Approval creates an immutable revision. A later draft cannot rewrite the terms attached to a checkout attempt.” |
-| 1:48–2:05 | Show sandbox configuration warning and disabled checkout action | “This environment has no PayPal sandbox app or merchant credentials. Checkout stays disabled. We do not simulate a successful payment.” |
-| 2:05–2:20 | Show buyer route with no capability, then explain capability handling | “A real buyer link carries a scoped capability in its fragment. The page moves it into tab storage and sends it only in a same-origin header.” |
-| 2:20–2:30 | Close on acceptance limits | “Local tests and browser checks pass. Genuine sandbox captures, registered webhook evidence, and paid screenshots still need authorized access.” |
+| 0:00–0:10 | Open on the owner workspace | “From a client brief to a clear scope, approved quote, and deposit handoff.” |
+| 0:10–0:20 | Show local owner workspace; login was completed privately before capture | “Owner workspace. A local account is signed in privately for this recording.” |
+| 0:20–0:38 | Load synthetic brief; enter goal and deliverables | “Synthetic brief only. AI extraction is disabled; scope is entered and edited manually.” |
+| 0:38–0:52 | Review timing, constraints, assumptions, and question | “Deliverables, timing, constraints, assumptions, and client questions stay editable.” |
+| 0:52–1:06 | Set one USD line item and deposit | “The owner sets one USD line item and a $400 deposit on a $1,200 quote.” |
+| 1:06–1:18 | Show unresolved blocker and disabled approval | “An unanswered blocking question keeps approval disabled.” |
+| 1:18–1:28 | Add a confirmed answer | “A confirmed answer unlocks explicit human approval.” |
+| 1:28–1:40 | Approve; show frozen revision | “The quote is approved and frozen as revision 1.” |
+| 1:40–1:58 | Show missing PayPal warning and disabled checkout | “PayPal Sandbox is not configured. Checkout stays disabled; no payment is simulated.” |
+| 1:58–2:12 | Open buyer route without a capability | “No buyer capability is supplied. Private checkout remains unavailable.” |
+| 2:12–2:22 | Sign out | “Sign out ends owner access. No paid state is shown.” |
+| 2:22–2:30 | Close on acceptance limits | “Local UI draft only. Genuine PayPal captures, webhook proof, and AI evaluation: NOT RUN.” |
 
-**If genuine provider evidence is completed before recording:** replace the 1:48–2:05 limitation shot only with a real sandbox buyer approval and verified server evidence. Keep provider IDs redacted. Never stage, seed, or invent a paid state.
+**If genuine provider evidence is completed later:** make a new recording that shows the actual verified state. Do not alter this local-only draft to imply provider proof. Keep provider IDs redacted. Never stage, seed, or invent a paid state.

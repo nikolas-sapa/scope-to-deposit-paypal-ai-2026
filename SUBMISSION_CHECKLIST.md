@@ -11,6 +11,7 @@
 - [x] Root `LICENSE` is MIT.
 - [x] Browser bundle scan found no private config names or generated owner password.
 - [x] Timed clean-checkout run completed on Node.js 25.8.1/npm 11.11.0: install, owner setup, TypeScript, production build, and health 200 in 33.59 seconds.
+- [x] Silent captioned local demo draft recorded and reviewed: 158.88 seconds, 1440×1000, with synthetic brief and genuine PayPal/AI evidence labeled NOT RUN.
 - [ ] Re-run verification after any change to the recorded build.
 
 ## External acceptance evidence
@@ -27,9 +28,9 @@
 
 - [x] Rechecked official event rules and deadline on 2026-10-10: [Devpost rules](https://paypalaihackathon.devpost.com/rules).
 - [ ] Confirm entrant type, conflict/support exclusions, ownership, and required participant declarations.
-- [ ] Review the final project description and 150-second demo against only verified behavior.
+- [ ] Review the final project description against verified behavior before submission.
 - [ ] Choose whether to create/select a remote and publish the repository.
-- [ ] Record the demo video and review its content.
+- [x] Record and review an unpublished local demo draft; public-use approval remains pending.
 - [ ] Approve any public repository, video, or event submission before publishing.
 
-Current status: no Git remote, public repository, deployment, video, or event submission is configured or authorized.
+Current status: no Git remote, public repository, deployment, video publication, or event submission is configured or authorized; local demo draft remains unpublished.

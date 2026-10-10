@@ -1,6 +1,6 @@
 # Verification results
 
-Backend verified 2026-10-09; local UI and browser verified 2026-10-10. No genuine PayPal transaction, authentic webhook or AI generation performed.
+Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft verified 2026-10-10. No genuine PayPal transaction, authentic webhook or AI generation performed.
 
 ## Checks executed
 
@@ -13,6 +13,7 @@ Backend verified 2026-10-09; local UI and browser verified 2026-10-10. No genuin
 | Production-browser UI workflow | 23/23 checks pass; 0 unexpected console errors; one expected invalid-capability 401 | LOCAL_RUNTIME, Playwright Chromium against `npm start` |
 | Fresh-checkout setup | 33.59s total: checkout 0.36s, `npm ci` 7.48s, private owner setup 1.37s, typecheck 5.84s, production build 17.20s, production start/health 1.15s; health 200 | Fresh detached Git worktree at commit `3376cf6`, Node 25.8.1 / npm 11.11.0; no provider/AI config |
 | UI screenshots | Owner approved quote desktop/mobile, login, buyer capability unavailable | Actual local production UI; no paid state asserted |
+| Local demo video draft | 14/14 state assertions pass; H.264 MP4, 1440×1000, 25 fps, 158.88s, silent | Actual production UI in Playwright Chromium; isolated local SQLite, blank PayPal/Gemini credentials, AI disabled; frames reviewed, no credentials/tokens/devtools shown |
 | Logout capability cleanup | Storage cleared on logout and unauthenticated bootstrap; re-review passed | Synthetic browser-only capability; no provider token |
 | Responsive layout | 390px mobile viewport, no horizontal overflow | Actual local production UI |
 | Browser asset scan | No private config field names or provisioned owner password in JS bundles | Actual local production build |
@@ -61,7 +62,7 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 | T13 | 10 local malformed/failed-verification cases rejected; authentic provider verification NOT RUN |
 | T14 | 10 local hostile brief/output boundary cases cause0 privileged actions/disclosures; real model run NOT RUN |
 | T15 | NOT RUN, genuine registered-webhook event |
-| T16 | Local owner approval, login, mobile, and buyer-unavailable screenshots captured; genuine paid/canceled provider-state screenshots NOT RUN |
+| T16 | Local owner approval, login, mobile, buyer-unavailable screenshots, and captioned demo draft captured; genuine paid/canceled provider-state screenshots NOT RUN |
 | T17 | Local overlapping revisions keep one guarded attempt; genuine provider evidence NOT RUN |
 | T18 | Local cancellation/capability races pass; genuine provider evidence NOT RUN |
 | T19 | Local failure before persistence and SQLite reopen after persistence pass; genuine delivery/restart NOT RUN |
@@ -72,3 +73,7 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 Single local Node process, loopback by default. Runtime Node25.8.1, native SQLite API not a production-stability claim. Rate limits and recovery cursor are process-local and reset after restart; persisted attempts/keys/receipts remain durable. Recovery batches rotate fairly, at most20 attempts per cycle; webhook receipts use fair bounded retries. Vite emits a future config-loader warning, current tests pass.
 
 No Git remote, deployment, publication or submission. Real PayPal credentials/merchant/buyer access and authorized AI usage remain missing. No complete product or hackathon acceptance claim.
+
+## Local demo draft
+
+Unpublished captioned walkthrough: `../release/scope-to-deposit-local-demo-draft.mp4`. The video shows the real local production UI with a synthetic brief, manual scope and quote, blocking question, explicit approval, missing PayPal configuration, unavailable buyer route, and logout. The local owner session was established through an API request before the page recording; no password, session token, cookie, devtools, or paid state is shown. Genuine PayPal captures, webhook proof, and AI evaluation are labeled NOT RUN. Full decode and sampled-frame review passed. This draft is not external judge-access or provider acceptance evidence.
