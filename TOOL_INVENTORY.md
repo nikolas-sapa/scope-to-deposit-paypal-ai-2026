@@ -15,7 +15,7 @@ Status 2026-10-10: local UI, delivery drafts, and timed fresh-checkout complete;
 | Geist/Tailwind/shadcn | Installed UI dependencies; five official MIT registry primitives retained with attribution; owner and buyer UI implemented |
 | Vitest/Playwright Chromium | 139 service tests pass; 23/23 production-browser checks pass, zero unexpected console errors; screenshots retained in private session work |
 | Fresh Git worktree | Node.js 25.8.1 / npm 11.11.0; clean `npm ci`, owner setup, typecheck, build, production health 200 in 33.59 seconds; PayPal/AI config false |
-| Gemini | Existing GEMINI_API_KEY passed metadata lookup; selected gemini-3.8-flash appears available. No generation, no approved spend; disabled by default |
+| Gemini | Existing GEMINI_API_KEY passed metadata/countTokens lookup; gemini-3.8-flash returned HTTP400 for all three capped generation requests, zero validated outputs. US$0.051642 reserved, actual charges unknown. Disabled by default; AI_SMOKE_RESULTS.md |
 | PayPal | Official sandbox Orders/webhook documentation reviewed; unauthenticated network reachability only. No app credential, authenticated sandbox call, capture or real event verified |
 
 No Cursor requirement found in refreshed PayPal event rules/resources. No Cursor contribution claimed. No sponsor SDK included solely for an award. AG Grid not selected: bounded quote form does not require its financial-table capabilities. No sponsor-category claim currently made.

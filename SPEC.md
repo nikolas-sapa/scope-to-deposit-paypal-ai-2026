@@ -81,7 +81,7 @@ Exact route schemas follow approved architecture in PLAN.md. Owner operations co
 
 1. Architecture A and owner/buyer boundaries selected by delegated coordinator; no further choice required.
 2. USD-only scope and quote approval/payment states adopted in locked contract.
-3. AI provider/model and approved usage budget. Existing Gemini metadata access verified; generation not performed.
+3. AI provider/model and approved usage budget. Existing Gemini metadata/countTokens access verified; three bounded generation requests returned HTTP400, zero validated outputs. Full model acceptance remains unperformed.
 4. Secure sandbox app credentials, business merchant, separate personal buyer; eventual webhook HTTPS access and registration authorization.
 5. Entrant eligibility and later license/remote/publication choice.
 

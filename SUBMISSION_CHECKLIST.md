@@ -19,7 +19,8 @@
 - [ ] Obtain authorized PayPal Sandbox app credentials, Business merchant, and separate Personal buyer access.
 - [ ] Complete three real buyer approval/capture scenarios and verify order, capture, amount, USD, and merchant.
 - [ ] Register an HTTPS webhook after authorization; verify one authentic sandbox event and durable receipt handling.
-- [ ] Obtain explicit AI usage/budget authorization before setting `AI_USAGE_ENABLED=true` or running real generation.
+- [x] Run bounded AI diagnostic smoke under a three-call/US$1 ceiling; all requests failed HTTP400, zero validated outputs.
+- [ ] Resolve AI request compatibility/account access, establish a new bounded allowance, then complete real-model rubric evaluation. Production `AI_USAGE_ENABLED` remains false.
 - [ ] Run the 20-brief source-grounded extraction rubric and review every output.
 - [ ] Capture review-required, genuine paid, and canceled/failed unpaid screenshots from their actual states. Never synthesize paid evidence.
 - [ ] Keep provider/model evidence labeled `REAL_SANDBOX`, `REAL_MODEL`, or `LOCAL_FIXTURE` as appropriate.
@@ -29,8 +30,9 @@
 - [x] Rechecked official event rules and deadline on 2026-10-10: [Devpost rules](https://paypalaihackathon.devpost.com/rules).
 - [ ] Confirm entrant type, conflict/support exclusions, ownership, and required participant declarations.
 - [ ] Review the final project description against verified behavior before submission.
-- [ ] Choose whether to create/select a remote and publish the repository.
+- [x] Create/select a private source remote and verify the pushed commit.
+- [ ] Publish the repository after final acceptance and declarations.
 - [x] Record and review an unpublished local demo draft; public-use approval remains pending.
 - [ ] Approve any public repository, video, or event submission before publishing.
 
-Current status: no Git remote, public repository, deployment, video publication, or event submission is configured or authorized; local demo draft remains unpublished.
+Current status: reviewed source pushed to private https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Public repository release, deployment, video publication and event submission remain unperformed; local demo draft remains unpublished.

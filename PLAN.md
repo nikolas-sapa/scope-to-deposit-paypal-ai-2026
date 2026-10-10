@@ -30,7 +30,7 @@ Records: owners, opaque sessions (anonymous CSRF bootstrap allowed), engagements
 
 Server context `HttpContext`: request, DatabaseSync connection, Config, UTC clock function, response Headers. Request-derived `OwnerPrincipal {ownerId}` and `BuyerPrincipal {capabilityId,attemptId,quoteId}`. Service functions recheck resource ownership/bindings. Browser never supplies a principal.
 
-`Config` contains APP_ORIGIN, DATABASE_PATH, sandbox client ID/secret and merchant ID, webhook ID, GEMINI_API_KEY/GEMINI_MODEL, AI_USAGE_ENABLED. Proposed configuration names become operative only in config module and `.env.example`; existing repo `.env` absent, actual inherited Gemini name verified. No session signing secret needed for hashed opaque database sessions. Selected Gemini model `gemini-3.8-flash` was returned by authenticated metadata lookup; paid/free generation still not authorized.
+`Config` contains APP_ORIGIN, DATABASE_PATH, sandbox client ID/secret and merchant ID, webhook ID, GEMINI_API_KEY/GEMINI_MODEL, AI_USAGE_ENABLED. Proposed configuration names become operative only in config module and `.env.example`; existing repo `.env` absent, actual inherited Gemini name verified. No session signing secret needed for hashed opaque database sessions. Selected Gemini model `gemini-3.8-flash` was returned by authenticated metadata lookup; production generation remains disabled; later three-call diagnostic allowance/results recorded in AI_SMOKE_RESULTS.md.
 
 ## Task 1: Shared contract and scaffold, main
 
@@ -114,6 +114,6 @@ expect(() => transaction(db, () => Promise.resolve())).toThrow();
 
 ## Plan self-review
 
-Local closeout: 139/139 tests, TypeScript, production build and 15/15 actual production HTTP checks pass. UI: 23/23 production-browser checks pass; independent TypeScript/security review findings fixed and re-reviewed. README, submission draft, 150-second demo script, checklist, and third-party notices complete. Fresh checkout passes in 33.59s. RESULTS.md records local provenance and genuine checks still NOT RUN. No remote configured; commits remain local.
+Local closeout: 139/139 tests, TypeScript, production build and 15/15 actual production HTTP checks pass. UI: 23/23 production-browser checks pass; independent TypeScript/security review findings fixed and re-reviewed. README, submission draft, demo script and 158.88s recorded draft, checklist, and third-party notices complete. Fresh checkout passes in 33.59s. RESULTS.md records local provenance and genuine checks still NOT RUN. Source pushed to private GitHub origin on 2026-10-10; remote commit verified. PAYPAL_SETUP.md supplies human account steps. AI_SMOKE_RESULTS.md records three failed HTTP400 requests, zero outputs and exhausted diagnostic allowance. Public release and submission remain pending genuine acceptance and entrant facts.
 
 T01/T14 -> Task 4/6; T02–T07/T09–T13/T15/T17–T20 -> Tasks 2/3/6; T08/T16 -> Tasks 5/6/7. Every shared record/route/signature is defined before dispatch in CONTRACTS.md. Dependencies and owned paths do not overlap; main alone owns route adapters/manifests/schema. Missing external access blocks only genuine checks, never causes fixture passes to be reported as integration. User delegated architecture decisions, so no further architecture choice prompt.

@@ -36,13 +36,13 @@ Sources: [rules](https://paypalaihackathon.devpost.com/rules), [overview](https:
 | --- | --- | --- |
 | Workspace | Local branch `hackathon/paypal-preflight`; Next.js/SQLite app and docs implemented; production-browser checks 23/23; clean-checkout bootstrap/build/health completed in 33.59s | No local implementation prerequisite remains |
 | PayPal network | Unauthenticated sandbox OAuth endpoint GET returned HTTP 401 | Sandbox merchant app credentials and buyer access; authenticated OAuth check |
-| AI access | `GEMINI_MODEL=gemini-3.8-flash`; generation disabled by `AI_USAGE_ENABLED=false` | Explicit AI usage/budget approval, then real generation/evaluation |
-| GitHub | `gh auth status` previously succeeded; repository has no remote | Human-selected remote and publication approval |
+| AI access | `GEMINI_MODEL=gemini-3.8-flash`; generation disabled by `AI_USAGE_ENABLED=false` | Three-call diagnostic allowance exhausted with HTTP400; accepted request and full rubric evaluation still required |
+| GitHub | Private repository `nikolas-sapa/scope-to-deposit-paypal-ai-2026` created; branch pushed and remote commit verified | Public release/submission after genuine acceptance and entrant declarations |
 | Build tools | Clean checkout: Node 25.8.1, npm 11.11.0; install, owner setup, typecheck, production build, start and health 200 completed in 33.59s | No local build prerequisite remains |
 | License | Root `LICENSE` is MIT; third-party notices retained | None for local package |
 | Personal eligibility | Adult age and Greece confirmed by human, relayed by coordinating chat | Entrant type, conflict/support and ownership declarations; no identity documents needed |
 
-No authenticated PayPal call, checkout, capture, real webhook, or model generation/evaluation completed. Browser screenshots, production-browser checks, clean-checkout setup, build, and independent TypeScript/security reviews are complete. No push, deployment, or submission occurred; repository has no remote.
+No authenticated PayPal call, checkout, capture or real webhook completed. Three bounded Gemini generation requests returned HTTP400; zero validated outputs and no completed model evaluation. See AI_SMOKE_RESULTS.md. Browser screenshots, production-browser checks, clean-checkout setup, build, and independent TypeScript/security reviews are complete. Reviewed source is pushed to a private GitHub repository. No public release, deployment or submission occurred.
 
 ## Preparation evidence
 
@@ -50,6 +50,6 @@ Luna API lookup: six primary-source questions in session `work/paypal-api-resear
 
 Resumed preparation: JUDGE_ACCESS.md specifies custody and T08 account-provisioning-only exclusion. EVALUATION_DESIGN.md and 30 synthetic cases prepare measurable checks without calling a model or payment API. Follow-up Sol spec review found five further ambiguities; SPEC.md now covers approval rejection, capability expiry races, finite retry retention/lost-create recovery, provider-backed capture counts and authentication bypass checks. HANDOFF.md preserves architecture options and conditional worker ownership. No runtime test result inferred from these artifacts.
 
-Official event rules, overview, resources, and FAQ rechecked on 2026-10-10. Product/architecture authority delegated by human; PLAN.md and CONTRACTS.md select A/USD without expanding spending/external-action permissions. Pinned dependency versions respect existing npm date cutoff. AI generation remains disabled pending authorized usage. Node 25.8.1 native SQLite transaction probe succeeded. UI primitive sources/license fetched from official shadcn registry. No authenticated PayPal/model-generation result inferred.
+Official event rules, overview, resources, and FAQ rechecked on 2026-10-10. Product/architecture authority delegated by human; PLAN.md and CONTRACTS.md select A/USD without expanding spending/external-action permissions. Pinned dependency versions respect existing npm date cutoff. Production AI remains disabled; the later bounded smoke is recorded in AI_SMOKE_RESULTS.md. Node 25.8.1 native SQLite transaction probe succeeded. UI primitive sources/license fetched from official shadcn registry. No authenticated PayPal/model-generation result inferred.
 
 Refresh event pages again before submission. Keep final submitted build and access stable throughout judging.

@@ -2,7 +2,7 @@
 
 Architecture authorized through delegated decisions: Next.js App Router, native SQLite, USD integer cents, sandbox only. Contracts in CONTRACTS.md; numerical acceptance checks in SPEC.md; implementation and ownership in PLAN.md.
 
-Current phase: local UI and delivery drafts complete. TypeScript passes; 139 local tests, production build, backend HTTP 15/15, and production-browser checks 23/23 pass. Independent UI TypeScript/security reviews completed and findings fixed. Fresh checkout at `3376cf6` completed install, owner setup, typecheck, production build, and health 200 in 33.59s. UI and documentation commits are local on `hackathon/paypal-preflight`. PayPal/AI-backed acceptance and genuine paid screenshots remain unrun until access and authorization exist. No Git remote configured.
+Current phase: local UI, delivery drafts and 158.88s demo complete. TypeScript passes; 139 local tests, production build, backend HTTP 15/15, and production-browser checks 23/23 pass. Independent UI TypeScript/security reviews completed and findings fixed. Fresh checkout at `3376cf6` completed install, owner setup, typecheck, production build, and health 200 in 33.59s. Source pushed to private GitHub origin on `hackathon/paypal-preflight`. Genuine PayPal/AI acceptance remains pending. PayPal setup in PAYPAL_SETUP.md; bounded real-AI smoke stopped after three HTTP400 requests, zero validated outputs; diagnosis in AI_SMOKE_RESULTS.md.
 
 ## Model ownership
 
@@ -17,7 +17,7 @@ Current phase: local UI and delivery drafts complete. TypeScript passes; 139 loc
 | All browser work | gpt-6-luna only | Actual browser workflow and screenshots; no fixture payment claims |
 | Delivery drafts | gpt-6-luna | Assigned README/submission/demo/checklist files, grounded in verified results |
 
-Workers preserve other edits, do not spawn, commit, push, publish, deploy, change access or spend. Main owns integration and commits. No Git remote configured; local commits cannot be pushed yet.
+Workers preserve other edits, do not spawn, commit, push, publish, deploy, change access or spend. Main owns integration and commits. Private origin: https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Current branch pushed; remote commit verified.
 
 ## Invariants carried forward
 
@@ -37,6 +37,6 @@ Handle missing integrations honestly. Owner CheckoutLink includes capabilityId f
 
 ## External checks still needing inputs
 
-PayPal sandbox app credentials, Business merchant and separate Personal buyer access remain unavailable. Real captures and authentic webhook checks require these plus approved HTTPS webhook access/registration. Existing Gemini model-list access succeeded, but real generation remains disabled pending authorized usage/budget. Human entrant/ownership declarations and eventual repository/video publication/submission remain pending.
+PayPal sandbox app credentials, Business merchant and separate Personal buyer access remain unavailable. Real captures and authentic webhook checks require these plus approved HTTPS webhook access/registration. Existing Gemini metadata/countTokens access succeeded, but three bounded generation requests failed HTTP400 INVALID_ARGUMENT. Production AI remains disabled; the diagnostic allowance is exhausted. Human entrant/ownership declarations and eventual repository/video publication/submission remain pending.
 
-No account changes, paid generation, live money, deployment, publication, submission or messages authorized. No remote exists to push to. External access, AI usage authorization, and publication decisions remain human inputs.
+Latest direction on 2026-10-10 assigns PayPal setup to the human and other remaining work to the coordinator. Private repository created and pushed. AI smoke made three guarded generation requests, all HTTP400, zero outputs. Request compatibility/account diagnosis remains unresolved; no production change made. Full T01/T14 evaluation remains NOT RUN. Cumulative reservation US$0.051642, not an invoice; see AI_SMOKE_RESULTS.md. PayPal setup in PAYPAL_SETUP.md. Entrant declarations remain human facts. Live money, public release, deployment and submission remain unperformed.

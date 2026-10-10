@@ -1,6 +1,6 @@
 # Verification results
 
-Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft verified 2026-10-10. No genuine PayPal transaction, authentic webhook or AI generation performed.
+Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft verified 2026-10-10. No genuine PayPal transaction or authentic webhook performed. Three bounded Gemini generation requests returned HTTP400; zero validated outputs. See AI_SMOKE_RESULTS.md.
 
 ## Checks executed
 
@@ -47,7 +47,7 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 
 | ID | Current evidence and remaining acceptance |
 | --- | --- |
-| T01 | NOT RUN, genuine 20-case model extraction and rubric review require authorized usage |
+| T01 | NOT RUN, three bounded diagnostic requests failed HTTP400; genuine 20-case extraction and rubric review remain unperformed |
 | T02 | Local exact-deposit and override checks pass; real checkout/capture matching NOT RUN |
 | T03 | Local replay convergence pass; genuine callback/event convergence NOT RUN |
 | T04 | 10 local pre-capture cancellation observations remain unpaid; genuine provider cancellation evidence NOT RUN |
@@ -72,7 +72,7 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 
 Single local Node process, loopback by default. Runtime Node25.8.1, native SQLite API not a production-stability claim. Rate limits and recovery cursor are process-local and reset after restart; persisted attempts/keys/receipts remain durable. Recovery batches rotate fairly, at most20 attempts per cycle; webhook receipts use fair bounded retries. Vite emits a future config-loader warning, current tests pass.
 
-No Git remote, deployment, publication or submission. Real PayPal credentials/merchant/buyer access and authorized AI usage remain missing. No complete product or hackathon acceptance claim.
+Private GitHub repository created and reviewed source pushed on 2026-10-10: https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Repository privacy and matching local/remote commit verified. No public release, deployment or submission. Real PayPal credentials/merchant/buyer access remain missing. Bounded AI smoke exhausted three requests, all HTTP400 INVALID_ARGUMENT; zero validated outputs, cumulative reserved ceiling US$0.051642 (not an invoice). Full model evaluation remains NOT RUN; see AI_SMOKE_RESULTS.md. No complete product or hackathon acceptance claim.
 
 ## Local demo draft
 
