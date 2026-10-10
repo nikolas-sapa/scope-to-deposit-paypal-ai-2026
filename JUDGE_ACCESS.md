@@ -1,6 +1,6 @@
 # Judge sandbox access handoff
 
-**Status: proposal only.** No app architecture, hosting, credentials, account access, or access channel approved. No credential values belong in this file or public README.
+**Status: local app implemented; judge-access proposal only.** App architecture is Next.js/SQLite. Hosting, credentials, account access, and access channel remain unapproved. No credential values belong in this file or public README.
 
 ## Access paths for later decision
 
@@ -8,11 +8,11 @@
 
 **Private hosted route:** entrant hosts a sandbox-only judge instance and grants access through a private channel. This needs a separate approval for hosting, account ownership, judge authentication, retention, and private credential delivery. Never put access tokens, passwords, session secrets, or private app credentials in a public README, issue, or source file. No hosted route authorized.
 
-Architecture remains open: Next.js/SQLite, React+Node/SQLite, or managed Postgres/auth. This handoff does not select one.
+The local product uses Next.js/SQLite. Judge hosting/access design remains open; this handoff does not authorize either route.
 
 ## Credential and identifier custody
 
-All labels below are proposed documentation/config labels only. **None is confirmed present or operative.** Do not create deployment configuration from this proposal.
+The local `.env.example` defines the listed PayPal and Gemini variable names with blank values. **No provider credentials or judge access are configured.** Do not create deployment configuration from this proposal.
 
 | Type | Proposed label | Treatment and custody |
 | --- | --- | --- |
@@ -44,7 +44,7 @@ Only PayPal account and buyer-account provisioning are outside the 15-minute fre
 ## Acceptance evidence links
 
 - **T05, genuine sandbox checkout:** 3/3 distinct real buyer approvals and server captures, reconciled order/capture IDs, amount, currency, merchant, status, timestamps. Status: **NOT RUN**.
-- **T08, judge setup:** fresh checkout in under 15 minutes, excluding account provisioning, with setup transcript and runtime versions. Status: **NOT RUN**.
+- **T08, judge setup:** fresh checkout in under 15 minutes, excluding account provisioning, with setup transcript and runtime versions. Local install, owner setup, typecheck, production build, start, and health check completed in 33.59s on Node 25.8.1/npm 11.11.0. PayPal credential setup/OAuth and judge usability were not exercised; overall T08 remains **NOT RUN**.
 - **T15, authentic webhook:** at least one real sandbox capture event passes registered webhook verification and converges on the existing capture. Status: **NOT RUN**. Simulator is not qualifying evidence.
 
 ## Cannot verify yet
@@ -55,8 +55,8 @@ Only PayPal account and buyer-account provisioning are outside the 15-minute fre
 4. Whether the selected app can create, retrieve, and capture orders for the intended merchant, or complete three genuine buyer-approved deposits.
 5. Whether a public HTTPS webhook endpoint can be hosted, registered, reached by PayPal, and verified for a real sandbox capture event.
 6. Whether local judge access or private hosted judge access will be selected and approved; no credentials or private access channel issued.
-7. Whether a fresh checkout meets T08’s timing. Implementation authorized; fresh-checkout timing not measured yet.
-8. Whether any of T05, T08, or T15 acceptance criteria pass. All three are **NOT RUN**.
+7. Whether fresh-checkout setup with authorized PayPal credentials and judge access meets T08’s full acceptance criteria. Local install/build/bootstrap took 33.59s; provider setup and judge usability were not measured.
+8. Whether T05 or T15 pass. Both remain **NOT RUN**. T08 local setup timing is measured, but overall T08 remains **NOT RUN** pending provider setup and judge usability.
 
 ## Primary references
 

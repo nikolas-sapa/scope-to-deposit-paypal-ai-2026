@@ -8,6 +8,7 @@
 - [x] 139 local service tests pass; 23/23 production-browser checks cover owner workflow, capability handling, logout, missing-provider behavior, and responsive layout.
 - [x] README documents the actual setup and sandbox-only boundaries.
 - [x] MIT notice retained for the five adapted shadcn/ui primitives.
+- [x] Root `LICENSE` is MIT.
 - [x] Browser bundle scan found no private config names or generated owner password.
 - [x] Timed clean-checkout run completed on Node.js 25.8.1/npm 11.11.0: install, owner setup, TypeScript, production build, and health 200 in 33.59 seconds.
 - [ ] Re-run verification after any change to the recorded build.
@@ -24,7 +25,8 @@
 
 ## Human decisions and release
 
-- [ ] Confirm entrant eligibility, current event rules/deadline, and any required declarations.
+- [x] Rechecked official event rules and deadline on 2026-10-10: [Devpost rules](https://paypalaihackathon.devpost.com/rules).
+- [ ] Confirm entrant type, conflict/support exclusions, ownership, and required participant declarations.
 - [ ] Review the final project description and 150-second demo against only verified behavior.
 - [ ] Choose whether to create/select a remote and publish the repository.
 - [ ] Record the demo video and review its content.
