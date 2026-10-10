@@ -109,11 +109,11 @@ expect(() => transaction(db, () => Promise.resolve())).toThrow();
 - [x] Commission independent gpt-6.1-sol/high typescript-reviewer and security-reviewer after runnable integrated code. Review packages in work/PLAN. Reviewers never edit.
 - [x] Fix reported TypeScript races and logout capability retention; both reviewers rechecked their scoped findings and reported them resolved.
 - [x] Draft only verified behavior; future video shots explicitly pending. 150-second script fits 3-minute maximum. Public source must never contain credentials. Main chooses MIT for entrant code, retains third-party notices.
-- [ ] Fresh-checkout setup <15 minutes excludes only account provisioning. No actual external provisioning hidden in timing; record prerequisite/runtime versions.
-- [ ] Main final acceptance/commits. No remote/publish/deploy/registration/submission/spend without authorization; deployment if later approved must reach Ready and live URL verification.
+- [x] Fresh detached worktree setup passes in 33.59s on Node 25.8.1 / npm 11.11.0: npm ci, owner setup, typecheck, production build, start and health 200. PayPal/AI configs remain false; no external provisioning counted.
+- [x] Main final acceptance and local commits complete. No remote/publish/deploy/registration/submission/spend without authorization; deployment if later approved must reach Ready and live URL verification.
 
 ## Plan self-review
 
-Backend closeout: 139/139 tests, TypeScript, production build and 15/15 actual production HTTP checks pass. UI: 23/23 production-browser checks pass; independent TypeScript/security review findings fixed and re-reviewed. README, submission draft, 150-second demo script, checklist, and third-party notices complete. Timed fresh-checkout setup remains before final closeout. RESULTS.md records local provenance and genuine checks still NOT RUN. No remote configured; commits remain local.
+Local closeout: 139/139 tests, TypeScript, production build and 15/15 actual production HTTP checks pass. UI: 23/23 production-browser checks pass; independent TypeScript/security review findings fixed and re-reviewed. README, submission draft, 150-second demo script, checklist, and third-party notices complete. Fresh checkout passes in 33.59s. RESULTS.md records local provenance and genuine checks still NOT RUN. No remote configured; commits remain local.
 
 T01/T14 -> Task 4/6; T02–T07/T09–T13/T15/T17–T20 -> Tasks 2/3/6; T08/T16 -> Tasks 5/6/7. Every shared record/route/signature is defined before dispatch in CONTRACTS.md. Dependencies and owned paths do not overlap; main alone owns route adapters/manifests/schema. Missing external access blocks only genuine checks, never causes fixture passes to be reported as integration. User delegated architecture decisions, so no further architecture choice prompt.

@@ -1,6 +1,6 @@
 # Actual tool inventory
 
-Status 2026-10-10: local UI and delivery drafts complete; external acceptance and timed fresh-checkout remain pending. Installed packages are recorded in package.json/package-lock.json; runtime verification in RESULTS.md.
+Status 2026-10-10: local UI, delivery drafts, and timed fresh-checkout complete; external acceptance remains pending. Installed packages are recorded in package.json/package-lock.json; runtime verification in RESULTS.md.
 
 | Tool | Actual use/status |
 | --- | --- |
@@ -14,6 +14,7 @@ Status 2026-10-10: local UI and delivery drafts complete; external acceptance an
 | Zod | Installed schema validator; real safeParse probe succeeded |
 | Geist/Tailwind/shadcn | Installed UI dependencies; five official MIT registry primitives retained with attribution; owner and buyer UI implemented |
 | Vitest/Playwright Chromium | 139 service tests pass; 23/23 production-browser checks pass, zero unexpected console errors; screenshots retained in private session work |
+| Fresh Git worktree | Node.js 25.8.1 / npm 11.11.0; clean `npm ci`, owner setup, typecheck, build, production health 200 in 33.59 seconds; PayPal/AI config false |
 | Gemini | Existing GEMINI_API_KEY passed metadata lookup; selected gemini-3.8-flash appears available. No generation, no approved spend; disabled by default |
 | PayPal | Official sandbox Orders/webhook documentation reviewed; unauthenticated network reachability only. No app credential, authenticated sandbox call, capture or real event verified |
 

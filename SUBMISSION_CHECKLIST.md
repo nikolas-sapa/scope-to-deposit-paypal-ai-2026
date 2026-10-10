@@ -9,7 +9,7 @@
 - [x] README documents the actual setup and sandbox-only boundaries.
 - [x] MIT notice retained for the five adapted shadcn/ui primitives.
 - [x] Browser bundle scan found no private config names or generated owner password.
-- [ ] Complete a timed clean-checkout setup run after final review; record runtime and elapsed time.
+- [x] Timed clean-checkout run completed on Node.js 25.8.1/npm 11.11.0: install, owner setup, TypeScript, production build, and health 200 in 33.59 seconds.
 - [ ] Re-run verification after any change to the recorded build.
 
 ## External acceptance evidence

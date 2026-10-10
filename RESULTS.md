@@ -11,6 +11,7 @@ Backend verified 2026-10-09; local UI and browser verified 2026-10-10. No genuin
 | Production build | Exit0; dynamic /api/[...path] route generated | LOCAL_RUNTIME |
 | Production HTTP roundtrip | 15/15 checks pass, 0 failures | LOCAL_RUNTIME, actual npm start and HTTP requests |
 | Production-browser UI workflow | 23/23 checks pass; 0 unexpected console errors; one expected invalid-capability 401 | LOCAL_RUNTIME, Playwright Chromium against `npm start` |
+| Fresh-checkout setup | 33.59s total: checkout 0.36s, `npm ci` 7.48s, private owner setup 1.37s, typecheck 5.84s, production build 17.20s, production start/health 1.15s; health 200 | Fresh detached Git worktree at commit `3376cf6`, Node 25.8.1 / npm 11.11.0; no provider/AI config |
 | UI screenshots | Owner approved quote desktop/mobile, login, buyer capability unavailable | Actual local production UI; no paid state asserted |
 | Logout capability cleanup | Storage cleared on logout and unauthenticated bootstrap; re-review passed | Synthetic browser-only capability; no provider token |
 | Responsive layout | 390px mobile viewport, no horizontal overflow | Actual local production UI |
@@ -51,8 +52,8 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 | T04 | 10 local pre-capture cancellation observations remain unpaid; genuine provider cancellation evidence NOT RUN |
 | T05 | NOT RUN, three real sandbox buyer approvals/captures |
 | T06 | Backend ownership/auth checks pass; production browser verified owner login/manual quote flow/logout. Cross-owner denial is covered by server tests, not a two-owner browser session |
-| T07 | Private files ignored and prior committed-history scan0; current browser bundle scan found no config names or generated owner password. Final commit scan remains pending |
-| T08 | Pending timed clean checkout after UI, docs, and final review |
+| T07 | Private files ignored; UI commit and final staged docs scan both report 0 leaks. Browser bundle excludes private config names and generated owner password |
+| T08 | Local fresh-checkout install/setup/typecheck/build/start verified in 33.59s (<15min); external account provisioning excluded from future setup time if required |
 | T09 | Local frozen quote, review blocker and unapproved dispatch checks pass |
 | T10 | Local concurrent/replayed capture counts pass; genuine provider-backed race evidence NOT RUN |
 | T11 | Local file-backed SQLite reopen/lost-response recovery pass; genuine sandbox fault/restart evidence NOT RUN |
