@@ -86,11 +86,11 @@ expect(() => transaction(db, () => Promise.resolve())).toThrow();
 
 **Files:** create src/ui/**, including api.ts, OwnerWorkspace.tsx, BuyerCheckout.tsx, primitives/**, cn.ts, styles.css. Depends shared route/DTO contract and Task 2 reviewed; independent from payment implementation. Main owns src/app page/layout adapters and fonts import.
 
-- [ ] Port five retained official shadcn source primitives with MIT provenance from session work/ui-sources. Use only installed approved dependencies. No icons/animation SDK needed.
-- [ ] Implement login/logout and owner workflow: synthetic brief prefill, genuine extraction only when enabled, editable scope/questions, bounded line items/deposit, explicit approve, copy buyer link, payment state/reconcile. Handle field errors and pending/unknown clearly. Client never controls authoritative capture amount or paid flag.
-- [ ] Implement `/pay` buyer view: read token from fragment into tab sessionStorage; send only X-Checkout-Token header to same-origin API. PayPal return `/pay?approved=1` contains no capability. Require server evidence for paid status; cancellation observation remains separate. No capability in logs/referrers.
-- [ ] Surface missing integration configuration honestly. No mock checkout or fake success mode in product.
-- [ ] Run UI/typecheck checks after integration adapters exist. Main screenshot-verifies real running review/unpaid state; paid screenshots require real provider evidence. Save task report; main verifies/reviews/commits.
+- [x] Port five retained official shadcn source primitives with MIT provenance from session work/ui-sources. Use only installed approved dependencies. No icons/animation SDK needed.
+- [x] Implement login/logout and owner workflow: synthetic brief prefill, genuine extraction only when enabled, editable scope/questions, bounded line items/deposit, explicit approve, copy buyer link, payment state/reconcile. Handle field errors and pending/unknown clearly. Client never controls authoritative capture amount or paid flag.
+- [x] Implement `/pay` buyer view: read token from fragment into tab sessionStorage; send only X-Checkout-Token header to same-origin API. PayPal return `/pay?approved=1` contains no capability. Require server evidence for paid status; cancellation observation remains separate. No capability in logs/referrers.
+- [x] Surface missing integration configuration honestly. No mock checkout or fake success mode in product.
+- [x] Typecheck and production build pass; actual production browser run covers owner workflow, blocker/approval, missing-provider fail-closed path, auth/Origin/logout, buyer token handling, responsive layout, bundle scan, and console errors. 23/23 checks pass. Genuine paid screenshots remain unavailable. Independent UI reviews completed and findings fixed/re-reviewed.
 
 ## Task 6: Route integration and local judge tooling, main
 
@@ -98,22 +98,22 @@ expect(() => transaction(db, () => Promise.resolve())).toThrow();
 
 - [x] Implement exact route matrix, strict Zod request inputs, authenticated owner/buyer guards, safe errors and security response headers. All mutations require Origin+CSRF except PayPal-authenticated webhook. Node runtime, no caching of sensitive responses.
 - [x] Wire local startup/setup/health/readiness and controlled scheduler/recovery with no duplicate hot-reload instances. Record server-only secrets boundary; no raw logging.
-- [ ] Run build/typecheck/tests, then actual browser auth/manual quote/approval/missing-provider/cancellation-observation checks with 0 console errors. Use isolated contexts for ownership and screenshot actual state. Check browser bundle for private credential names/values.
+- [x] Run build/typecheck/tests and actual browser auth/manual quote/approval/missing-provider checks with 0 unexpected console errors. Owner auth/Origin boundaries, logout, responsive layout, buyer capability handling, and browser bundle scan pass; cross-owner denial remains covered by backend service tests. Screenshots show actual local states; no paid state asserted.
 - [x] Check-access obtains OAuth only if secure PayPal config exists; no create/capture during access preflight. Evaluation runner saves REAL_MODEL per-case results only with usage enabled, otherwise NOT RUN.
-- [ ] Complete test ledger: local checks marked local; T01 genuine model, T05 three sandbox payments, T15 authentic event and other provider claims stay NOT RUN if prerequisites absent. No passing suite repeated without new changes/concerns.
+- [x] Complete test ledger: local checks marked local; T01 genuine model, T05 three sandbox payments, T15 authentic event and other provider claims remain NOT RUN because prerequisites are absent. No passing suite repeated without new changes/concerns.
 
 ## Task 7: Independent review and deliverables
 
 **Files:** reviewer read-only whole branch; assigned Luna drafts README.md, SUBMISSION.md, DEMO_SCRIPT.md, SUBMISSION_CHECKLIST.md, TOOL_INVENTORY.md; main owns LICENSE decision, architecture diagram and actual RESULTS.md.
 
-- [ ] Commission independent gpt-6.1-sol/high typescript-reviewer and security-reviewer after runnable integrated code. Review packages in work/PLAN. Reviewers never edit.
-- [ ] Dispatch material fixes to owning implementer, covering checks and scoped re-review. Main integrates and records unresolved external checks.
-- [ ] Draft only verified behavior; future video shots explicitly pending. 150-second script requires 3-minute maximum adherence. Public source must never contain credentials. Main chooses MIT for entrant code, retains third-party notices.
+- [x] Commission independent gpt-6.1-sol/high typescript-reviewer and security-reviewer after runnable integrated code. Review packages in work/PLAN. Reviewers never edit.
+- [x] Fix reported TypeScript races and logout capability retention; both reviewers rechecked their scoped findings and reported them resolved.
+- [x] Draft only verified behavior; future video shots explicitly pending. 150-second script fits 3-minute maximum. Public source must never contain credentials. Main chooses MIT for entrant code, retains third-party notices.
 - [ ] Fresh-checkout setup <15 minutes excludes only account provisioning. No actual external provisioning hidden in timing; record prerequisite/runtime versions.
 - [ ] Main final acceptance/commits. No remote/publish/deploy/registration/submission/spend without authorization; deployment if later approved must reach Ready and live URL verification.
 
 ## Plan self-review
 
-Sol backend closeout: 139/139 tests, canonical TypeScript, production build and 15/15 actual production HTTP checks pass. Independent code/security approval includes final Next URL-normalization fix. Task 6 browser/page integration and Task 7 whole-product review/deliverables remain open for Luna. RESULTS.md records local provenance and genuine checks still NOT RUN. No remote configured; commits remain local.
+Backend closeout: 139/139 tests, TypeScript, production build and 15/15 actual production HTTP checks pass. UI: 23/23 production-browser checks pass; independent TypeScript/security review findings fixed and re-reviewed. README, submission draft, 150-second demo script, checklist, and third-party notices complete. Timed fresh-checkout setup remains before final closeout. RESULTS.md records local provenance and genuine checks still NOT RUN. No remote configured; commits remain local.
 
 T01/T14 -> Task 4/6; T02–T07/T09–T13/T15/T17–T20 -> Tasks 2/3/6; T08/T16 -> Tasks 5/6/7. Every shared record/route/signature is defined before dispatch in CONTRACTS.md. Dependencies and owned paths do not overlap; main alone owns route adapters/manifests/schema. Missing external access blocks only genuine checks, never causes fixture passes to be reported as integration. User delegated architecture decisions, so no further architecture choice prompt.

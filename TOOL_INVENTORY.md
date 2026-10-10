@@ -1,6 +1,6 @@
 # Actual tool inventory
 
-Status 2026-10-09: implementation in progress, not a submission-ready claim. Installed packages are recorded in package.json/package-lock.json; runtime verification in results/report files.
+Status 2026-10-10: local UI and delivery drafts complete; external acceptance and timed fresh-checkout remain pending. Installed packages are recorded in package.json/package-lock.json; runtime verification in RESULTS.md.
 
 | Tool | Actual use/status |
 | --- | --- |
@@ -9,11 +9,11 @@ Status 2026-10-09: implementation in progress, not a submission-ready claim. Ins
 | gpt-6-luna, medium | Official API documentation, secure judge-access draft, 30 synthetic fixtures, evaluation protocol, Context7 retrieval, UI source lookup |
 | Context7 ctx7@0.5.12 | Anonymous framework/library documentation retrieval; no login/setup/account changes |
 | npm | Registry version/timestamp verification, pinned install respecting configured date cutoff, audit0 vulnerabilities |
-| Next.js/React/TypeScript | Installed local full-stack framework; TypeScript contract/config check passed; production backend build passed; UI pending |
+| Next.js/React/TypeScript | Installed local full-stack framework; TypeScript check and production build pass with UI routes |
 | Node25.8.1 node:sqlite | Real native schema initialization/transaction probe; 139 local tests include real native persistence/constraints/reopen checks |
 | Zod | Installed schema validator; real safeParse probe succeeded |
-| Geist/Tailwind/shadcn | Installed UI dependencies; five real MIT registry primitive sources retained; UI not yet implemented |
-| Vitest/Playwright | Installed test tools; 139 server tests pass; browser verification reserved for Luna and pending |
+| Geist/Tailwind/shadcn | Installed UI dependencies; five official MIT registry primitives retained with attribution; owner and buyer UI implemented |
+| Vitest/Playwright Chromium | 139 service tests pass; 23/23 production-browser checks pass, zero unexpected console errors; screenshots retained in private session work |
 | Gemini | Existing GEMINI_API_KEY passed metadata lookup; selected gemini-3.8-flash appears available. No generation, no approved spend; disabled by default |
 | PayPal | Official sandbox Orders/webhook documentation reviewed; unauthenticated network reachability only. No app credential, authenticated sandbox call, capture or real event verified |
 

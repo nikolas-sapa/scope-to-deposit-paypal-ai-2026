@@ -2,7 +2,7 @@
 
 Architecture authorized through delegated decisions: Next.js App Router, native SQLite, USD integer cents, sandbox only. Contracts in CONTRACTS.md; numerical acceptance checks in SPEC.md; implementation and ownership in PLAN.md.
 
-Current phase: Sol backend complete. Independent code/security reviews, including final framework configuration, approved. 139 local tests and production build pass; actual production HTTP 15/15 checks pass. Luna UI/browser phase follows. No browser automation assigned to Sol.
+Current phase: local UI and delivery drafts complete. TypeScript passes; 139 local tests, production build, backend HTTP 15/15, and production-browser checks 23/23 pass. Independent UI TypeScript/security reviews completed and findings fixed. Timed fresh-checkout verification and final local commit remain. PayPal/AI-backed acceptance and genuine paid screenshots remain unrun until access and authorization exist. No Git remote configured.
 
 ## Model ownership
 
@@ -39,4 +39,4 @@ Handle missing integrations honestly. Owner CheckoutLink includes capabilityId f
 
 PayPal sandbox app credentials, Business merchant and separate Personal buyer access remain unavailable. Real captures and authentic webhook checks require these plus approved HTTPS webhook access/registration. Existing Gemini model-list access succeeded, but real generation remains disabled pending authorized usage/budget. Human entrant/ownership declarations and eventual repository/video publication/submission remain pending.
 
-No account changes, paid generation, live money, deployment, publication, submission or messages authorized. Continue reversible local implementation and checks within current scope.
+No account changes, paid generation, live money, deployment, publication, submission or messages authorized. Next: run a timed clean-checkout setup, update results/checklist, then commit locally. No remote exists to push to.

@@ -1,6 +1,6 @@
-# Backend verification results
+# Verification results
 
-Verified 2026-10-09. Backend implemented and runnable through the local production API. Product UI, browser acceptance and submission deliverables remain Luna phase. No genuine PayPal transaction, authentic webhook or AI generation performed.
+Backend verified 2026-10-09; local UI and browser verified 2026-10-10. No genuine PayPal transaction, authentic webhook or AI generation performed.
 
 ## Checks executed
 
@@ -10,6 +10,11 @@ Verified 2026-10-09. Backend implemented and runnable through the local producti
 | Canonical TypeScript | 0 diagnostics; also passed inside production build | LOCAL_RUNTIME |
 | Production build | Exit0; dynamic /api/[...path] route generated | LOCAL_RUNTIME |
 | Production HTTP roundtrip | 15/15 checks pass, 0 failures | LOCAL_RUNTIME, actual npm start and HTTP requests |
+| Production-browser UI workflow | 23/23 checks pass; 0 unexpected console errors; one expected invalid-capability 401 | LOCAL_RUNTIME, Playwright Chromium against `npm start` |
+| UI screenshots | Owner approved quote desktop/mobile, login, buyer capability unavailable | Actual local production UI; no paid state asserted |
+| Logout capability cleanup | Storage cleared on logout and unauthenticated bootstrap; re-review passed | Synthetic browser-only capability; no provider token |
+| Responsive layout | 390px mobile viewport, no horizontal overflow | Actual local production UI |
+| Browser asset scan | No private config field names or provisioned owner password in JS bundles | Actual local production build |
 | Owner authentication/ownership | 10 bypass, 10 CSRF/Origin, 10 cross-owner service checks denied; real setup credentials private | LOCAL_RUNTIME |
 | Frozen quote and amount validation | 10 immutable rewrites/deletions denied; exact integer totals and review blockers checked | LOCAL_RUNTIME |
 | Payment/evidence scenarios | Stable keys, races, lifetime capture counts, lost responses, SQLite reopen, expiry, mismatches, receipt durability and fair batches checked | LOCAL_FIXTURE, not real PayPal |
@@ -20,7 +25,11 @@ Verified 2026-10-09. Backend implemented and runnable through the local producti
 | Staged backend secret scan | Exit0, 0 leaks in candidate commit | Redacted gitleaks pre-commit report retained privately |
 | npm audit | 0 vulnerabilities at scaffold/foundation review | Pinned dependency graph unchanged |
 
-Production HTTP checks: health200, two bootstrap cookies, login rotation, owner create201, draft/version persistence, stale-version409, exact10000-cent total/5000-cent USD deposit approval, snapshot read, missing PayPal503, unauthenticated401, hostile Origin403, disabled AI503, logout200, revoked owner access401, zero owner password disclosures in server logs. No browser used.
+Production HTTP checks: health200, two bootstrap cookies, login rotation, owner create201, draft/version persistence, stale-version409, exact10000-cent total/5000-cent USD deposit approval, snapshot read, missing PayPal503, unauthenticated401, hostile Origin403, disabled AI503, logout200, revoked owner access401, zero owner password disclosures in server logs. These were backend-phase HTTP checks; UI checks used an actual browser.
+
+## UI review findings fixed
+
+Independent TypeScript review found a save/edit race and out-of-order engagement selection; controls now disable during pending writes, and stale selection responses are ignored. Independent security review found buyer capability links remained in tab storage after owner logout; logout and unauthenticated bootstrap now clear that storage. Both reviewers rechecked their findings and found them resolved.
 
 ## Review findings fixed
 
@@ -41,9 +50,9 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 | T03 | Local replay convergence pass; genuine callback/event convergence NOT RUN |
 | T04 | 10 local pre-capture cancellation observations remain unpaid; genuine provider cancellation evidence NOT RUN |
 | T05 | NOT RUN, three real sandbox buyer approvals/captures |
-| T06 | Local ownership/authentication checks pass; complete two-owner browser/API workflow remains integration phase |
-| T07 | Private files ignored and committed history scan0; browser bundle/final publication scan pending UI |
-| T08 | NOT RUN, timed fresh checkout after UI and final setup instructions |
+| T06 | Backend ownership/auth checks pass; production browser verified owner login/manual quote flow/logout. Cross-owner denial is covered by server tests, not a two-owner browser session |
+| T07 | Private files ignored and prior committed-history scan0; current browser bundle scan found no config names or generated owner password. Final commit scan remains pending |
+| T08 | Pending timed clean checkout after UI, docs, and final review |
 | T09 | Local frozen quote, review blocker and unapproved dispatch checks pass |
 | T10 | Local concurrent/replayed capture counts pass; genuine provider-backed race evidence NOT RUN |
 | T11 | Local file-backed SQLite reopen/lost-response recovery pass; genuine sandbox fault/restart evidence NOT RUN |
@@ -51,7 +60,7 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 | T13 | 10 local malformed/failed-verification cases rejected; authentic provider verification NOT RUN |
 | T14 | 10 local hostile brief/output boundary cases cause0 privileged actions/disclosures; real model run NOT RUN |
 | T15 | NOT RUN, genuine registered-webhook event |
-| T16 | NOT RUN, UI and three real-state screenshots |
+| T16 | Local owner approval, login, mobile, and buyer-unavailable screenshots captured; genuine paid/canceled provider-state screenshots NOT RUN |
 | T17 | Local overlapping revisions keep one guarded attempt; genuine provider evidence NOT RUN |
 | T18 | Local cancellation/capability races pass; genuine provider evidence NOT RUN |
 | T19 | Local failure before persistence and SQLite reopen after persistence pass; genuine delivery/restart NOT RUN |
