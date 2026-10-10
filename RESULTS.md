@@ -38,7 +38,7 @@ Independent Sol reviewers identified and closed schema replacement/deletion/frac
 
 Last boundary regressions: three expected failures before fix, then 26/26 focused tests pass. Gateway rechecks the persisted retryUntil after OAuth with a30-second conservative margin; expired create/capture dispatches0 payment POSTs and preserves original guard/key/payload. Explicit injected transport is labeled LOCAL_FIXTURE, never REAL_SANDBOX.
 
-Independent backend code/security approval and final configuration re-review are recorded in session work/PLAN. Full product review follows UI integration.
+Independent backend code/security approval and final configuration re-review are recorded in session work/PLAN. Independent UI code/security reviews also completed, with findings resolved as described above. Genuine provider/model acceptance remains unverified.
 
 ## Acceptance ledger
 
