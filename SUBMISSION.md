@@ -29,7 +29,7 @@ Scope to Deposit keeps the sequence visible: capture the brief, review scope and
 - Buyer route designed around a fragment capability stored per tab and sent only in `X-Checkout-Token`.
 - PayPal Sandbox Orders, capture verification, reconciliation, and durable webhook receipt services implemented; genuine provider acceptance remains pending.
 - Vyce AI extraction returns facts/questions only and defaults to disabled; no real generation was performed.
-- Local verification: 139/139 service tests, TypeScript, production build, 15/15 production HTTP checks from the backend phase, 23/23 production-browser UI checks, and a 33.59-second fresh-checkout install/build/health run.
+- Local verification: current 140/140 service tests, TypeScript, production build; historical 15/15 production HTTP checks, 23/23 production-browser UI checks, and 33.59-second fresh-checkout install/build/health run.
 
 ## Use of PayPal
 

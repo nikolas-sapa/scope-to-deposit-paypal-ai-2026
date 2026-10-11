@@ -1,17 +1,17 @@
 # Verification results
 
-Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft verified 2026-10-10. Candidate-count compatibility cleanup verified 2026-10-11: regression RED against the previous adapter, 139/139 current tests, TypeScript and production build pass; independent TypeScript/security reviews approve. No genuine PayPal transaction or authentic webhook performed. Three bounded Gemini generation requests returned HTTP400; zero validated outputs. See AI_SMOKE_RESULTS.md.
+Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft verified 2026-10-10. Current provider switch verified locally 2026-10-11: 140/140 tests, TypeScript and production build pass; TypeScript and security reviewers found no provider/key leak or type defects. Vyce metadata returned HTTP200, 7 models, selected `deepseek-v4-flash` available. No Vyce generation call or spend. Historical Gemini smoke had three HTTP400 responses and zero validated outputs; see AI_SMOKE_RESULTS.md.
 
 ## Checks executed
 
 | Check | Result | Provenance |
 | --- | --- | --- |
-| Full server suite | 139/139 tests, 10/10 suites pass, 6.80s | Real local SQLite/scrypt/CLI/validation; explicit provider/model transport fixtures |
+| Full server suite | 140/140 tests, 10/10 suites pass | Real local SQLite/scrypt/CLI/validation; explicit provider/model transport fixtures; current Vyce adapter remains LOCAL_FIXTURE-only |
 | Canonical TypeScript | 0 diagnostics; also passed inside production build | LOCAL_RUNTIME |
 | Production build | Exit0; dynamic /api/[...path] route generated | LOCAL_RUNTIME |
 | Production HTTP roundtrip | 15/15 checks pass, 0 failures | LOCAL_RUNTIME, actual npm start and HTTP requests |
 | Production-browser UI workflow | 23/23 checks pass; 0 unexpected console errors; one expected invalid-capability 401 | LOCAL_RUNTIME, Playwright Chromium against `npm start` |
-| Fresh-checkout setup | 33.59s total: checkout 0.36s, `npm ci` 7.48s, private owner setup 1.37s, typecheck 5.84s, production build 17.20s, production start/health 1.15s; health 200 | Fresh detached Git worktree at commit `3376cf6`, Node 25.8.1 / npm 11.11.0; no provider/AI config |
+| Fresh-checkout setup | 33.59s total: checkout 0.36s, `npm ci` 7.48s, private owner setup 1.37s, typecheck 5.84s, production build 17.20s, production start/health 1.15s; health 200 | Fresh detached Git worktree at commit `3376cf6`, Node 25.8.1 / npm 11.11.0; no provider/AI config; historical result |
 | UI screenshots | Owner approved quote desktop/mobile, login, buyer capability unavailable | Actual local production UI; no paid state asserted |
 | Local demo video draft | 14/14 state assertions pass; H.264 MP4, 1440×1000, 25 fps, 158.88s, silent | Actual production UI in Playwright Chromium; isolated local SQLite, blank PayPal/Gemini credentials, AI disabled; frames reviewed, no credentials/tokens/devtools shown |
 | Logout capability cleanup | Storage cleared on logout and unauthenticated bootstrap; re-review passed | Synthetic browser-only capability; no provider token |
@@ -20,7 +20,7 @@ Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft 
 | Owner authentication/ownership | 10 bypass, 10 CSRF/Origin, 10 cross-owner service checks denied; real setup credentials private | LOCAL_RUNTIME |
 | Frozen quote and amount validation | 10 immutable rewrites/deletions denied; exact integer totals and review blockers checked | LOCAL_RUNTIME |
 | Payment/evidence scenarios | Stable keys, races, lifetime capture counts, lost responses, SQLite reopen, expiry, mismatches, receipt durability and fair batches checked | LOCAL_FIXTURE, not real PayPal |
-| AI boundary | 50/50 schema/gate/hostile-output/timeout checks pass | LOCAL_FIXTURE with real Zod, not real model quality |
+| AI boundary | Schema/gate/hostile-output/timeout fixture checks pass within 140/140 suite | LOCAL_FIXTURE with real Zod, not real model quality |
 | Access CLI | Expected exit2, NOT_CONFIGURED | No PayPal OAuth/order/capture dispatched |
 | Evaluation CLI | Expected exit2; 30/30 NOT_RUN, 0 outputs, 0 model provenance records | No generation dispatched |
 | Git history secret scan | Exit0, 0 leaks in committed history at scan | Redacted gitleaks report retained privately |
@@ -72,7 +72,9 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 
 Single local Node process, loopback by default. Runtime Node25.8.1, native SQLite API not a production-stability claim. Rate limits and recovery cursor are process-local and reset after restart; persisted attempts/keys/receipts remain durable. Recovery batches rotate fairly, at most20 attempts per cycle; webhook receipts use fair bounded retries. Vite emits a future config-loader warning, current tests pass.
 
-Private GitHub repository created and reviewed source pushed on 2026-10-10: https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Repository privacy and matching local/remote commit verified. No public release, deployment or submission. Real PayPal credentials/merchant/buyer access remain missing. Bounded AI smoke exhausted three requests, all HTTP400 INVALID_ARGUMENT; zero validated outputs, cumulative reserved ceiling US$0.051642 (not an invoice). Full model evaluation remains NOT RUN; see AI_SMOKE_RESULTS.md. No complete product or hackathon acceptance claim.
+Vyce spend remains gated off. No aggregate dollar cap or extraction-specific request limit exists if `AI_USAGE_ENABLED` is changed to `true`; the fixed model and 1,536-token output cap do not bound cumulative spend. Extraction sends the submitted brief to Vyce. Enable only after reviewing account rates and approving usage; no live generation or model-quality result is claimed.
+
+Private GitHub repository: https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Current branch and origin were verified at the provider-switch commit; the documentation/release reconciliation is recorded separately. No public release, deployment or submission. No PayPal transactions or genuine webhook checks were performed. Historical Gemini smoke: three HTTP400 INVALID_ARGUMENT responses, zero validated outputs, cumulative reserved ceiling US$0.051642 (not an invoice; actual charge unknown). Current Vyce model catalog check was metadata-only; generation and full rubric evaluation remain NOT RUN. No complete product or hackathon acceptance claim.
 
 ## Local demo draft
 

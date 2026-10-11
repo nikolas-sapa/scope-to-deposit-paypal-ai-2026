@@ -1,6 +1,6 @@
 # Compliance preflight
 
-Checked 2026-10-10, Europe/Athens. Local product/package preparation is complete; external acceptance evidence and human release decisions remain pending.
+Checked 2026-10-11, Europe/Athens. Local product/package preparation is complete; external acceptance evidence and human release decisions remain pending.
 
 ## Official requirements
 
