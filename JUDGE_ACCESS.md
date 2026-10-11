@@ -12,7 +12,7 @@ The local product uses Next.js/SQLite. Judge hosting/access design remains open;
 
 ## Credential and identifier custody
 
-The local `.env.example` defines the listed PayPal and Gemini variable names with blank values. **No provider credentials or judge access are configured.** Do not create deployment configuration from this proposal.
+The local `.env.example` defines the listed PayPal and Vyce AI variable names with blank values. **No provider credentials or judge access are configured.** Do not create deployment configuration from this proposal.
 
 | Type | Proposed label | Treatment and custody |
 | --- | --- | --- |

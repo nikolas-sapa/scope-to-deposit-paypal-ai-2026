@@ -4,7 +4,7 @@ import type { Currency } from "../shared/contracts";
 export interface Config {
   appOrigin: string; databasePath: string;
   paypalClientId: string; paypalClientSecret: string; paypalMerchantId: string; paypalWebhookId: string;
-  geminiApiKey: string; geminiModel: string; aiUsageEnabled: boolean;
+  vyceApiKey: string; vyceModel: string; aiUsageEnabled: boolean;
 }
 export interface OwnerPrincipal { ownerId: string }
 export interface BuyerPrincipal { capabilityId: string; attemptId: string; quoteId: string }

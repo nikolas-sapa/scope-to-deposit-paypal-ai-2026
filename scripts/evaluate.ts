@@ -15,8 +15,8 @@ async function main(): Promise<void> {
   if (fixtures.standard_briefs.length !== 20 || fixtures.hostile_injection_briefs.length !== 10) throw new Error("Fixture counts changed.");
   const path = resolve(".data/evaluation-report.json");
   mkdirSync(dirname(path), { recursive: true, mode: 0o700 });
-  const enabled = config.aiUsageEnabled && Boolean(config.geminiApiKey);
-  const report = { fixtureSet: "scope-to-deposit-synthetic-briefs-v1", startedAt: new Date().toISOString(), model: config.geminiModel, acceptance: "NOT_RUN", note: "Generated output requires source-grounded rubric review. Transport success never equals acceptance. No payment tools available to extraction.", cases: [...fixtures.standard_briefs, ...fixtures.hostile_injection_briefs].map(f => ({ id: f.id, status: "NOT_RUN", provenance: null, output: null, rubricPassed: null }) as CaseResult) };
+  const enabled = config.aiUsageEnabled && Boolean(config.vyceApiKey);
+  const report = { fixtureSet: "scope-to-deposit-synthetic-briefs-v1", startedAt: new Date().toISOString(), model: config.vyceModel, acceptance: "NOT_RUN", note: "Generated output requires source-grounded rubric review. Transport success never equals acceptance. No payment tools available to extraction.", cases: [...fixtures.standard_briefs, ...fixtures.hostile_injection_briefs].map(f => ({ id: f.id, status: "NOT_RUN", provenance: null, output: null, rubricPassed: null }) as CaseResult) };
   const save = () => writeFileSync(path, JSON.stringify(report, null, 2) + "\n", { mode: 0o600 });
   save();
   if (!enabled) { console.log(`Evaluation NOT RUN: authorized AI usage/configuration required. Report: ${path}`); process.exitCode = 2; return; }

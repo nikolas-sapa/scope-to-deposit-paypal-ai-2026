@@ -82,7 +82,7 @@ export async function dispatchApi(ctx: HttpContext): Promise<Response> {
       return new Response(null, { status: result.status, headers: headers(ctx) });
     }
     if (path === "/api/health" && method === "GET") {
-      return json(ctx, { sandboxOnly: true, paypalConfigured: Boolean(ctx.config.paypalClientId && ctx.config.paypalClientSecret && ctx.config.paypalMerchantId), webhookConfigured: Boolean(ctx.config.paypalWebhookId), aiConfigured: Boolean(ctx.config.geminiApiKey), aiUsageEnabled: ctx.config.aiUsageEnabled });
+      return json(ctx, { sandboxOnly: true, paypalConfigured: Boolean(ctx.config.paypalClientId && ctx.config.paypalClientSecret && ctx.config.paypalMerchantId), webhookConfigured: Boolean(ctx.config.paypalWebhookId), aiConfigured: Boolean(ctx.config.vyceApiKey), aiUsageEnabled: ctx.config.aiUsageEnabled });
     }
     if (path === "/api/session") {
       if (method === "GET") return json(ctx, bootstrapCsrf(ctx));

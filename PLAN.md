@@ -30,7 +30,7 @@ Records: owners, opaque sessions (anonymous CSRF bootstrap allowed), engagements
 
 Server context `HttpContext`: request, DatabaseSync connection, Config, UTC clock function, response Headers. Request-derived `OwnerPrincipal {ownerId}` and `BuyerPrincipal {capabilityId,attemptId,quoteId}`. Service functions recheck resource ownership/bindings. Browser never supplies a principal.
 
-`Config` contains APP_ORIGIN, DATABASE_PATH, sandbox client ID/secret and merchant ID, webhook ID, GEMINI_API_KEY/GEMINI_MODEL, AI_USAGE_ENABLED. Proposed configuration names become operative only in config module and `.env.example`; existing repo `.env` absent, actual inherited Gemini name verified. No session signing secret needed for hashed opaque database sessions. Selected Gemini model `gemini-3.8-flash` was returned by authenticated metadata lookup; production generation remains disabled; later three-call diagnostic allowance/results recorded in AI_SMOKE_RESULTS.md.
+`Config` contains APP_ORIGIN, DATABASE_PATH, sandbox client ID/secret and merchant ID, webhook ID, VYCEAI_API_KEY/VYCEAI_MODEL, AI_USAGE_ENABLED. This plan originally implemented Gemini; current extraction adapter uses Vyce `deepseek-v4-flash`, and generation remains disabled pending account pricing review. Historical Gemini diagnostic results remain in AI_SMOKE_RESULTS.md.
 
 ## Task 1: Shared contract and scaffold, main
 

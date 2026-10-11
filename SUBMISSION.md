@@ -28,7 +28,7 @@ Scope to Deposit keeps the sequence visible: capture the brief, review scope and
 - Explicit quote approval and immutable revisions.
 - Buyer route designed around a fragment capability stored per tab and sent only in `X-Checkout-Token`.
 - PayPal Sandbox Orders, capture verification, reconciliation, and durable webhook receipt services implemented; genuine provider acceptance remains pending.
-- Gemini extraction returns facts/questions only and defaults to disabled; no real generation was performed.
+- Vyce AI extraction returns facts/questions only and defaults to disabled; no real generation was performed.
 - Local verification: 139/139 service tests, TypeScript, production build, 15/15 production HTTP checks from the backend phase, 23/23 production-browser UI checks, and a 33.59-second fresh-checkout install/build/health run.
 
 ## Use of PayPal
@@ -37,7 +37,7 @@ PayPal Sandbox is the intended deposit provider. The server creates and captures
 
 ## Use of AI
 
-The project includes a Gemini extraction adapter for source-grounded facts and questions. It cannot approve a quote, set commercial terms, or perform payment actions. Generation remains disabled because authorized usage was not available. The verified demo uses manual editing.
+The project includes a Vyce AI extraction adapter for source-grounded facts and questions. It cannot approve a quote, set commercial terms, or perform payment actions. Generation remains disabled. The verified demo uses manual editing. No Vyce generation has been tested; rate and spend remain unverified.
 
 ## Credits and tools
 

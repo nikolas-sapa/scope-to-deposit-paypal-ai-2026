@@ -30,7 +30,7 @@ export function getConfig(env: NodeJS.ProcessEnv = process.env): Config {
     appOrigin, databasePath,
     paypalClientId: env.PAYPAL_CLIENT_ID ?? "", paypalClientSecret: env.PAYPAL_CLIENT_SECRET ?? "",
     paypalMerchantId: env.PAYPAL_MERCHANT_ID ?? "", paypalWebhookId: env.PAYPAL_WEBHOOK_ID ?? "",
-    geminiApiKey: env.GEMINI_API_KEY ?? "", geminiModel: env.GEMINI_MODEL ?? "gemini-3.8-flash",
+    vyceApiKey: env.VYCEAI_API_KEY ?? "", vyceModel: env.VYCEAI_MODEL ?? "deepseek-v4-flash",
     aiUsageEnabled: env.AI_USAGE_ENABLED === "true",
   };
 }

@@ -58,7 +58,7 @@ flowchart LR
   E --> PP[PayPal Sandbox Orders API]
   WH[PayPal webhook] --> V[Verify and persist receipt]
   V --> D
-  A -. optional, disabled by default .-> G[Gemini extraction]
+  A -. optional, disabled by default .-> G[Vyce AI extraction]
   G --> R[Editable facts and questions]
   R --> U
 ```
@@ -72,7 +72,7 @@ SQLite and payment operations are local/single-process. The client never supplie
 - Quotes are USD integer cents with bounded quantities and line counts. Approval freezes a revision.
 - An uncertain or pending attempt stays guarded. Reconciliation checks the original provider order; it never invents a replacement charge.
 - Capture evidence must match the approved order, configured merchant, deposit amount, and USD currency.
-- AI output cannot approve scope, set commercial terms, or trigger payment. `AI_USAGE_ENABLED` defaults to `false`.
+- AI output cannot approve scope, set commercial terms, or trigger payment. Vyce AI usage defaults to `false` through `AI_USAGE_ENABLED`.
 - Keep `.env.local`, `.data/`, logs, database files, and private owner credentials out of Git. No private credentials are included in the client bundle.
 - The native SQLite API and current Node runtime are tested for this prototype, not claimed as production-ready infrastructure.
 

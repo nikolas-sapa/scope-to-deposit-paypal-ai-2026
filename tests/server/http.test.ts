@@ -8,7 +8,7 @@ import type { DraftInput, EngagementDto } from "../../src/shared/contracts";
 import type { DatabaseSync } from "node:sqlite";
 
 const origin = "http://127.0.0.1:3000";
-const config: Config = { appOrigin: origin, databasePath: ":memory:", paypalClientId: "", paypalClientSecret: "", paypalMerchantId: "", paypalWebhookId: "", geminiApiKey: "", geminiModel: "gemini-3.8-flash", aiUsageEnabled: false };
+const config: Config = { appOrigin: origin, databasePath: ":memory:", paypalClientId: "", paypalClientSecret: "", paypalMerchantId: "", paypalWebhookId: "", vyceApiKey: "", vyceModel: "deepseek-v4-flash", aiUsageEnabled: false };
 const validDraft: DraftInput = { brief: "Create a landing page, assets supplied, delivery October 30.", goal: "Create a landing page", deliverables: ["Landing page"], timing: "October 30", constraints: ["Assets supplied"], assumptions: [], questions: [], items: [{ description: "Landing page", quantity: 1, unitCents: 10000 }], depositCents: 5000 };
 let owner: Record<string, string | number | null>;
 let db: DatabaseSync;

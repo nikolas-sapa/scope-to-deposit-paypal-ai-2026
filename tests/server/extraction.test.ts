@@ -13,9 +13,7 @@ const extraction: ScopeExtraction = {
 
 // LOCAL_FIXTURE transport only. These cases never claim real model evaluation.
 function responseFor(output: unknown): Response {
-  return Response.json({ candidates: [{ finishReason: "STOP", content: {
-    role: "model", parts: [{ text: JSON.stringify(output) }],
-  } }] });
+  return Response.json({ choices: [{ finish_reason: "stop", message: { content: JSON.stringify(output) } }] });
 }
 
 let db: DatabaseSync;
@@ -35,7 +33,7 @@ beforeEach(() => {
       appOrigin: "http://127.0.0.1:3000", databasePath: ":memory:",
       paypalClientId: "private-paypal-client", paypalClientSecret: "private-paypal-secret",
       paypalMerchantId: "private-merchant", paypalWebhookId: "private-webhook",
-      geminiApiKey: "private-gemini-key", geminiModel: "gemini-3.8-flash", aiUsageEnabled: true,
+      vyceApiKey: "private-vyce-key", vyceModel: "deepseek-v4-flash", aiUsageEnabled: true,
     },
     provider: {
       createOrder: paymentActions, captureOrder: paymentActions, getOrder: paymentActions,
@@ -54,15 +52,15 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
     expect(transport).toHaveBeenCalledTimes(1);
   });
 
-  it("sends 1 fixed Google request, 0 tools, 0 context secrets, API key only in header", async () => {
+  it("sends 1 fixed Vyce request, 0 tools, 0 context secrets, API key only in header", async () => {
     await extractScope(ctx, "Build three accessible website pages.");
     const [url, options] = transport.mock.calls[0];
-    expect(url).toBe("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent");
+    expect(url).toBe("https://vyceai.com/v1/chat/completions");
     expect(options?.method).toBe("POST");
     expect(options?.redirect).toBe("error");
     expect(options?.signal).toBeInstanceOf(AbortSignal);
     const headers = new Headers(options?.headers);
-    expect(headers.get("x-goog-api-key")).toBe(ctx.config.geminiApiKey);
+    expect(headers.get("authorization")).toBe(`Bearer ${ctx.config.vyceApiKey}`);
     const bodyText = String(options?.body);
     for (const secret of [...Object.values(ctx.config).filter((value): value is string =>
       typeof value === "string" && value.startsWith("private-")), "private-database-secret"]) {
@@ -72,15 +70,14 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
     const body = JSON.parse(bodyText);
     expect(body.tools).toBeUndefined();
     expect(body.toolConfig).toBeUndefined();
-    expect(body.generationConfig).toMatchObject({ responseMimeType: "application/json", maxOutputTokens: 4096 });
-    expect(body.generationConfig).not.toHaveProperty("candidateCount");
-    expect(body.systemInstruction.parts[0].text).toContain("untrusted");
-    expect(body.contents).toEqual([{ role: "user", parts: [{ text: "Build three accessible website pages." }] }]);
+    expect(body).toMatchObject({ model: "deepseek-v4-flash", response_format: { type: "json_object" }, max_tokens: 1536 });
+    expect(body.messages[0]).toMatchObject({ role: "system", content: expect.stringContaining("untrusted") });
+    expect(body.messages[1]).toEqual({ role: "user", content: "Build three accessible website pages." });
   });
 
   it.each([
-    { aiUsageEnabled: false }, { geminiApiKey: "" }, { geminiApiKey: "   " },
-    { geminiModel: "gemini-other" }, { geminiModel: "../../live" },
+    { aiUsageEnabled: false }, { vyceApiKey: "" }, { vyceApiKey: "   " },
+    { vyceModel: "" }, { vyceModel: "   " }, { vyceModel: "gpt-6-luna" },
   ])("rejects unauthorized/missing configuration %j with 0 transport calls", async (change) => {
     Object.assign(ctx.config, change);
     await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({ code: "CONFIG_REQUIRED", status: 503 });
@@ -118,7 +115,7 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
     expect(db.prepare("SELECT COUNT(*) AS count FROM private_data").get()).toEqual({ count: 1 });
     expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
     const requestBody = String(transport.mock.calls[0][1]?.body);
-    for (const secret of ["private-paypal-secret", "private-paypal-client", "private-merchant", "private-webhook", "private-gemini-key", "private-database-secret"]) {
+    for (const secret of ["private-paypal-secret", "private-paypal-client", "private-merchant", "private-webhook", "private-vyce-key", "private-database-secret"]) {
       expect(requestBody).not.toContain(secret);
     }
   });
@@ -136,18 +133,18 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
   });
 
   it.each([400, 401, 429, 500, 302])("HTTP %i leaks 0 provider response fields", async (status) => {
-    transport.mockResolvedValue(new Response("private-gemini-key provider debug", { status }));
+    transport.mockResolvedValue(new Response("private-vyce-key provider debug", { status }));
     await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({
       code: "PROVIDER_UNAVAILABLE", message: "Scope extraction is unavailable.",
     });
   });
 
   it.each([
-    {}, { candidates: [] }, { candidates: [{ finishReason: "MAX_TOKENS", content: { parts: [{ text: JSON.stringify(extraction) }] } }] },
-    { candidates: [{ finishReason: "STOP", content: { parts: [{ functionCall: { name: "captureOrder" } }] } }] },
-    { candidates: [{ finishReason: "STOP", content: { parts: [{ text: "not JSON" }] } }] },
-    { candidates: [{ finishReason: "STOP", content: { parts: [{ text: JSON.stringify(extraction), thought: true }] } }] },
-    { candidates: [1, 2] },
+    {}, { choices: [] }, { choices: [{ finish_reason: "length", message: { content: JSON.stringify(extraction) } }] },
+    { choices: [{ finish_reason: "stop", message: { content: null, tool_calls: [{ function: { name: "captureOrder" } }] } }] },
+    { choices: [{ finish_reason: "stop", message: { content: "not JSON" } }] },
+    { choices: [{ finish_reason: "stop", message: { content: "a".repeat(32769) } }] },
+    { choices: [1, 2] },
   ])("rejects invalid provider envelope %# with 0 privileged calls", async (body) => {
     transport.mockResolvedValue(Response.json(body));
     await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE" });
@@ -160,7 +157,7 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
   });
 
   it("rejects 1 non-JSON response content type", async () => {
-    transport.mockResolvedValue(new Response(JSON.stringify({ candidates: [] }), { headers: { "content-type": "text/html" } }));
+    transport.mockResolvedValue(new Response(JSON.stringify({ choices: [] }), { headers: { "content-type": "text/html" } }));
     await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE" });
   });
 
@@ -174,7 +171,7 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
   });
 
   it("rejects extracted JSON text >32768 characters", async () => {
-    transport.mockResolvedValue(Response.json({ candidates: [{ finishReason: "STOP", content: { parts: [{ text: "a".repeat(32769) }] } }] }));
+    transport.mockResolvedValue(Response.json({ choices: [{ finish_reason: "stop", message: { content: "a".repeat(32769) } }] }));
     await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE" });
   });
 
@@ -186,7 +183,7 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
   });
 
   it("network failure exposes 0 raw exception or secret fields", async () => {
-    transport.mockRejectedValue(new Error("private-gemini-key provider exception"));
+    transport.mockRejectedValue(new Error("private-vyce-key provider exception"));
     await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({
       code: "PROVIDER_UNAVAILABLE", message: "Scope extraction is unavailable.",
     });
