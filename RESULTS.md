@@ -1,6 +1,6 @@
 # Verification results
 
-Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft verified 2026-10-10. Current provider switch verified locally 2026-10-11: 140/140 tests, TypeScript and production build pass; TypeScript and security reviewers found no provider/key leak or type defects. Vyce metadata returned HTTP200, 7 models, selected `deepseek-v4-flash` available. No Vyce generation call or spend. Historical Gemini smoke had three HTTP400 responses and zero validated outputs; see AI_SMOKE_RESULTS.md.
+Latest local verification on 2026-10-11 after the Vyce provider switch: 140/140 tests, TypeScript, production build, and health HTTP 200 pass. Health reports sandbox-only mode, PayPal/webhook unconfigured, and AI usage disabled. Independent source reviews found no provider-key leak in committed code and no type defects. Vyce metadata returned HTTP 200 with 7 models, including `deepseek-v4-flash`. No Vyce generation call or spend. Historical Gemini smoke had three HTTP 400 responses and zero validated outputs; see AI_SMOKE_RESULTS.md.
 
 ## Checks executed
 
@@ -9,6 +9,7 @@ Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft 
 | Full server suite | 140/140 tests, 10/10 suites pass | Real local SQLite/scrypt/CLI/validation; explicit provider/model transport fixtures; current Vyce adapter remains LOCAL_FIXTURE-only |
 | Canonical TypeScript | 0 diagnostics; also passed inside production build | LOCAL_RUNTIME |
 | Production build | Exit0; dynamic /api/[...path] route generated | LOCAL_RUNTIME |
+| Current production health | HTTP 200; sandbox-only true, PayPal/webhook unconfigured, AI usage disabled | LOCAL_RUNTIME; built server, GET /api/health only, no provider calls |
 | Production HTTP roundtrip | 15/15 checks pass, 0 failures | LOCAL_RUNTIME, actual npm start and HTTP requests |
 | Production-browser UI workflow | 23/23 checks pass; 0 unexpected console errors; one expected invalid-capability 401 | LOCAL_RUNTIME, Playwright Chromium against `npm start` |
 | Fresh-checkout setup | 33.59s total: checkout 0.36s, `npm ci` 7.48s, private owner setup 1.37s, typecheck 5.84s, production build 17.20s, production start/health 1.15s; health 200 | Fresh detached Git worktree at commit `3376cf6`, Node 25.8.1 / npm 11.11.0; no provider/AI config; historical result |
@@ -74,7 +75,7 @@ Single local Node process, loopback by default. Runtime Node25.8.1, native SQLit
 
 Vyce spend remains gated off. No aggregate dollar cap or extraction-specific request limit exists if `AI_USAGE_ENABLED` is changed to `true`; the fixed model and 1,536-token output cap do not bound cumulative spend. Extraction sends the submitted brief to Vyce. Enable only after reviewing account rates and approving usage; no live generation or model-quality result is claimed.
 
-Private GitHub repository: https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Current branch and origin were verified at the provider-switch commit; the documentation/release reconciliation is recorded separately. No public release, deployment or submission. No PayPal transactions or genuine webhook checks were performed. Historical Gemini smoke: three HTTP400 INVALID_ARGUMENT responses, zero validated outputs, cumulative reserved ceiling US$0.051642 (not an invoice; actual charge unknown). Current Vyce model catalog check was metadata-only; generation and full rubric evaluation remain NOT RUN. No complete product or hackathon acceptance claim.
+Private GitHub repository: https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Current branch and origin were verified at the latest documentation commit; the canonical archive checksum is recorded in the release manifest. No public release, deployment or submission. No PayPal transactions or genuine webhook checks were performed. Historical Gemini smoke: three HTTP400 INVALID_ARGUMENT responses, zero validated outputs, cumulative reserved ceiling US$0.051642 (not an invoice; actual charge unknown). Current Vyce model catalog check was metadata-only; generation and full rubric evaluation remain NOT RUN. No complete product or hackathon acceptance claim.
 
 ## Local demo draft
 
