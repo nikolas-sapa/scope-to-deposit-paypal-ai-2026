@@ -1,6 +1,6 @@
 # Compliance preflight
 
-Checked 2026-10-11, Europe/Athens. Local product/package preparation is complete; external acceptance evidence and human release decisions remain pending.
+Checked 2026-10-11, Europe/Athens. Local implementation and package checks are complete for the reviewed commit; external acceptance evidence and human release decisions remain pending.
 
 ## Official requirements
 
@@ -46,7 +46,7 @@ No authenticated PayPal call, checkout, capture or real webhook completed. Three
 
 ## Preparation evidence
 
-Luna API lookup: six primary-source questions in session `work/paypal-api-research.md`. Sol independent security preflight: quote immutability, ownership, capture verification, durable idempotency, timeout reconciliation, webhook authentication, AI and secret boundaries. Independent spec review raised four material findings: revision overlap, cancellation race, webhook acknowledgement durability, authentic-but-mismatched evidence. SPEC.md addresses all four with explicit invariants and numerical checks. Preparation review only; final code/security review still required.
+Luna API lookup: six primary-source questions in session `work/paypal-api-research.md`. Sol independent security preflight: quote immutability, ownership, capture verification, durable idempotency, timeout reconciliation, webhook authentication, AI and secret boundaries. Independent spec review raised four material findings: revision overlap, cancellation race, webhook acknowledgement durability, authentic-but-mismatched evidence. SPEC.md addresses all four with explicit invariants and numerical checks. Independent implementation and security reviews are complete for the current source. Provider-backed PayPal acceptance, live model quality, and release compliance remain unverified.
 
 Resumed preparation: JUDGE_ACCESS.md specifies custody and T08 account-provisioning-only exclusion. EVALUATION_DESIGN.md and 30 synthetic cases prepare measurable checks without calling a model or payment API. Follow-up Sol spec review found five further ambiguities; SPEC.md now covers approval rejection, capability expiry races, finite retry retention/lost-create recovery, provider-backed capture counts and authentication bypass checks. HANDOFF.md preserves architecture options and conditional worker ownership. No runtime test result inferred from these artifacts.
 
