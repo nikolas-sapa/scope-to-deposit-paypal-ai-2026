@@ -72,7 +72,8 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
     const body = JSON.parse(bodyText);
     expect(body.tools).toBeUndefined();
     expect(body.toolConfig).toBeUndefined();
-    expect(body.generationConfig).toMatchObject({ responseMimeType: "application/json", maxOutputTokens: 4096, candidateCount: 1 });
+    expect(body.generationConfig).toMatchObject({ responseMimeType: "application/json", maxOutputTokens: 4096 });
+    expect(body.generationConfig).not.toHaveProperty("candidateCount");
     expect(body.systemInstruction.parts[0].text).toContain("untrusted");
     expect(body.contents).toEqual([{ role: "user", parts: [{ text: "Build three accessible website pages." }] }]);
   });

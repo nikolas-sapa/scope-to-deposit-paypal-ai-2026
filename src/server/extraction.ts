@@ -126,7 +126,7 @@ export async function extractScope(ctx: HttpContext, brief: string): Promise<Sco
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: systemInstruction }] },
         contents: [{ role: "user", parts: [{ text: input.data }] }],
-        generationConfig: { responseMimeType: "application/json", responseSchema, maxOutputTokens: 4096, candidateCount: 1 },
+        generationConfig: { responseMimeType: "application/json", responseSchema, maxOutputTokens: 4096 },
       }),
     });
     if (!response.ok) {

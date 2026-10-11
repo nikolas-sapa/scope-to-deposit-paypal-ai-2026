@@ -1,6 +1,6 @@
 # Verification results
 
-Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft verified 2026-10-10. No genuine PayPal transaction or authentic webhook performed. Three bounded Gemini generation requests returned HTTP400; zero validated outputs. See AI_SMOKE_RESULTS.md.
+Backend verified 2026-10-09; local UI, browser, and silent captioned demo draft verified 2026-10-10. Candidate-count compatibility cleanup verified 2026-10-11: regression RED against the previous adapter, 139/139 current tests, TypeScript and production build pass; independent TypeScript/security reviews approve. No genuine PayPal transaction or authentic webhook performed. Three bounded Gemini generation requests returned HTTP400; zero validated outputs. See AI_SMOKE_RESULTS.md.
 
 ## Checks executed
 

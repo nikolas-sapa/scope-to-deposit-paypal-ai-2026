@@ -12,7 +12,9 @@ User assigned remaining technical work to the coordinator. A shared-key smoke us
 
 Each request passed authenticated `countTokens` first. Counted input was 212 tokens; conservative input reservation was 2,472 tokens and combined thinking/output ceiling 4,096. Cumulative reservation: **US$0.051642**, not an invoice or observed charge. No generation usage metadata was returned. Project billing tier and remaining quota were unavailable.
 
-Official Gemini 3.8 migration guidance says to omit `candidate_count`; other Google documentation conflicts on whether one candidate is accepted. Removing it did not resolve this failure. Legacy `responseSchema` is documented in the API reference; deprecation alone does not establish the cause. The provider returned no field-level diagnosis. Production code was left unchanged.
+Official Gemini 3.8 migration guidance says to omit `candidate_count`; other Google documentation conflicts on whether one candidate is accepted. Removing it did not resolve this failure. Legacy `responseSchema` is documented in the API reference; deprecation alone does not establish the cause. The provider returned no field-level diagnosis.
+
+On 2026-10-11, the production adapter omitted `candidateCount` as compatibility cleanup. Strict validation still accepts exactly one candidate, and the 4,096-token cap remains. The updated request regression failed against the frozen previous adapter (1 failure, 49 other passes), then all 139 server tests, TypeScript and production build passed with the patch. Independent TypeScript/security reviews approved. This is not a fix for the observed HTTP400; the third live request already tested the same omission and failed. No further generation calls were made.
 
 Sources: [Gemini 3.8 migration](https://ai.google.dev/gemini-api/docs/generate-content/latest-model), [Generate Content API](https://ai.google.dev/api/generate-content), [structured output](https://ai.google.dev/gemini-api/docs/generate-content/structured-output), [pricing](https://ai.google.dev/gemini-api/docs/pricing).
 
