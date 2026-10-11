@@ -30,7 +30,7 @@ The sample brief is synthetic. AI extraction remains disabled unless authorized 
 | `npm run start` | Start the production build on loopback |
 | `npm run typecheck` | Run TypeScript checks |
 | `npm test` | Run local service and boundary tests |
-| `npm run test:e2e` | Run the Playwright suite after installing its browser with `npx playwright install chromium` |
+| `npm run test:e2e` | Runs Playwright specs under `tests/e2e`; none are currently checked in. Recorded production-browser verification is in [RESULTS.md](RESULTS.md). |
 | `npm run setup:owner` | Provision the first local owner and private access file |
 | `npm run check:access` | Check sandbox OAuth only when credentials exist; never creates an order or capture |
 | `npm run evaluate` | Run the 30-case model evaluation only when authorized AI usage is enabled; otherwise records `NOT RUN` |
