@@ -27,7 +27,7 @@
 
 ## Human decisions and release
 
-- [x] Rechecked official event rules and deadline on 2026-10-10: [Devpost rules](https://paypalaihackathon.devpost.com/rules).
+- [x] Rechecked official event rules and deadline on 2026-10-11: [Devpost rules](https://paypalaihackathon.devpost.com/rules). Requirements: public licensed source, functional demo, public YouTube video under 3 minutes, and free judge access through December 15.
 - [ ] Confirm entrant type, conflict/support exclusions, ownership, and required participant declarations.
 - [ ] Review the final project description against verified behavior before submission.
 - [x] Create/select a private source remote and verify the pushed commit.
