@@ -17,7 +17,8 @@
 ## External acceptance evidence
 
 - [x] Verify OAuth-only PayPal Sandbox access with current app credentials; no order/capture created.
-- [ ] Set Business Merchant ID; confirm separate Business and Personal buyer access.
+- [x] Store the user-provided Business Merchant ID in ignored local `.env.local`; payment use remains unverified.
+- [ ] Confirm separate Business and Personal buyer access.
 - [ ] Complete three real buyer approval/capture scenarios and verify order, capture, amount, USD, and merchant.
 - [ ] Register an HTTPS webhook after authorization; verify one authentic sandbox event and durable receipt handling.
 - [x] Historical Gemini diagnostic: three requests failed HTTP400, zero validated outputs; reserved ceiling US$0.051642, actual charge unknown.
