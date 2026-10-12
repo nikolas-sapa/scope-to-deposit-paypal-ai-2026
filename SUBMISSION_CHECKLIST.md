@@ -5,22 +5,23 @@
 ## Local package
 
 - [x] Source builds and TypeScript checks pass.
-- [x] 140 local service tests pass; 23/23 production-browser checks cover owner workflow, capability handling, logout, missing-provider behavior, and responsive layout.
+- [x] 141 local service tests pass; 23/23 production-browser checks cover owner workflow, capability handling, logout, missing-provider behavior, and responsive layout.
 - [x] README documents the actual setup and sandbox-only boundaries.
 - [x] MIT notice retained for the five adapted shadcn/ui primitives.
 - [x] Root `LICENSE` is MIT.
 - [x] Browser bundle scan found no private config names or generated owner password.
 - [x] Timed clean-checkout run completed on Node.js 25.8.1/npm 11.11.0: install, owner setup, TypeScript, production build, and health 200 in 33.59 seconds.
 - [x] Silent captioned local demo draft recorded and reviewed: 158.88 seconds, 1440×1000, with synthetic brief and genuine PayPal/AI evidence labeled NOT RUN.
-- [x] After the Vyce provider switch, production health returned HTTP 200 with sandbox-only mode enabled and AI usage disabled. PayPal and webhook credentials are absent; this check made no provider calls.
+- [x] After the Vyce provider switch, production health returned HTTP 200 with sandbox-only mode enabled and AI usage disabled. Business Merchant ID and webhook ID are absent; this historical health check made no provider calls.
 
 ## External acceptance evidence
 
-- [ ] Obtain authorized PayPal Sandbox app credentials, Business merchant, and separate Personal buyer access.
+- [x] Verify OAuth-only PayPal Sandbox access with current app credentials; no order/capture created.
+- [ ] Set Business Merchant ID; confirm separate Business and Personal buyer access.
 - [ ] Complete three real buyer approval/capture scenarios and verify order, capture, amount, USD, and merchant.
 - [ ] Register an HTTPS webhook after authorization; verify one authentic sandbox event and durable receipt handling.
-- [x] Run bounded AI diagnostic smoke under a three-call/US$1 ceiling; all requests failed HTTP400, zero validated outputs.
-- [ ] Resolve AI request compatibility/account access, establish a new bounded allowance, then complete real-model rubric evaluation. Production `AI_USAGE_ENABLED` remains false.
+- [x] Historical Gemini diagnostic: three requests failed HTTP400, zero validated outputs; reserved ceiling US$0.051642, actual charge unknown.
+- [ ] Diagnose the failed application-adapter call and verify exact Vyce rate/debit before more calls. One direct synthetic smoke succeeded; one adapter call failed and its charge is unknown. Production `AI_USAGE_ENABLED` remains false.
 - [ ] Run the 20-brief source-grounded extraction rubric and review every output.
 - [ ] Capture review-required, genuine paid, and canceled/failed unpaid screenshots from their actual states. Never synthesize paid evidence.
 - [ ] Keep provider/model evidence labeled `REAL_SANDBOX`, `REAL_MODEL`, or `LOCAL_FIXTURE` as appropriate.

@@ -17,8 +17,8 @@ PAYPAL_WEBHOOK_ID=
 
 Keep the secret and buyer password out of chat, source, screenshots and videos. Leave the webhook ID blank initially. Tell the coordinator when the local file is ready; the current review process deliberately overrides integration credentials, so configuration must be loaded into a restarted test runtime.
 
-The coordinator will verify OAuth and restart the configured app. You will then approve three distinct test deposits using the Personal Sandbox buyer. The coordinator will check actual order/capture IDs, amount, USD and merchant evidence; a successful redirect alone does not prove payment.
+OAuth-only access has been verified. After Merchant ID is set, the coordinator can restart the app. You will then approve three distinct test deposits using the Personal Sandbox buyer. The coordinator will check actual order/capture IDs, amount, USD and merchant evidence; a successful redirect alone does not prove payment.
 
 Authentic webhook testing additionally needs a public HTTPS endpoint. Once its address is ready, register `https://<approved-host>/api/webhooks/paypal` in the same Sandbox app, subscribe to `PAYMENT.CAPTURE.COMPLETED`, and save the returned Webhook ID in `.env.local`. The coordinator will verify a genuine event and durable receipt. Local loopback cannot receive PayPal deliveries; simulator events do not satisfy authentic-event acceptance. [Official webhook guide](https://developer.paypal.com/api/rest/webhooks/rest/)
 
-Checked 2026-10-12. Local Client ID and secret are configured; Business Merchant ID and webhook ID remain unset. No Sandbox app/account changes were made by the coordinator; no OAuth, capture, or webhook acceptance is claimed.
+Checked 2026-10-12. Local Client ID and secret are configured; Business Merchant ID and webhook ID remain unset. The OAuth-only Sandbox check returned `OAUTH_VERIFIED` after fixing a local guard that previously required Merchant ID. No Sandbox app/account changes, order, capture, or webhook acceptance are claimed.

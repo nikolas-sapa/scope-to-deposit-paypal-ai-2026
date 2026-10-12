@@ -20,4 +20,10 @@ Sources: [Gemini 3.8 migration](https://ai.google.dev/gemini-api/docs/generate-c
 
 Private evidence is retained outside the repository in session `work/PLAN/real-ai-smoke.json`, `real-ai-diagnostic.json`, and `real-ai-candidate-hypothesis.json`. Reports refuse replay. Eight billing-guard regressions and strict scratch TypeScript checks passed; independent TypeScript/security reviews approved bounded invocations.
 
-Next coordinator work: establish an accepted request using provider/account diagnostics, then rerun extraction and the source-grounded rubric within a separately bounded allowance. No further calls under this exhausted three-request allowance. Transport or fixture success cannot pass T01 (20 ordinary cases) or T14 (10 hostile cases).
+## Vyce follow-up, 2026-10-12
+
+A bounded validation allowance was authorized. The application remains configured with `AI_USAGE_ENABLED=false`. The model catalog still returns HTTP200 and lists `deepseek-v4-flash`; it provides no pricing fields.
+
+One short synthetic-brief generation returned HTTP200 with 370 total tokens and valid JSON containing the six expected top-level fields. It was a direct provider smoke, not application acceptance. At [DeepSeek's published peak rates](https://api-docs.deepseek.com/quick_start/pricing/), the token-count estimate is about US$0.00035; this is not Vyce pricing, and its actual rate/debit is unknown. A following single call through `extractScope` failed the application-level call; the public wrapper suppresses provider diagnostics, and any associated charge is unknown.
+
+No further provider requests were made. Do not run the 30-case evaluator under this authorization. Full T01 (20 ordinary cases), T14 (10 hostile cases), strict app-output validation, and rubric review remain NOT RUN. The cap is not enforced by an application-level aggregate spend ledger.

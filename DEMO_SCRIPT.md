@@ -1,4 +1,4 @@
-# Demo script, 150 seconds
+# Demo script, 159 seconds
 
 **Recording status: local silent, captioned draft recorded and reviewed.** The unpublished MP4 is `../release/scope-to-deposit-local-demo-draft.mp4` (158.88 seconds, 1440×1000, H.264, no audio). The owner session is established privately before capture; no password appears. Persistent labels disclose “Local demo draft,” “Synthetic brief,” and “AI + real PayPal evidence not run.” This shows verified local behavior only.
 

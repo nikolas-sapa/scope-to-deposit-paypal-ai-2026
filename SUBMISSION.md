@@ -10,7 +10,7 @@ Agree the scope. Freeze the quote. Verify the deposit.
 
 Scope to Deposit helps independent freelancers turn a client brief into a clear, editable scope and an explicitly approved quote before requesting a deposit. The freelancer can review deliverables, assumptions, timing, constraints, open questions, and USD line items in one workflow. A buyer checkout is tied to the approved quote revision, and the product treats payment as complete only after the server verifies provider evidence against the original order, merchant, deposit, and currency.
 
-The current local prototype supports manual scope editing and quote approval. AI extraction is implemented behind an explicit usage gate and remains disabled pending authorized usage. PayPal Sandbox routes are implemented. Local Sandbox app Client ID and secret are set; Business Merchant ID and webhook ID remain unset. OAuth, merchant account, buyer access, and registered HTTPS webhook are unverified. The prototype therefore does not demonstrate or claim a genuine transaction or paid state.
+The current local prototype supports manual scope editing and quote approval. AI extraction is implemented behind an explicit usage gate and remains disabled while app compatibility and account pricing are verified. PayPal Sandbox routes are implemented. Local Sandbox app Client ID and secret are set; Business Merchant ID and webhook ID remain unset. Sandbox OAuth is verified. Business merchant setup, buyer access, and registered HTTPS webhook remain unverified. The prototype therefore does not demonstrate or claim a genuine transaction or paid state.
 
 ## Problem
 
@@ -28,8 +28,8 @@ Scope to Deposit keeps the sequence visible: capture the brief, review scope and
 - Explicit quote approval and immutable revisions.
 - Buyer route designed around a fragment capability stored per tab and sent only in `X-Checkout-Token`.
 - PayPal Sandbox Orders, capture verification, reconciliation, and durable webhook receipt services implemented; genuine provider acceptance remains pending.
-- Vyce AI extraction returns facts/questions only and defaults to disabled; no real generation was performed.
-- Local verification: current 140/140 service tests, TypeScript, production build; historical 15/15 production HTTP checks, 23/23 production-browser UI checks, and 33.59-second fresh-checkout install/build/health run.
+- Vyce AI extraction is implemented behind a disabled-by-default gate. A direct synthetic-brief smoke returned HTTP200, but a single application-adapter call failed behind a generic error boundary; exact failure stage is unknown; no accepted app output or rubric evidence exists.
+- Local verification: current 141/141 service tests, TypeScript, production build; historical 15/15 production HTTP checks, 23/23 production-browser UI checks, and 33.59-second fresh-checkout install/build/health run.
 
 ## Use of PayPal
 
@@ -37,7 +37,7 @@ PayPal Sandbox is the intended deposit provider. The server creates and captures
 
 ## Use of AI
 
-The project includes a Vyce AI extraction adapter for source-grounded facts and questions. It cannot approve a quote, set commercial terms, or perform payment actions. Generation remains disabled. The verified demo uses manual editing. No Vyce generation has been tested; rate and spend remain unverified.
+The project includes a Vyce AI extraction adapter for source-grounded facts and questions. It cannot approve a quote, set commercial terms, or perform payment actions. A direct synthetic-brief call returned valid JSON, but the application adapter did not accept its follow-up response. Generation remains disabled; model quality, app integration, and the 20-brief rubric are not verified. Vyce pricing and actual charges remain unknown.
 
 ## Credits and tools
 

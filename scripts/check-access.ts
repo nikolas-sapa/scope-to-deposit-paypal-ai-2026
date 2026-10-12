@@ -7,7 +7,7 @@ import { checkPayPalAccess } from "../src/server/paypal";
 async function main(): Promise<void> {
   loadEnvironment();
   const config = getConfig();
-  const configured = Boolean(config.paypalClientId && config.paypalClientSecret && config.paypalMerchantId);
+  const configured = Boolean(config.paypalClientId && config.paypalClientSecret);
   let paypalStatus = "NOT_CONFIGURED";
   if (configured) {
     try { paypalStatus = (await checkPayPalAccess({ request: new Request(`${config.appOrigin}/api/health`), config, db: getDatabase(config), now: Date.now, responseHeaders: new Headers() })).authenticated ? "OAUTH_VERIFIED" : "OAUTH_FAILED"; }

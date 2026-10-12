@@ -21,6 +21,17 @@ describe("LOCAL_FIXTURE sandbox transport", () => {
     await expect(checkPayPalAccess(ctx)).rejects.toMatchObject({ code: "CONFIG_REQUIRED" });
     expect(fetcher).not.toHaveBeenCalled();
   });
+  it("checks OAuth with app credentials before merchant setup, while payment requests stay guarded", async () => {
+    const requests: string[] = [];
+    const fetcher: typeof fetch = async (input) => {
+      requests.push(String(input));
+      return json({ access_token: "fixture-token", expires_in: 3600 });
+    };
+    const ctx = context(fetcher); ctx.config.paypalMerchantId = "";
+    await expect(checkPayPalAccess(ctx)).resolves.toEqual({ authenticated: true, sandboxOnly: true });
+    await expect(createPayPalGateway(ctx).getOrder("ORDER1")).rejects.toMatchObject({ code: "CONFIG_REQUIRED" });
+    expect(requests).toEqual(["https://api-m.sandbox.paypal.com/v1/oauth2/token"]);
+  });
   it("uses fixed origin, no redirects, stable request ID, cached OAuth and exact gross cents", async () => {
     const requests: { url: string; init?: RequestInit }[] = [];
     const fetcher: typeof fetch = async (input, init) => { requests.push({ url: String(input), init }); return String(input).endsWith("/token") ? json({ access_token: "fixture-token", expires_in: 3600 }) : json(order()); };

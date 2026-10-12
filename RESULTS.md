@@ -1,12 +1,12 @@
 # Verification results
 
-Latest local verification on 2026-10-11 after the Vyce provider switch: 140/140 tests, TypeScript, production build, and health HTTP 200 pass. Health reports sandbox-only mode, PayPal/webhook unconfigured, and AI usage disabled. Independent source reviews found no provider-key leak in committed code and no type defects. Vyce metadata returned HTTP 200 with 7 models, including `deepseek-v4-flash`. No Vyce generation call or spend. Historical Gemini smoke had three HTTP 400 responses and zero validated outputs; see AI_SMOKE_RESULTS.md.
+Latest verification on 2026-10-12: 141/141 tests, TypeScript, and production build pass. The OAuth-only PayPal Sandbox check returns `OAUTH_VERIFIED`; no order or capture was created. Health reported sandbox-only mode, PayPal/webhook unconfigured, and AI usage disabled. On 2026-10-12, Vyce metadata returned HTTP200 with 7 models, including `deepseek-v4-flash`; one direct synthetic call returned HTTP200 and valid JSON (370 tokens), while one app-adapter attempt failed. Exact Vyce charges are unknown; AI remains disabled. Historical Gemini smoke had three HTTP400 responses and zero validated outputs; see AI_SMOKE_RESULTS.md.
 
 ## Checks executed
 
 | Check | Result | Provenance |
 | --- | --- | --- |
-| Full server suite | 140/140 tests, 10/10 suites pass | Real local SQLite/scrypt/CLI/validation; explicit provider/model transport fixtures; current Vyce adapter remains LOCAL_FIXTURE-only |
+| Full server suite | 141/141 tests, 10/10 suites pass | Real local SQLite/scrypt/CLI/validation; explicit provider/model transport fixtures; current Vyce adapter remains LOCAL_FIXTURE-only |
 | Canonical TypeScript | 0 diagnostics; also passed inside production build | LOCAL_RUNTIME |
 | Production build | Exit0; dynamic /api/[...path] route generated | LOCAL_RUNTIME |
 | Current production health | HTTP 200; sandbox-only true, PayPal/webhook unconfigured, AI usage disabled | LOCAL_RUNTIME; built server, GET /api/health only, no provider calls |
@@ -21,8 +21,8 @@ Latest local verification on 2026-10-11 after the Vyce provider switch: 140/140 
 | Owner authentication/ownership | 10 bypass, 10 CSRF/Origin, 10 cross-owner service checks denied; real setup credentials private | LOCAL_RUNTIME |
 | Frozen quote and amount validation | 10 immutable rewrites/deletions denied; exact integer totals and review blockers checked | LOCAL_RUNTIME |
 | Payment/evidence scenarios | Stable keys, races, lifetime capture counts, lost responses, SQLite reopen, expiry, mismatches, receipt durability and fair batches checked | LOCAL_FIXTURE, not real PayPal |
-| AI boundary | Schema/gate/hostile-output/timeout fixture checks pass within 140/140 suite | LOCAL_FIXTURE with real Zod, not real model quality |
-| Access CLI | Expected exit2, NOT_CONFIGURED | No PayPal OAuth/order/capture dispatched |
+| AI boundary | Schema/gate/hostile-output/timeout fixture checks pass within 141/141 suite | LOCAL_FIXTURE with real Zod, not real model quality |
+| Access CLI | `OAUTH_VERIFIED` on 2026-10-12 after guard fix | One OAuth token request only; no order/capture dispatched |
 | Evaluation CLI | Expected exit2; 30/30 NOT_RUN, 0 outputs, 0 model provenance records | No generation dispatched |
 | Git history secret scan | Exit0, 0 leaks in committed history at scan | Redacted gitleaks report retained privately |
 | Staged backend secret scan | Exit0, 0 leaks in candidate commit | Redacted gitleaks pre-commit report retained privately |
@@ -73,9 +73,9 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 
 Single local Node process, loopback by default. Runtime Node25.8.1, native SQLite API not a production-stability claim. Rate limits and recovery cursor are process-local and reset after restart; persisted attempts/keys/receipts remain durable. Recovery batches rotate fairly, at most20 attempts per cycle; webhook receipts use fair bounded retries. Vite emits a future config-loader warning, current tests pass.
 
-Vyce spend remains gated off. No aggregate dollar cap or extraction-specific request limit exists if `AI_USAGE_ENABLED` is changed to `true`; the fixed model and 1,536-token output cap do not bound cumulative spend. Extraction sends the submitted brief to Vyce. Enable only after reviewing account rates and approving usage; no live generation or model-quality result is claimed.
+Production Vyce usage remains gated off. No aggregate dollar cap or extraction-specific request limit exists if `AI_USAGE_ENABLED` is changed to `true`; the fixed model and 1,536-token output cap do not bound cumulative spend. Extraction sends the submitted brief to Vyce. One direct synthetic smoke returned valid JSON; the application adapter has not produced an accepted output. Account rates and actual charges remain unknown; no model-quality result is claimed.
 
-Private GitHub repository: https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Current branch and origin were verified at the latest documentation commit; the canonical archive checksum is recorded in the release manifest. No public release, deployment or submission. No PayPal transactions or genuine webhook checks were performed. Historical Gemini smoke: three HTTP400 INVALID_ARGUMENT responses, zero validated outputs, cumulative reserved ceiling US$0.051642 (not an invoice; actual charge unknown). Current Vyce model catalog check was metadata-only; generation and full rubric evaluation remain NOT RUN. No complete product or hackathon acceptance claim.
+Private GitHub repository: https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Current branch and origin were verified at the latest documentation commit; the canonical archive checksum is recorded in the release manifest. No public release, deployment or submission. No PayPal transactions or genuine webhook checks were performed. Historical Gemini smoke: three HTTP400 INVALID_ARGUMENT responses, zero validated outputs, cumulative reserved ceiling US$0.051642 (not an invoice; actual charge unknown). One direct Vyce generation smoke returned valid JSON; one app-level adapter call failed. Full rubric evaluation remains NOT RUN and exact provider debit is unknown. No complete product or hackathon acceptance claim.
 
 ## Local demo draft
 

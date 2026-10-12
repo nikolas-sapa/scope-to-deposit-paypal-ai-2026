@@ -70,6 +70,11 @@ function configured(ctx: HttpContext, webhook = false): void {
     throw new AppError("CONFIG_REQUIRED", "Sandbox payment configuration required.", 503);
   }
 }
+function configuredOAuth(ctx: HttpContext): void {
+  if (![ctx.config.paypalClientId, ctx.config.paypalClientSecret].every((value) => value.trim())) {
+    throw new AppError("CONFIG_REQUIRED", "Sandbox app credentials required.", 503);
+  }
+}
 async function request(ctx: HttpContext, path: string, init: RequestInit): Promise<Json> {
   const controller = new AbortController(); let timer: ReturnType<typeof setTimeout> | undefined;
   const deadline = new Promise<never>((_, reject) => { timer = setTimeout(() => { controller.abort(); reject(unavailable()); }, TIMEOUT); });
@@ -96,7 +101,7 @@ async function request(ctx: HttpContext, path: string, init: RequestInit): Promi
   finally { if (timer) clearTimeout(timer); }
 }
 async function accessToken(ctx: HttpContext): Promise<string> {
-  configured(ctx); const transport = ctx.fetchImpl ?? fetch;
+  configuredOAuth(ctx); const transport = ctx.fetchImpl ?? fetch;
   let map = caches.get(transport); if (!map) { map = new Map(); caches.set(transport, map); }
   const key = createHash("sha256").update(`${ctx.config.paypalClientId}\0${ctx.config.paypalClientSecret}`).digest("hex");
   let cache = map.get(key); if (!cache) { cache = {}; map.set(key, cache); }
@@ -115,6 +120,7 @@ async function accessToken(ctx: HttpContext): Promise<string> {
   return (cache.pending ? await cache.pending : cache.token!).value;
 }
 async function api(ctx: HttpContext, path: string, method: "GET" | "POST", payload?: Json, requestId?: string, retryUntil?: number): Promise<Json> {
+  configured(ctx);
   const token = await accessToken(ctx);
   // OAuth can yield across the immutable retention boundary. Check at actual dispatch.
   if (requestId !== undefined && (!Number.isSafeInteger(retryUntil) || retryUntil! - ctx.now() <= DISPATCH_MARGIN_MS)) throw unavailable();
