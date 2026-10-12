@@ -22,7 +22,7 @@ Private evidence is retained outside the repository in session `work/PLAN/real-a
 
 ## Vyce follow-up, 2026-10-12
 
-A bounded validation allowance was authorized. The application remains configured with `AI_USAGE_ENABLED=false`. The model catalog still returns HTTP200 and lists `deepseek-v4-flash`; it provides no pricing fields.
+A bounded validation allowance was authorized. The application remains configured with `AI_USAGE_ENABLED=false`. The model catalog still returns HTTP200 and lists `deepseek-v4-flash`; it provides no pricing fields. Vyce's [Terms of Service](https://vyceai.com/terms) state that per-token rates are displayed in the account dashboard; the public page gives no model rate. No authenticated Vyce dashboard session was available, so the exact rate and current debit remain unverified.
 
 One short synthetic-brief generation returned HTTP200 with 370 total tokens and valid JSON containing the six expected top-level fields. Retained evidence records only the field names, four deliverables, six questions, and token counts; it does not retain the response envelope or field values. It was a direct provider smoke, not application acceptance. At [DeepSeek's published peak rates](https://api-docs.deepseek.com/quick_start/pricing/), the token-count estimate is about US$0.00035; this is not Vyce pricing, and its actual rate/debit is unknown. A following single call through `extractScope` failed at stage `application extraction`; any associated charge is unknown.
 
