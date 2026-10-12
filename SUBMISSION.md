@@ -10,7 +10,7 @@ Agree the scope. Freeze the quote. Verify the deposit.
 
 Scope to Deposit helps independent freelancers turn a client brief into a clear, editable scope and an explicitly approved quote before requesting a deposit. The freelancer can review deliverables, assumptions, timing, constraints, open questions, and USD line items in one workflow. A buyer checkout is tied to the approved quote revision, and the product treats payment as complete only after the server verifies provider evidence against the original order, merchant, deposit, and currency.
 
-The current local prototype supports manual scope editing and quote approval. AI extraction is implemented behind an explicit usage gate and remains disabled pending authorized usage. PayPal Sandbox routes are implemented, but app credentials, merchant access, buyer access, and registered HTTPS webhook access were unavailable during this verification. The prototype therefore does not demonstrate or claim a genuine transaction or paid state.
+The current local prototype supports manual scope editing and quote approval. AI extraction is implemented behind an explicit usage gate and remains disabled pending authorized usage. PayPal Sandbox routes are implemented. Local Sandbox app Client ID and secret are set; Business Merchant ID and webhook ID remain unset. OAuth, merchant account, buyer access, and registered HTTPS webhook are unverified. The prototype therefore does not demonstrate or claim a genuine transaction or paid state.
 
 ## Problem
 

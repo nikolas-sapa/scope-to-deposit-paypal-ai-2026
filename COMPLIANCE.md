@@ -1,6 +1,6 @@
 # Compliance preflight
 
-Checked 2026-10-11, Europe/Athens. Local implementation and package checks are complete for the reviewed commit; external acceptance evidence and human release decisions remain pending.
+Checked 2026-10-12, Europe/Athens. Local implementation and package checks are complete for the reviewed commit; external acceptance evidence and human release decisions remain pending.
 
 ## Official requirements
 
@@ -35,14 +35,14 @@ Sources: [rules](https://paypalaihackathon.devpost.com/rules), [overview](https:
 | Check | Evidence/result | Remaining prerequisite |
 | --- | --- | --- |
 | Workspace | Local branch `hackathon/paypal-preflight`; Next.js/SQLite app and docs implemented; production-browser checks 23/23; clean-checkout bootstrap/build/health completed in 33.59s | No local implementation prerequisite remains |
-| PayPal network | Unauthenticated sandbox OAuth endpoint GET returned HTTP 401 | Sandbox merchant app credentials and buyer access; authenticated OAuth check |
+| PayPal network | Client ID and secret are set in ignored local `.env.local`; merchant ID and webhook ID are blank. No authenticated OAuth call made. | Add Business merchant ID; confirm Business and separate Personal buyer accounts; then run OAuth-only check. HTTPS webhook registration follows approved public endpoint. |
 | AI access | Current adapter uses Vyce `deepseek-v4-flash`; generation disabled by `AI_USAGE_ENABLED=false` | Vyce rate not visible publicly; check account rate before one bounded smoke, then complete full rubric evaluation |
 | GitHub | Private repository `nikolas-sapa/scope-to-deposit-paypal-ai-2026` created; branch pushed and remote commit verified | Public release/submission after genuine acceptance and entrant declarations |
 | Build tools | Clean checkout: Node 25.8.1, npm 11.11.0; install, owner setup, typecheck, production build, start and health 200 completed in 33.59s | No local build prerequisite remains |
 | License | Root `LICENSE` is MIT; third-party notices retained | None for local package |
 | Personal eligibility | Adult age and Greece confirmed by human, relayed by coordinating chat | Entrant type, conflict/support and ownership declarations; no identity documents needed |
 
-No authenticated PayPal call, checkout, capture or real webhook completed. Three bounded Gemini generation requests returned HTTP400; zero validated outputs and no completed model evaluation. Current source has switched to Vyce, but no Vyce generation was made. See AI_SMOKE_RESULTS.md. Browser screenshots, production-browser checks, clean-checkout setup, build, and independent TypeScript/security reviews are complete. Reviewed source is pushed to a private GitHub repository. No public release, deployment or submission occurred.
+No authenticated PayPal call, checkout, capture or real webhook completed. Local client ID/secret are now present, but Merchant ID and webhook ID are blank; buyer access remains unverified. Three bounded Gemini generation requests returned HTTP400; zero validated outputs and no completed model evaluation. Current source has switched to Vyce, but no Vyce generation was made. See AI_SMOKE_RESULTS.md. Browser screenshots, production-browser checks, clean-checkout setup, build, and independent TypeScript/security reviews are complete. Reviewed source is pushed to a private GitHub repository. No public release, deployment or submission occurred.
 
 ## Preparation evidence
 

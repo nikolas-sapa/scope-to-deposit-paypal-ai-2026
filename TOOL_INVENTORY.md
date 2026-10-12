@@ -1,6 +1,6 @@
 # Actual tool inventory
 
-Status 2026-10-11: provider switch, local UI, delivery drafts, and timed fresh-checkout complete; external acceptance remains pending. Installed packages are recorded in package.json/package-lock.json; runtime verification in RESULTS.md.
+Status 2026-10-12: provider switch, local UI, delivery drafts, and timed fresh-checkout complete; external acceptance remains pending. Installed packages are recorded in package.json/package-lock.json; runtime verification in RESULTS.md.
 
 | Tool | Actual use/status |
 | --- | --- |
@@ -17,7 +17,7 @@ Status 2026-10-11: provider switch, local UI, delivery drafts, and timed fresh-c
 | Fresh Git worktree | Node.js 25.8.1 / npm 11.11.0; clean `npm ci`, owner setup, typecheck, build, production health 200 in 33.59 seconds; PayPal/AI config false |
 | Vyce AI | Metadata-only authenticated catalog request returned HTTP200, 7 models, `deepseek-v4-flash` available. Current extraction adapter uses this model; AI disabled; zero generation calls and zero Vyce spend. Public rates unavailable; see HANDOFF.md |
 | Gemini, historical | Existing GEMINI_API_KEY passed metadata/countTokens lookup; `gemini-3.8-flash` returned HTTP400 for all three capped generation requests, zero validated outputs. US$0.051642 reserved, actual charges unknown. Replaced by Vyce; see AI_SMOKE_RESULTS.md |
-| PayPal | Official sandbox Orders/webhook documentation reviewed; unauthenticated network reachability only. No app credential, authenticated sandbox call, capture or real event verified |
+| PayPal | Official sandbox Orders/webhook documentation reviewed; Client ID and secret are present in ignored local `.env.local`; Merchant ID and webhook ID blank. No authenticated OAuth, capture or real event verified |
 
 No Cursor requirement found in refreshed PayPal event rules/resources. No Cursor contribution claimed. No sponsor SDK included solely for an award. AG Grid not selected: bounded quote form does not require its financial-table capabilities. No sponsor-category claim currently made.
 
