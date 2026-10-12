@@ -1,6 +1,6 @@
 # Verification results
 
-Latest verification on 2026-10-12: 141/141 tests, TypeScript, and production build pass. The OAuth-only PayPal Sandbox check returns `OAUTH_VERIFIED`; no order or capture was created. Health reported sandbox-only mode, PayPal/webhook unconfigured, and AI usage disabled. On 2026-10-12, Vyce metadata returned HTTP200 with 7 models, including `deepseek-v4-flash`; one direct synthetic call returned HTTP200 and valid JSON (370 tokens), while one app-adapter attempt failed. Exact Vyce charges are unknown; AI remains disabled. Historical Gemini smoke had three HTTP400 responses and zero validated outputs; see AI_SMOKE_RESULTS.md.
+Latest verification on 2026-10-12: 141/141 tests, TypeScript, and production build pass. The OAuth-only PayPal Sandbox check returns `OAUTH_VERIFIED`; no order or capture was created. Current prepared runtime health is HTTP200, sandbox-only, PayPal configured, webhook unset, and AI disabled. Three synthetic manual quotes and checkout capabilities passed79 local checks; current database has3 reserved attempts,6 undispatched operations,0 paid deposits and0 webhook receipts. On 2026-10-12, Vyce metadata returned HTTP200 with 7 models, including `deepseek-v4-flash`; one direct synthetic call returned HTTP200 and valid JSON (370 tokens), while one app-adapter attempt failed. Exact Vyce charges are unknown; AI remains disabled. Historical Gemini smoke had three HTTP400 responses and zero validated outputs; see AI_SMOKE_RESULTS.md.
 
 ## Checks executed
 
@@ -9,7 +9,11 @@ Latest verification on 2026-10-12: 141/141 tests, TypeScript, and production bui
 | Full server suite | 141/141 tests, 10/10 suites pass | Real local SQLite/scrypt/CLI/validation; explicit provider/model transport fixtures; current Vyce adapter remains LOCAL_FIXTURE-only |
 | Canonical TypeScript | 0 diagnostics; also passed inside production build | LOCAL_RUNTIME |
 | Production build | Exit0; dynamic /api/[...path] route generated | LOCAL_RUNTIME |
-| Current production health | HTTP 200; sandbox-only true, PayPal/webhook unconfigured, AI usage disabled | LOCAL_RUNTIME; built server, GET /api/health only, no provider calls |
+| Current prepared runtime | HTTP200; listener127.0.0.1, sandbox-only true, PayPal configured, webhook unset, AI disabled | LOCAL_RUNTIME_RECHECK; private existing SQLite, no provider calls |
+| Three checkout preparations | 79/79 local checks; USD deposits100/200/300 cents;3 reserved attempts,6 undispatched operations,0 paid deposits/receipts | LOCAL_SETUP; synthetic manual drafts, no order creation or buyer approval |
+| Local launcher hardening | 24/24 assertions; redirect refusal, explicit child environment, bounded process-group shutdown including SIGTERM refusal | Scratch launcher only; existing runtime not restarted; fetch wrapper is not comprehensive OS egress control |
+| Webhook-only receiver preparation | 43/43 local HTTP assertions; independent TypeScript/security/advisor review | Private loopback proxy, exactPOST route, bounded raw-body forwarding; no public tunnel or genuine event |
+| Offline Vyce diagnostic | 89 assertions across10 fixture cases; live mode refuses before transport | LOCAL_FIXTURE; actual adapter with synthetic injected fetch, no live error cause established |
 | Production HTTP roundtrip | 15/15 checks pass, 0 failures | LOCAL_RUNTIME, actual npm start and HTTP requests |
 | Production-browser UI workflow | 23/23 checks pass; 0 unexpected console errors; one expected invalid-capability 401 | LOCAL_RUNTIME, Playwright Chromium against `npm start` |
 | Fresh-checkout setup | 33.59s total: checkout 0.36s, `npm ci` 7.48s, private owner setup 1.37s, typecheck 5.84s, production build 17.20s, production start/health 1.15s; health 200 | Fresh detached Git worktree at commit `3376cf6`, Node 25.8.1 / npm 11.11.0; no provider/AI config; historical result |
@@ -48,7 +52,7 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 
 | ID | Current evidence and remaining acceptance |
 | --- | --- |
-| T01 | NOT RUN, three bounded diagnostic requests failed HTTP400; genuine 20-case extraction and rubric review remain unperformed |
+| T01 | NOT RUN, accepted Vyce app output and genuine20-case rubric evaluation remain unperformed; direct smoke is not app acceptance |
 | T02 | Local exact-deposit and override checks pass; real checkout/capture matching NOT RUN |
 | T03 | Local replay convergence pass; genuine callback/event convergence NOT RUN |
 | T04 | 10 local pre-capture cancellation observations remain unpaid; genuine provider cancellation evidence NOT RUN |
