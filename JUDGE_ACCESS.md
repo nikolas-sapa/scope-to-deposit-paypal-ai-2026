@@ -1,6 +1,6 @@
 # Judge sandbox access handoff
 
-**Status: local app implemented; judge-access proposal only.** App architecture is Next.js/SQLite. Hosting, credentials, account access, and access channel remain unapproved. No credential values belong in this file or public README.
+**Status: local app implemented; judge-access proposal only.** App architecture is Next.js/SQLite. Public source and publication/submission are authorized. Own-sandbox local setup is the intended judge route, allowed by official rules; provider-backed judge usability remains unverified. No credential values belong in this file or public README.
 
 ## Access paths for later decision
 
@@ -54,7 +54,7 @@ Only PayPal account and buyer-account provisioning are outside the 15-minute fre
 3. Whether sandbox OAuth token issuance succeeds with this project’s app, and which permissions/scopes its merchant and app actually have.
 4. Whether the selected app can create, retrieve, and capture orders for the intended merchant, or complete three genuine buyer-approved deposits.
 5. Whether a public HTTPS webhook endpoint can be hosted, registered, reached by PayPal, and verified for a real sandbox capture event.
-6. Whether local judge access or private hosted judge access will be selected and approved; no credentials or private access channel issued.
+6. Whether the intended own-sandbox local route meets full provider-backed judge usability; no hosted instance or judge credentials issued.
 7. Whether fresh-checkout setup with authorized PayPal credentials and judge access meets T08’s full acceptance criteria. Local install/build/bootstrap took 33.59s; provider setup and judge usability were not measured.
 8. Whether T05 or T15 pass. Both remain **NOT RUN**. T08 local setup timing is measured, but overall T08 remains **NOT RUN** pending provider setup and judge usability.
 

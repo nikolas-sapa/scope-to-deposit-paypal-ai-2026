@@ -1,6 +1,6 @@
 # Scope to Deposit
 
-**Status: draft only.** No entry, repository, or video has been published or submitted.
+**Status: entry draft.** Source repository is public. Event entry remains unsubmitted and the local video draft remains unpublished.
 
 ## One-line pitch
 
@@ -10,7 +10,7 @@ Agree the scope. Freeze the quote. Verify the deposit.
 
 Scope to Deposit helps independent freelancers turn a client brief into a clear, editable scope and an explicitly approved quote before requesting a deposit. The freelancer can review deliverables, assumptions, timing, constraints, open questions, and USD line items in one workflow. A buyer checkout is tied to the approved quote revision, and the product treats payment as complete only after the server verifies provider evidence against the original order, merchant, deposit, and currency.
 
-The current local prototype supports manual scope editing and quote approval. AI extraction is implemented behind an explicit usage gate and remains disabled while app compatibility and account pricing are verified. PayPal Sandbox routes are implemented. Local Sandbox app Client ID and secret are set. The user-provided Business Merchant ID is stored in ignored local configuration; its use in a payment has not been verified. The webhook ID remains unset. Sandbox OAuth is verified. Buyer access, payment acceptance, and registered HTTPS webhook remain unverified. The prototype therefore does not demonstrate or claim a genuine transaction or paid state.
+The current local prototype supports manual scope editing and quote approval. AI extraction is implemented behind an explicit usage gate and remains disabled while app compatibility and account pricing are verified. PayPal Sandbox routes are implemented. Local Sandbox app Client ID and secret are set. The user-provided Business Merchant ID is stored in ignored local configuration; its use in a payment has not been verified. A Sandbox webhook has been registered, read back and activated in the local app. Its initial temporary HTTPS listener is stopped and needs URL renewal before capture testing; no genuine event is verified. Sandbox OAuth is verified. Buyer access, payment acceptance, and genuine webhook delivery remain unverified. The prototype therefore does not demonstrate or claim a genuine transaction or paid state.
 
 ## Problem
 
@@ -45,8 +45,8 @@ The entrant source is MIT licensed. Five small UI primitives were adapted from o
 
 ## Remaining evidence before submission
 
-- Complete genuine sandbox buyer approvals/captures and registered webhook verification after access is provided.
+- Complete genuine sandbox buyer approvals/captures and genuine registered-webhook event verification after buyer access is provided.
 - Complete the real-model 20-brief rubric after usage authorization.
 - Capture genuine paid-state evidence only from provider-verified records.
-- Recheck entrant eligibility, deadline, event rules, repository access, and publication choice.
-- Record and review the final video, then obtain human approval before publication or submission.
+- Confirm remaining entrant declarations and authenticated Devpost/YouTube access. Official rules permit complete local setup/run instructions for judging; a hosted app is optional.
+- Record and review final provider-backed evidence before video publication and event submission. The user authorized finishing and submission; factual entrant declarations remain pending.

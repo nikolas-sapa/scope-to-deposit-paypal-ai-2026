@@ -1,6 +1,6 @@
 # Submission checklist
 
-**Draft checklist. Nothing has been published or submitted.**
+**Entry checklist. Source repository is public; event entry and public video remain unfinished.**
 
 ## Local package
 
@@ -20,7 +20,8 @@
 - [x] Store the user-provided Business Merchant ID in ignored local `.env.local`; payment use remains unverified.
 - [ ] Confirm separate Business and Personal buyer access.
 - [ ] Complete three real buyer approval/capture scenarios and verify order, capture, amount, USD, and merchant.
-- [ ] Register an HTTPS webhook after authorization; verify one authentic sandbox event and durable receipt handling.
+- [x] Register one Sandbox HTTPS webhook, confirm exact event subscription through readback, save private ID and activate runtime.
+- [ ] Renew the stopped temporary listener URL on the existing webhook, then verify one authentic capture event and durable receipt handling.
 - [x] Historical Gemini diagnostic: three requests failed HTTP400, zero validated outputs; reserved ceiling US$0.051642, actual charge unknown.
 - [ ] Diagnose the failed application-adapter call and verify exact Vyce rate/debit before more calls. One direct synthetic smoke succeeded; one adapter call failed and its charge is unknown. Production `AI_USAGE_ENABLED` remains false.
 - [ ] Run the 20-brief source-grounded extraction rubric and review every output.
@@ -33,8 +34,8 @@
 - [ ] Confirm entrant type, conflict/support exclusions, ownership, and required participant declarations.
 - [ ] Review the final project description against verified behavior before submission.
 - [x] Create/select a private source remote and verify the pushed commit.
-- [ ] Publish the repository after final acceptance and declarations.
-- [x] Record and review an unpublished local demo draft; public-use approval remains pending.
-- [ ] Approve any public repository, video, or event submission before publishing.
+- [x] Publish the reviewed MIT-licensed source repository under explicit user authorization; anonymous public access verified.
+- [x] Record and review an unpublished local demo draft; publication authorized, final provider evidence and YouTube access still needed.
+- [x] User explicitly authorized finishing and submission, including required publication. No eligibility/conflict/ownership facts inferred from that authorization.
 
-Current status: reviewed source pushed to private https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Public repository release, deployment, video publication and event submission remain unperformed; local demo draft remains unpublished.
+Current status: reviewed source is public at https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026, verified2026-10-13. Video publication and event submission remain unperformed. Browser-control/authentication, entrant declarations and external acceptance evidence remain incomplete.

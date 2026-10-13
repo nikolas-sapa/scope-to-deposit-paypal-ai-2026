@@ -1,6 +1,6 @@
 # Compliance preflight
 
-Checked 2026-10-12, Europe/Athens. Local implementation and package checks are complete for the reviewed commit; external acceptance evidence and human release decisions remain pending.
+Checked 2026-10-13, Europe/Athens. Local implementation and package checks are complete for the reviewed commit; external acceptance evidence and human entrant declarations remain pending. Publication/submission were explicitly authorized.
 
 ## Official requirements
 
@@ -35,14 +35,14 @@ Sources: [rules](https://paypalaihackathon.devpost.com/rules), [overview](https:
 | Check | Evidence/result | Remaining prerequisite |
 | --- | --- | --- |
 | Workspace | Local branch `hackathon/paypal-preflight`; Next.js/SQLite app and docs implemented; production-browser checks 23/23; clean-checkout bootstrap/build/health completed in 33.59s | No local implementation prerequisite remains |
-| PayPal network | Client ID, secret, and the user-provided Business Merchant ID are set in ignored local `.env.local`; webhook ID is blank. OAuth-only Sandbox authentication is verified (`OAUTH_VERIFIED`). The Merchant ID has not been verified through a payment. | Confirm separate Business and Personal buyer access; register an HTTPS webhook after an approved public endpoint exists. |
+| PayPal network | Client ID, secret, and the user-provided Business Merchant ID are set in ignored local `.env.local`; webhook ID is saved after successful Sandbox registration/readback. OAuth-only Sandbox authentication is verified (`OAUTH_VERIFIED`). The Merchant ID has not been verified through a payment. | Confirm separate Business and Personal buyer access; renew the stopped temporary listener URL on the existing registration, then receive and authenticate a genuine capture event. |
 | AI access | Vyce `deepseek-v4-flash` is available. One direct synthetic smoke returned valid JSON; one application-adapter call failed behind the generic error boundary; exact failure stage is unknown. `AI_USAGE_ENABLED=false` | Exact Vyce rate/debit unknown. Resolve compatibility, verify pricing, then run bounded rubric |
-| GitHub | Private repository `nikolas-sapa/scope-to-deposit-paypal-ai-2026` created; branch pushed and remote commit verified | Public release/submission after genuine acceptance and entrant declarations |
+| GitHub | Public repository `nikolas-sapa/scope-to-deposit-paypal-ai-2026` created; branch pushed and remote commit verified | Public source access verified; final entry still needs genuine acceptance, entrant declarations and authenticated form access |
 | Build tools | Clean checkout: Node 25.8.1, npm 11.11.0; install, owner setup, typecheck, production build, start and health 200 completed in 33.59s | No local build prerequisite remains |
 | License | Root `LICENSE` is MIT; third-party notices retained | None for local package |
 | Personal eligibility | Adult age and Greece confirmed by human, relayed by coordinating chat | Entrant type, conflict/support and ownership declarations; no identity documents needed |
 
-OAuth-only PayPal authentication succeeded; no checkout, capture or real webhook completed. Local client ID/secret and user-provided Merchant ID are present; webhook ID is blank. Merchant ID use in a payment and buyer access remain unverified. Three historical Gemini requests returned HTTP400. One direct Vyce synthetic smoke returned valid JSON; one app-adapter attempt failed behind the generic error boundary (exact stage unknown), actual Vyce charges remain unknown, and no rubric evaluation completed. See AI_SMOKE_RESULTS.md. Browser screenshots, production-browser checks, clean-checkout setup, build, and independent TypeScript/security reviews are complete. Reviewed source is pushed to a private GitHub repository. No public release, deployment or submission occurred.
+OAuth-only PayPal authentication succeeded; no checkout, capture or authentic webhook event completed. Local client ID/secret and user-provided Merchant ID are present; webhook ID is saved after successful Sandbox registration/readback. Merchant ID use in a payment and buyer access remain unverified. Three historical Gemini requests returned HTTP400. One direct Vyce synthetic smoke returned valid JSON; one app-adapter attempt failed behind the generic error boundary (exact stage unknown), actual Vyce charges remain unknown, and no rubric evaluation completed. See AI_SMOKE_RESULTS.md. Browser screenshots, production-browser checks, clean-checkout setup, build, and independent TypeScript/security reviews are complete. Reviewed source is public on GitHub and anonymous access is verified. Video publication, final event submission and genuine provider/model acceptance remain incomplete.
 
 ## Preparation evidence
 
@@ -52,4 +52,4 @@ Resumed preparation: JUDGE_ACCESS.md specifies custody and T08 account-provision
 
 Official event rules, overview, resources, and FAQ rechecked on 2026-10-12. Product/architecture authority delegated by human; PLAN.md and CONTRACTS.md select A/USD without expanding spending/external-action permissions. Pinned dependency versions respect existing npm date cutoff. Production AI remains disabled; the later bounded smoke is recorded in AI_SMOKE_RESULTS.md. Node 25.8.1 native SQLite transaction probe succeeded. UI primitive sources/license fetched from official shadcn registry. No PayPal order/capture or model-quality result inferred.
 
-Refresh event pages again before submission. Keep final submitted build and access stable throughout judging.
+Refresh event pages again before submission. Keep final submitted build and access stable throughout judging. Official rules allow complete repo setup/run instructions instead of a hosted URL. User publication/submission authorization does not establish entrant type, ownership or conflict declarations.

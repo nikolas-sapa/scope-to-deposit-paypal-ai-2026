@@ -1,6 +1,6 @@
 # Your PayPal Sandbox setup
 
-Only Sandbox accounts and credentials are used. Local app, source, demo and private GitHub repository are ready. No real money is involved in Sandbox tests.
+Only Sandbox accounts and credentials are used. Local app, source, demo draft and public GitHub repository are ready. No real money is involved in Sandbox tests.
 
 1. Sign in to the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/).
 2. Open **Testing Tools → Sandbox Accounts**. Identify or create one **Business** account (merchant) and a separate **Personal** account (buyer). Keep buyer login details private; you will use that account to approve the test checkouts. [Official account guide](https://developer.paypal.com/sandbox-testing/accounts)
@@ -21,6 +21,8 @@ OAuth-only access has been verified. The user-provided Business Merchant ID is n
 
 Authentic webhook testing additionally needs a public HTTPS endpoint. Once its address is ready, register `https://<approved-host>/api/webhooks/paypal` in the same Sandbox app, subscribe to `PAYMENT.CAPTURE.COMPLETED`, and save the returned Webhook ID in `.env.local`. The coordinator will verify a genuine event and durable receipt. Local loopback cannot receive PayPal deliveries; simulator events do not satisfy authentic-event acceptance. [Official webhook guide](https://developer.paypal.com/api/rest/webhooks/rest/)
 
-Checked 2026-10-12. Local Client ID, secret, and user-provided Business Merchant ID are configured; webhook ID remains unset. The OAuth-only Sandbox check returned `OAUTH_VERIFIED` before Merchant ID was added; no repeat call was made. No Sandbox app/account changes, order, capture, or webhook acceptance are claimed.
+Checked2026-10-13. Client ID, secret, user-provided Business Merchant ID and verified webhook ID are stored in ignored local configuration. One Sandbox webhook for PAYMENT.CAPTURE.COMPLETED was created and confirmed through list readback, then activated in the loopback runtime. This required1 OAuth,1 create and2 list requests; no orders/captures or genuine events occurred. The temporary listener exposes only the webhook route and has rolling6/min,30/hour and120/process-lifetime admission limits; it is development infrastructure, not stable judge hosting.
 
 Three local checkout fixtures are now prepared for USD1/2/3 deposits. All79 preparation checks passed, but no PayPal order, buyer approval, capture, or genuine event has occurred. The prepared app remains private on loopback. A separate Personal Sandbox buyer account is still needed: Testing Tools → Sandbox Accounts → Personal account → View/Edit Account. Save its email/password in the coordinator-provided private `work/PLAN/sandbox-personal-buyer.json` file outside the repository, never in chat. The Business account cannot approve its own merchant checkout.
+
+Current listener lifecycle: the initial temporary HTTPS route was verified, but its proxy/tunnel processes have since exited. The webhook ID remains saved and the local app reports webhookConfigured=true. Before buyer-approved captures, renew the temporary listener and replace the URL on this one existing registration, then read it back. Never create duplicate hooks or call a stale URL delivery proof. No authentic event has been received.
