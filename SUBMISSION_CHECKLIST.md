@@ -18,11 +18,11 @@
 
 - [x] Verify OAuth-only PayPal Sandbox access with current app credentials; no order/capture created.
 - [x] Store the user-provided Business Merchant ID in ignored local `.env.local`; payment use remains unverified.
-- [ ] Confirm separate Business and Personal buyer access.
-- [x] Create one genuine USD1 Sandbox order through the application using a fresh, manually approved USD10 quote. Approval URL bound to the persisted order; zero captures. Personal buyer approval remains pending.
+- [x] Confirm separate Business and Personal buyer access through genuine buyer approval of the first order.
+- [x] Complete first genuine USD1 Sandbox order/approval/capture from an approved USD10 manual quote. Canonical order/capture/merchant/USD amount match, one REAL_SANDBOX paid deposit.
 - [ ] Complete three real buyer approval/capture scenarios and verify order, capture, amount, USD, and merchant.
 - [x] Register one Sandbox HTTPS webhook, confirm exact event subscription through readback, save private ID and activate runtime.
-- [ ] Renew the stopped temporary listener URL on the existing webhook, then verify one authentic capture event and durable receipt handling.
+- [x] Renew temporary listener URL on existing webhook and verify one authentic PAYMENT.CAPTURE.COMPLETED event persisted and processed as paid. Receiver liveness remains temporary; fault/restart acceptance still pending.
 - [x] Historical Gemini diagnostic: three requests failed HTTP400, zero validated outputs; reserved ceiling US$0.051642, actual charge unknown.
 - [ ] Diagnose the failed application-adapter call and verify exact Vyce rate/debit before more calls. One direct synthetic smoke succeeded; one adapter call failed and its charge is unknown. Production `AI_USAGE_ENABLED` remains false.
 - [ ] Run the 20-brief source-grounded extraction rubric and review every output.

@@ -55,10 +55,10 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 | ID | Current evidence and remaining acceptance |
 | --- | --- |
 | T01 | NOT RUN, accepted Vyce app output and genuine20-case rubric evaluation remain unperformed; direct smoke is not app acceptance |
-| T02 | Local exact-deposit and override checks pass; real checkout/capture matching NOT RUN |
+| T02 | Local exact-deposit/override checks pass; first genuine USD1 order/capture/merchant/USD matching verified. Full criterion remains incomplete |
 | T03 | Local replay convergence pass; genuine callback/event convergence NOT RUN |
 | T04 | 10 local pre-capture cancellation observations remain unpaid; genuine provider cancellation evidence NOT RUN |
-| T05 | NOT RUN, three real sandbox buyer approvals/captures |
+| T05 | 1/3 genuine Sandbox buyer approvals/captures verified; USD1 complete, two remaining |
 | T06 | Backend ownership/auth checks pass; production browser verified owner login/manual quote flow/logout. Cross-owner denial is covered by server tests, not a two-owner browser session |
 | T07 | Private files ignored; UI commit and final staged docs scan both report 0 leaks. Browser bundle excludes private config names and generated owner password |
 | T08 | Local fresh-checkout install/setup/typecheck/build/start verified in 33.59s (<15min); external account provisioning excluded from future setup time if required |
@@ -68,7 +68,7 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 | T12 | Local uncertain/expired-retention guard and zero replacement checks pass; provider-backed acceptance NOT RUN |
 | T13 | 10 local malformed/failed-verification cases rejected; authentic provider verification NOT RUN |
 | T14 | 10 local hostile brief/output boundary cases cause0 privileged actions/disclosures; real model run NOT RUN |
-| T15 | NOT RUN, genuine registered-webhook event |
+| T15 | One authentic PAYMENT.CAPTURE.COMPLETED event verified, persisted and processed as paid; broader criterion remains incomplete |
 | T16 | Local owner approval, login, mobile, buyer-unavailable screenshots, and captioned demo draft captured; genuine paid/canceled provider-state screenshots NOT RUN |
 | T17 | Local overlapping revisions keep one guarded attempt; genuine provider evidence NOT RUN |
 | T18 | Local cancellation/capability races pass; genuine provider evidence NOT RUN |
@@ -84,5 +84,7 @@ Production Vyce usage remains gated off. No aggregate dollar cap or extraction-s
 Public GitHub repository: https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. Current branch and origin were verified at the latest documentation commit; canonical archive checksum is recorded in release manifest. Source publication and anonymous access verified2026-10-13 under explicit user authorization; no public video or event submission. One Sandbox webhook registered and read back. One genuine USD1 order created through the application from a fresh owner-approved USD10 synthetic quote; official approval URL matches persisted order. Old three reservations unchanged, four attempts total, zero captures/paid deposits. Buyer approval and genuine event delivery remain pending. Temporary receiver renewal failed DNS checks and stopped without a provider update; capture prohibited until receiver restoration and canonical approval. Historical Gemini smoke: three HTTP400 INVALID_ARGUMENT responses, zero validated outputs, reserved ceiling US$0.051642 (not an invoice; actual charge unknown). One direct Vyce smoke returned valid JSON; one app adapter call failed. Full rubric evaluation NOT RUN, provider debit unknown. No complete product or hackathon acceptance claim.
 
 ## Local demo draft
+
+Latest genuine-payment evidence: one USD1 capture verified through canonical Sandbox API evidence, matching the original order, configured merchant and USD amount. One authentic capture event persisted and processed as paid, confirmed through an independent SQLite readback. Three original reserved attempts and six operations unchanged. Browser return lacked its original capability because checkout was initiated by API and approved using the direct PayPal URL; original private link is preserved and queued to reopen, but UI restoration and paid screenshot remain unverified. No app code changed or AI called in this continuation.
 
 Unpublished captioned walkthrough: `../release/scope-to-deposit-local-demo-draft.mp4`. The video shows the real local production UI with a synthetic brief, manual scope and quote, blocking question, explicit approval, missing PayPal configuration, unavailable buyer route, and logout. The local owner session was established through an API request before the page recording; no password, session token, cookie, devtools, or paid state is shown. Genuine PayPal captures, webhook proof, and AI evaluation are labeled NOT RUN. Full decode and sampled-frame review passed. This draft is not external judge-access or provider acceptance evidence.
