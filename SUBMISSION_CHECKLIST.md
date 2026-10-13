@@ -19,6 +19,7 @@
 - [x] Verify OAuth-only PayPal Sandbox access with current app credentials; no order/capture created.
 - [x] Store the user-provided Business Merchant ID in ignored local `.env.local`; payment use remains unverified.
 - [ ] Confirm separate Business and Personal buyer access.
+- [x] Create one genuine USD1 Sandbox order through the application using a fresh, manually approved USD10 quote. Approval URL bound to the persisted order; zero captures. Personal buyer approval remains pending.
 - [ ] Complete three real buyer approval/capture scenarios and verify order, capture, amount, USD, and merchant.
 - [x] Register one Sandbox HTTPS webhook, confirm exact event subscription through readback, save private ID and activate runtime.
 - [ ] Renew the stopped temporary listener URL on the existing webhook, then verify one authentic capture event and durable receipt handling.
