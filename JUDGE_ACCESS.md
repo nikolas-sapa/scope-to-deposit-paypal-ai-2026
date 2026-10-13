@@ -51,9 +51,9 @@ Only PayPal account and buyer-account provisioning are outside the 15-minute fre
 
 1. Other participants' residence, majority and eligibility, plus any participant's disqualifying judge/organizer/support conflicts. Adult status and Greece residence are confirmed for the human entrant only; other participants need not reside in Greece.
 2. Who owns or controls the PayPal Developer account, sandbox Business merchant, app credentials, Personal buyer account, and any webhook registration. Access and ownership remain unconfirmed.
-3. Whether sandbox OAuth token issuance succeeds with this project’s app, and which permissions/scopes its merchant and app actually have.
+3. Sandbox OAuth and webhook registration permissions are verified. Orders/capture permissions and payment merchant binding remain unverified.
 4. Whether the selected app can create, retrieve, and capture orders for the intended merchant, or complete three genuine buyer-approved deposits.
-5. Whether a public HTTPS webhook endpoint can be hosted, registered, reached by PayPal, and verified for a real sandbox capture event.
+5. Temporary HTTPS webhook-only exposure and registration were verified; the listener has stopped. Renew its URL and verify a genuine signed capture event before claiming delivery acceptance.
 6. Whether the intended own-sandbox local route meets full provider-backed judge usability; no hosted instance or judge credentials issued.
 7. Whether fresh-checkout setup with authorized PayPal credentials and judge access meets T08’s full acceptance criteria. Local install/build/bootstrap took 33.59s; provider setup and judge usability were not measured.
 8. Whether T05 or T15 pass. Both remain **NOT RUN**. T08 local setup timing is measured, but overall T08 remains **NOT RUN** pending provider setup and judge usability.
