@@ -64,12 +64,12 @@ This table distinguishes local evidence from the complete SPEC.md criterion. No 
 | T08 | Local fresh-checkout install/setup/typecheck/build/start verified in 33.59s (<15min); external account provisioning excluded from future setup time if required |
 | T09 | Local frozen quote, review blocker and unapproved dispatch checks pass |
 | T10 | Local concurrent/replayed capture counts pass; genuine provider-backed race evidence NOT RUN |
-| T11 | Local file-backed SQLite reopen/lost-response recovery pass; genuine sandbox fault/restart evidence NOT RUN |
+| T11 | Local file-backed reopen/lost-response recovery pass. Genuine paid runtime restart preserved exact payment/receipt/capability rows; broader fault/lost-response criterion incomplete |
 | T12 | Local uncertain/expired-retention guard and zero replacement checks pass; provider-backed acceptance NOT RUN |
 | T13 | 10 local malformed/failed-verification cases rejected; authentic provider verification NOT RUN |
 | T14 | 10 local hostile brief/output boundary cases cause0 privileged actions/disclosures; real model run NOT RUN |
 | T15 | One authentic PAYMENT.CAPTURE.COMPLETED event verified, persisted and processed as paid; broader criterion remains incomplete |
-| T16 | Local owner approval, login, mobile, buyer-unavailable screenshots, and captioned demo draft captured; genuine paid/canceled provider-state screenshots NOT RUN |
+| T16 | Local owner/login/mobile/unavailable screenshots and demo draft captured; genuine paid USD1 screenshot captured and visually reviewed. Canceled provider-state screenshot NOT RUN |
 | T17 | Local overlapping revisions keep one guarded attempt; genuine provider evidence NOT RUN |
 | T18 | Local cancellation/capability races pass; genuine provider evidence NOT RUN |
 | T19 | Local failure before persistence and SQLite reopen after persistence pass; genuine delivery/restart NOT RUN |
