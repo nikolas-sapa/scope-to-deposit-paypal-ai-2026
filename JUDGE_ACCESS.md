@@ -1,6 +1,6 @@
 # Judge sandbox access handoff
 
-**Status: local app implemented; judge-access proposal only.** App architecture is Next.js/SQLite. Public source and publication/submission are authorized. Own-sandbox local setup is the intended judge route, allowed by official rules; provider-backed judge usability remains unverified. No credential values belong in this file or public README.
+**Status: local app implemented; judge-access proposal only.** App architecture is Next.js/SQLite. Public source and publication/submission are authorized. One genuine Sandbox deposit and one authentic webhook are verified; two additional buyer approvals are pending. Own-sandbox local setup is the intended judge route, allowed by official rules; provider-backed judge usability remains unverified. No credential values belong in this file or public README.
 
 ## Access paths for later decision
 
@@ -31,10 +31,9 @@ The local `.env.example` defines the listed PayPal and Vyce AI variable names wi
 
 1. Architecture A and local sandbox-only access selected under delegated authority. Confirm owner, merchant account, and buyer account custody. No account changes by this handoff.
 2. Confirm a sandbox Business account and REST app already exist, or obtain separate approval for provisioning. Keep app secret with its owner. Give judges their own Personal buyer account; never share its password.
-3. Before any checkout, verify OAuth token issuance with the sandbox client-credentials flow, then make a non-mutating authenticated Orders `GET` only when a valid sandbox order ID exists. Distinguish 401 credential/authentication failure from 403 permission failure. Record status and redacted request metadata, never token or Authorization header.
-4. Confirm authorized Orders create/get/capture permissions and merchant binding using PayPal’s sandbox API logs and returned order/capture details. Do not infer access from an unauthenticated endpoint response or simulator event.
-5. With a synthetic quote and explicit human approval, perform three buyer-approved sandbox orders and server captures. Persist redacted order/capture IDs, amount, currency, configured merchant match, status, and timestamps. Reconcile each order by API before calling it paid.
-6. For authentic webhook evidence, approve HTTPS endpoint registration for the selected sandbox app, record its webhook ID server-side, receive a real sandbox capture event, and verify it with PayPal’s postback endpoint or documented cryptographic verification. Confirm the verified event maps to the same order, capture, merchant, amount, and currency. Simulator mock events can test listener plumbing only; they cannot prove postback verification or real transaction delivery.
+3. OAuth token issuance and authenticated Sandbox Orders create/capture have been exercised successfully for one genuine buyer-approved order. Keep tokens and Authorization headers out of logs.
+4. One completed capture matches the intended order, configured merchant, USD 1 deposit, and frozen USD 10 quote. Two further buyer-approved sandbox orders remain needed for the three-scenario acceptance target.
+5. An authentic `PAYMENT.CAPTURE.COMPLETED` event arrived through the registered webhook and was verified, persisted, and processed against the genuine capture. Simulator events do not count toward this evidence.
 7. Provide only the chosen access instructions through the approved channel. Public README may explain setup and credential names, but must contain no credential values or judge passwords. Redact tokens, cookies, buyer email, and unnecessary personal data from evidence.
 
 ## Provisioning time and setup benchmark
@@ -43,20 +42,20 @@ Only PayPal account and buyer-account provisioning are outside the 15-minute fre
 
 ## Acceptance evidence links
 
-- **T05, genuine sandbox checkout:** 3/3 distinct real buyer approvals and server captures, reconciled order/capture IDs, amount, currency, merchant, status, timestamps. Status: **NOT RUN**.
+- **T05, genuine sandbox checkout:** target 3/3 distinct real buyer approvals and server captures, reconciled order/capture IDs, amount, currency, merchant, status, timestamps. Status: **1/3 complete; two buyer approvals pending**.
 - **T08, judge setup:** fresh checkout in under 15 minutes, excluding account provisioning, with setup transcript and runtime versions. Local install, owner setup, typecheck, production build, start, and health check completed in 33.59s on Node 25.8.1/npm 11.11.0. PayPal credential setup/OAuth and judge usability were not exercised; overall T08 remains **NOT RUN**.
-- **T15, authentic webhook:** at least one real sandbox capture event passes registered webhook verification and converges on the existing capture. Status: **NOT RUN**. Simulator is not qualifying evidence.
+- **T15, authentic webhook:** at least one real sandbox capture event passes registered webhook verification and converges on the existing capture. Status: **PASS for one genuine capture**. Simulator is not qualifying evidence.
 
 ## Cannot verify yet
 
 1. Other participants' residence, majority and eligibility, plus any participant's disqualifying judge/organizer/support conflicts. Adult status and Greece residence are confirmed for the human entrant only; other participants need not reside in Greece.
 2. Who owns or controls the PayPal Developer account, sandbox Business merchant, app credentials, Personal buyer account, and any webhook registration. Access and ownership remain unconfirmed.
-3. Sandbox OAuth and webhook registration permissions are verified. Orders/capture permissions and payment merchant binding remain unverified.
-4. Whether the selected app can create, retrieve, and capture orders for the intended merchant, or complete three genuine buyer-approved deposits.
-5. Temporary HTTPS webhook-only exposure and registration were verified; the listener has stopped. Renew its URL and verify a genuine signed capture event before claiming delivery acceptance.
+3. Sandbox OAuth and webhook registration permissions are verified. One genuine order was created and captured with the configured merchant binding.
+4. Whether the remaining two buyer checkouts will be approved and captured to complete the 3-scenario target.
+5. The temporary HTTPS webhook listener was used successfully for one authentic capture event. Runtime/listener availability is temporary; verify liveness before relying on it again.
 6. Whether the intended own-sandbox local route meets full provider-backed judge usability; no hosted instance or judge credentials issued.
 7. Whether fresh-checkout setup with authorized PayPal credentials and judge access meets T08’s full acceptance criteria. Local install/build/bootstrap took 33.59s; provider setup and judge usability were not measured.
-8. Whether T05 or T15 pass. Both remain **NOT RUN**. T08 local setup timing is measured, but overall T08 remains **NOT RUN** pending provider setup and judge usability.
+8. Whether T05 reaches 3/3. Current status is 1/3. T15 passed for one authentic capture. T08 local setup timing is measured, but overall T08 remains **NOT RUN** pending provider setup and judge usability.
 
 ## Primary references
 
