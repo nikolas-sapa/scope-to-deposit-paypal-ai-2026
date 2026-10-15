@@ -4,8 +4,8 @@
 
 ## Local package
 
-- [x] Source builds and TypeScript checks pass.
-- [x] 141 local service tests pass; 23/23 production-browser checks cover owner workflow, capability handling, logout, missing-provider behavior, and responsive layout.
+- [x] Historical full run2026-10-12: source build and TypeScript checks pass.
+- [x] Historical full run:141 local service tests pass;23/23 production-browser checks cover owner workflow, capability handling, logout, missing-provider behavior and responsive layout.
 - [x] README documents the actual setup and sandbox-only boundaries.
 - [x] MIT notice retained for the five adapted shadcn/ui primitives.
 - [x] Root `LICENSE` is MIT.
@@ -17,12 +17,12 @@
 ## External acceptance evidence
 
 - [x] Verify OAuth-only PayPal Sandbox access with current app credentials; no order/capture created.
-- [x] Store the user-provided Business Merchant ID in ignored local `.env.local`; payment use remains unverified.
+- [x] Store the user-provided Business Merchant ID in ignored local `.env.local`; canonical evidence now validates its binding on all3 genuine captures.
 - [x] Confirm separate Business and Personal buyer access through genuine buyer approval of the first order.
 - [x] Complete first genuine USD1 Sandbox order/approval/capture from an approved USD10 manual quote. Canonical order/capture/merchant/USD amount match, one REAL_SANDBOX paid deposit.
-- [ ] Complete two more of three real buyer approval/capture scenarios and verify order, capture, amount, USD, and merchant. Two prepared checkout links await human buyer approval; no capture helper replay.
+- [x] Complete all3 real buyer approval/capture scenarios: USD1/2/3 deposits against approved USD10/20/30 quotes. Canonical order/capture/amount/USD/merchant match; exactly one completed capture per order. T05 PASS2026-10-15.
 - [x] Register one Sandbox HTTPS webhook, confirm exact event subscription through readback, save private ID and activate runtime.
-- [x] Renew temporary listener URL on existing webhook and verify one authentic PAYMENT.CAPTURE.COMPLETED event persisted and processed as paid. Receiver liveness remains temporary; fault/restart acceptance still pending.
+- [x] Verify3 authentic PAYMENT.CAPTURE.COMPLETED events, one per capture, persisted and processed as paid. T15 PASS. Temporary receiver stopped after testing; existing registration retained. Future genuine captures require a new listener and URL-only renewal/readback. Broader fault/restart criteria remain incomplete.
 - [x] Historical Gemini diagnostic: three requests failed HTTP400, zero validated outputs; reserved ceiling US$0.051642, actual charge unknown.
 - [ ] Resolve Vyce quota/reset and pricing unit before any further call. One bounded `deepseek-v4-flash` application-adapter request returned HTTP 429 with no usage metadata; debit is unknown. Do not retry. Production `AI_USAGE_ENABLED` remains false.
 - [ ] Run the 20-brief source-grounded extraction rubric and review every output.
@@ -36,7 +36,7 @@
 - [ ] Review the final project description against verified behavior before submission.
 - [x] Create/select a private source remote and verify the pushed commit.
 - [x] Publish the reviewed MIT-licensed source repository under explicit user authorization; anonymous public access verified.
-- [x] Record and review an unpublished local demo draft; publication authorized, final buyer evidence and YouTube access still needed.
+- [x] Record and review an unpublished local demo draft; publication authorized, final evidence review and YouTube access still needed.
 - [x] User explicitly authorized finishing and submission, including required publication. No eligibility/conflict/ownership facts inferred from that authorization.
 
-Current status (2026-10-14): reviewed source is public at https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. One of three intended genuine Sandbox captures and one authentic webhook are verified; two buyer approvals remain pending. Updated local demo draft is 164.80 seconds and unpublished. Vyce returned HTTP 429; debit, billing unit, and quota/reset are unknown. AI remains disabled. Entrant declarations, authenticated YouTube/Devpost access, and final submission remain incomplete.
+Current status (2026-10-15): reviewed source is public at https://github.com/nikolas-sapa/scope-to-deposit-paypal-ai-2026. All3 genuine Sandbox captures and3 authentic webhooks are verified; no buyer approval remains pending for these scenarios. USD2/3 normal returns visibly showed server-verified paid states, with no PNG exports. Independent security review confirmed original reservations/undispatched operations preserved. Updated local demo draft is164.80seconds and unpublished. Vyce returned HTTP429; debit, billing unit and quota/reset are unknown. AI remains disabled. Broader fault criteria, entrant declarations, authenticated YouTube/Devpost access, final video review and submission remain incomplete.

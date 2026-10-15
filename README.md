@@ -1,12 +1,12 @@
 # Scope to Deposit
 
-Scope to Deposit turns a client brief into an editable scope, a human-approved quote, and a buyer checkout link. The local build uses a real sandbox-only payment boundary. PayPal access and AI generation are currently unconfigured, so the app supports manual scope editing and approval and keeps checkout disabled.
+Scope to Deposit turns a client brief into an editable scope, a human-approved quote, and a buyer checkout link. The local build uses a real sandbox-only payment boundary. Three genuine PayPal Sandbox deposits and their authentic completion webhooks are verified. Manual scope editing and quote approval work; AI generation remains disabled pending accepted app output and verified usage limits.
 
 This is a local hackathon prototype. It is not a production payment service, contract system, accounting tool, or legal/tax advisor.
 
 ## Local setup
 
-Requirements: Node.js `>=24 <26` and npm. The verified runtime was Node.js 25.8.1.
+Requirements: Node.js `>=24 <26` and npm. Current Sandbox runtime uses Node.js 24.21.0; the historical fresh-checkout benchmark used Node.js 25.8.1.
 
 ```sh
 npm ci
@@ -80,4 +80,6 @@ Five adapted shadcn/ui primitives are attributed in source and covered by [THIRD
 
 ## Verification status
 
-See [RESULTS.md](RESULTS.md) for local evidence and the acceptance ledger. The production browser run passed 23/23 UI and security-boundary checks with zero unexpected console errors. A fresh checkout on Node.js 25.8.1/npm 11.11.0 completed install, owner setup, TypeScript, production build, and health 200 in 33.59 seconds. The current 141-test suite passes. A direct Vyce synthetic smoke returned valid JSON, but the application-adapter call failed; actual charges are unknown. Genuine PayPal captures, a registered webhook event, accepted Vyce app output, and paid-state screenshots remain unverified. Three historical Gemini requests returned HTTP400 with zero validated outputs. See [AI_SMOKE_RESULTS.md](AI_SMOKE_RESULTS.md) and [PAYPAL_SETUP.md](PAYPAL_SETUP.md).
+See [RESULTS.md](RESULTS.md) for evidence and the acceptance ledger. On 2026-10-15, all 3/3 genuine Sandbox deposits (USD 1/2/3 against approved USD 10/20/30 quotes) were verified against canonical order, capture, merchant, amount and currency evidence. Three authentic completion webhooks were persisted and processed as paid. Normal buyer returns for the USD 2/3 checkouts visibly showed server-verified payment; the USD 1 paid-state screenshot is retained privately. The temporary webhook listener is not durable judge hosting.
+
+The latest full local run was 2026-10-12: 141/141 tests, TypeScript and production build passed. Historical production-browser checks passed 23/23 with zero unexpected console errors. A fresh checkout on Node.js 25.8.1/npm 11.11.0 completed install, owner setup, TypeScript, production build and health 200 in 33.59 seconds. A direct Vyce synthetic smoke returned valid JSON, but the latest bounded application-adapter request returned HTTP429 with no usage metadata. Accepted AI app output and rubric evaluation remain NOT RUN; AI stays disabled and actual charges are unknown. See [AI_SMOKE_RESULTS.md](AI_SMOKE_RESULTS.md) and [PAYPAL_SETUP.md](PAYPAL_SETUP.md).

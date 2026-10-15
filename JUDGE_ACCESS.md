@@ -1,6 +1,6 @@
 # Judge sandbox access handoff
 
-**Status: local app implemented; judge-access proposal only.** App architecture is Next.js/SQLite. Public source and publication/submission are authorized. One genuine Sandbox deposit and one authentic webhook are verified; two additional buyer approvals are pending. Own-sandbox local setup is the intended judge route, allowed by official rules; provider-backed judge usability remains unverified. No credential values belong in this file or public README.
+**Status2026-10-15: local app implemented; judge usability remains unverified.** App architecture is Next.js/SQLite. Public source and publication/submission are authorized. All3 genuine Sandbox deposits and3 authentic completion webhooks are verified; T05/T15 PASS. Own-sandbox local setup is the intended judge route, allowed by official rules. No credential values belong in this file or public README.
 
 ## Access paths for later decision
 
@@ -8,11 +8,11 @@
 
 **Private hosted route:** entrant hosts a sandbox-only judge instance and grants access through a private channel. This needs a separate approval for hosting, account ownership, judge authentication, retention, and private credential delivery. Never put access tokens, passwords, session secrets, or private app credentials in a public README, issue, or source file. No hosted route authorized.
 
-The local product uses Next.js/SQLite. Judge hosting/access design remains open; this handoff does not authorize either route.
+The selected judge route is own-sandbox local setup. No hosted judge instance has been provisioned.
 
 ## Credential and identifier custody
 
-The local `.env.example` defines the listed PayPal and Vyce AI variable names with blank values. **No provider credentials or judge access are configured.** Do not create deployment configuration from this proposal.
+The local `.env.example` defines the listed PayPal and Vyce AI variable names with blank values. Entrant Sandbox credentials are configured only in ignored private local files; the public source contains no provisioned judge credentials. AI remains disabled. Do not create deployment configuration from this proposal.
 
 | Type | Proposed label | Treatment and custody |
 | --- | --- | --- |
@@ -31,9 +31,10 @@ The local `.env.example` defines the listed PayPal and Vyce AI variable names wi
 
 1. Architecture A and local sandbox-only access selected under delegated authority. Confirm owner, merchant account, and buyer account custody. No account changes by this handoff.
 2. Confirm a sandbox Business account and REST app already exist, or obtain separate approval for provisioning. Keep app secret with its owner. Give judges their own Personal buyer account; never share its password.
-3. OAuth token issuance and authenticated Sandbox Orders create/capture have been exercised successfully for one genuine buyer-approved order. Keep tokens and Authorization headers out of logs.
-4. One completed capture matches the intended order, configured merchant, USD 1 deposit, and frozen USD 10 quote. Two further buyer-approved sandbox orders remain needed for the three-scenario acceptance target.
-5. An authentic `PAYMENT.CAPTURE.COMPLETED` event arrived through the registered webhook and was verified, persisted, and processed against the genuine capture. Simulator events do not count toward this evidence.
+3. OAuth token issuance and authenticated Sandbox Orders create/capture have been exercised successfully for3 genuine buyer-approved orders. Keep tokens and Authorization headers out of logs.
+4. All3 completed captures match their intended orders, configured merchant, USD1/2/3 deposits and frozen USD10/20/30 quotes. Canonical evidence confirms exactly one completed capture per order.
+5. Three authentic `PAYMENT.CAPTURE.COMPLETED` events arrived through the registered webhook and were verified, persisted and processed against their existing captures. Simulator events do not count toward this evidence.
+6. Temporary receiver stopped after testing; existing webhook registration retained. Before future genuine captures, provision a fresh listener, renew only that registration's URL and confirm exact readback.
 7. Provide only the chosen access instructions through the approved channel. Public README may explain setup and credential names, but must contain no credential values or judge passwords. Redact tokens, cookies, buyer email, and unnecessary personal data from evidence.
 
 ## Provisioning time and setup benchmark
@@ -42,20 +43,17 @@ Only PayPal account and buyer-account provisioning are outside the 15-minute fre
 
 ## Acceptance evidence links
 
-- **T05, genuine sandbox checkout:** target 3/3 distinct real buyer approvals and server captures, reconciled order/capture IDs, amount, currency, merchant, status, timestamps. Status: **1/3 complete; two buyer approvals pending**.
+- **T05, genuine sandbox checkout:** **PASS2026-10-15,3/3** distinct real buyer approvals and server captures; canonical order/capture IDs, amount, USD, merchant and completed status match persisted evidence.
 - **T08, judge setup:** fresh checkout in under 15 minutes, excluding account provisioning, with setup transcript and runtime versions. Local install, owner setup, typecheck, production build, start, and health check completed in 33.59s on Node 25.8.1/npm 11.11.0. PayPal credential setup/OAuth and judge usability were not exercised; overall T08 remains **NOT RUN**.
-- **T15, authentic webhook:** at least one real sandbox capture event passes registered webhook verification and converges on the existing capture. Status: **PASS for one genuine capture**. Simulator is not qualifying evidence.
+- **T15, authentic webhook:** **PASS**,3 authentic capture events passed registered webhook verification and converged on their existing captures. Simulator is not qualifying evidence. Broader fault/restart criteria remain separate and incomplete.
 
 ## Cannot verify yet
 
 1. Other participants' residence, majority and eligibility, plus any participant's disqualifying judge/organizer/support conflicts. Adult status and Greece residence are confirmed for the human entrant only; other participants need not reside in Greece.
 2. Who owns or controls the PayPal Developer account, sandbox Business merchant, app credentials, Personal buyer account, and any webhook registration. Access and ownership remain unconfirmed.
-3. Sandbox OAuth and webhook registration permissions are verified. One genuine order was created and captured with the configured merchant binding.
-4. Whether the remaining two buyer checkouts will be approved and captured to complete the 3-scenario target.
-5. The temporary HTTPS webhook listener was used successfully for one authentic capture event. Runtime/listener availability is temporary; verify liveness before relying on it again.
-6. Whether the intended own-sandbox local route meets full provider-backed judge usability; no hosted instance or judge credentials issued.
-7. Whether fresh-checkout setup with authorized PayPal credentials and judge access meets T08’s full acceptance criteria. Local install/build/bootstrap took 33.59s; provider setup and judge usability were not measured.
-8. Whether T05 reaches 3/3. Current status is 1/3. T15 passed for one authentic capture. T08 local setup timing is measured, but overall T08 remains **NOT RUN** pending provider setup and judge usability.
+3. Whether the selected own-sandbox local route meets full provider-backed judge usability; no hosted instance or judge credentials issued. The entrant's3 verified transactions establish T05/T15, not judge usability.
+4. Whether fresh-checkout setup with authorized PayPal credentials and judge access meets T08's full acceptance criteria. Local install/build/bootstrap took33.59s; provider setup and judge usability were not measured. Overall T08 remains **NOT RUN**.
+5. Broader real-provider fault, replay and crash/restart acceptance remains incomplete. Temporary receiver has been closed; its historical success does not establish durable hosting.
 
 ## Primary references
 
