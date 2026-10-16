@@ -1,6 +1,6 @@
 # Judge sandbox access handoff
 
-October 16 AI status: GLM produced 20 schema-valid ordinary outputs, but semantic T01 failed and T14 remains incomplete. Latest quality prompt timed out; provider diagnostic returned HTTP 402, cause unresolved, so no further inference; private judge access remains unprovided.
+October 16 AI status: 28 GLM dispatches, 22 schema-accepted outputs and 35,857 reported tokens; two timeouts and two HTTP 402 responses lack usage. T01 remains FAIL (1/20 strict cases), T14 incomplete (2/10). The latest prompt has no accepted real output. Fresh access recheck returned HTTP 402 in 409 ms; cause unresolved. Published source 1a5247f uses a 45-second whole AI fetch/body deadline; PayPal timeouts are unchanged. Local 172/172 tests, TypeScript and production build PASS. Codex IAB works with authenticated Vyce. Judge key remains private, sharing unapproved. The reviewed 177.00-second video is published UNLISTED at https://youtu.be/tdFlgzJ0MXY; both YouTube checks completed with No issues, and Save confirmed publication at 2:57. The watch page confirms UNLISTED and working playback (177.021-second duration, no player error). Devpost accepted the video embed and saved the story, tags, GitHub URL and video through Save & continue, DRAFT 4/5. Additional information persisted on readback. No final project submission or judge-key sharing has occurred.
 
 **Status 2026-10-16: local app implemented; judge usability remains unverified.** App architecture is Next.js/SQLite. Source is public; publication/submission are authorized. All 3 genuine Sandbox deposits and 3 authentic completion webhooks are verified; T05/T15 PASS. Own-sandbox local setup is the intended judge route, allowed by official rules. Free judge AI access remains unresolved. No credential values belong in this file or public README.
 
@@ -56,7 +56,7 @@ Only PayPal account and buyer-account provisioning are outside the 15-minute fre
 3. Whether the selected own-sandbox local route meets full provider-backed judge usability; no hosted instance or judge credentials issued. The entrant's3 verified transactions establish T05/T15, not judge usability.
 4. Whether fresh-checkout setup with authorized PayPal credentials and judge access meets T08's full acceptance criteria. Local install/build/bootstrap took33.59s; provider setup and judge usability were not measured. Overall T08 remains **NOT RUN**.
 5. Broader real-provider fault, replay and crash/restart acceptance remains incomplete. Temporary receiver has been closed; its historical success does not establish durable hosting.
-6. Free judge AI access remains unverified. The latest quality prompt timed out and minimal diagnostic returned HTTP 402, despite enabled-key metadata; cause unresolved, no further inference. Current root browser unavailable after interruption; panel reconnection pending, native access denied/no fallback.
+6. Free judge AI access remains unverified. The latest quality prompt timed out and minimal diagnostic returned HTTP 402, despite enabled-key metadata; cause unresolved, no further inference. Codex IAB currently works with authenticated Vyce; browser reconnection is no longer a blocker.
 
 ## Primary references
 

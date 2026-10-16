@@ -1,8 +1,8 @@
 # AI validation history
 
-Current status, October 16: 22 real GLM application-adapter outputs were accepted by the strict schema. The 20-case quality baseline failed, and only two of ten hostile outputs were reviewed before the batch stopped on a timeout. The latest source-grounding prompt correction is reviewed locally but unvalidated live. A subsequent minimal GLM infrastructure check returned HTTP 402 `insufficient_balance`, while metadata still reported positive credit and an enabled key. No further inference is being attempted. Earlier dated records below retain their original results.
+Current status, October 16: 28 GLM dispatches, 22 schema-accepted outputs and 35,857 reported tokens; two timeouts and two HTTP 402 responses lack usage. T01 remains FAIL (1/20 strict cases), T14 incomplete (2/10). The latest prompt has no accepted real output. Fresh access recheck returned HTTP 402 in 409 ms; cause unresolved. Published source 1a5247f uses a 45-second whole AI fetch/body deadline; PayPal timeouts are unchanged. Local 172/172 tests, TypeScript and production build PASS. Codex IAB works with authenticated Vyce. Judge key remains private, sharing unapproved. The reviewed 177.00-second video is published UNLISTED at https://youtu.be/tdFlgzJ0MXY; both YouTube checks completed with No issues, and Save confirmed publication at 2:57. The watch page confirms UNLISTED and working playback (177.021-second duration, no player error). Devpost accepted the video embed and saved the story, tags, GitHub URL and video through Save & continue, DRAFT 4/5. Additional information persisted on readback. No final project submission or judge-key sharing has occurred.
 
-## Bounded Gemini smoke, 2026-10-10
+## Bounded Gemini smoke, 2026-10-10 (historical)
 
 Result: **blocked, zero validated outputs**. Full T01/T14 model evaluation remains NOT RUN.
 
@@ -24,7 +24,7 @@ Sources: [Gemini 3.8 migration](https://ai.google.dev/gemini-api/docs/generate-c
 
 Private evidence is retained outside the repository in session `work/PLAN/real-ai-smoke.json`, `real-ai-diagnostic.json`, and `real-ai-candidate-hypothesis.json`. Reports refuse replay. Eight billing-guard regressions and strict scratch TypeScript checks passed; independent TypeScript/security reviews approved bounded invocations.
 
-## Vyce follow-up, 2026-10-12
+## Vyce follow-up, 2026-10-12 (historical)
 
 A bounded validation allowance was authorized. The application remains configured with `AI_USAGE_ENABLED=false`. The model catalog still returns HTTP200 and lists `deepseek-v4-flash`; it provides no pricing fields. Vyce's [Terms of Service](https://vyceai.com/terms) state that per-token rates are displayed in the account dashboard; the public page gives no model rate. No authenticated Vyce dashboard session was available, so the exact rate and current debit remain unverified.
 
@@ -36,7 +36,7 @@ No further provider requests were made after the October 12 smoke until the sepa
 
 An offline diagnostic now exercises the actual Vyce adapter with eight injected transport fixtures, the disabled-config gate, and live-mode refusal. It passed89 assertions with zero network requests. Bounded metadata names the synthetic fixture fault only; the adapter intentionally masks provider failures, so these checks do not identify the historical live failure. A separate one-second harness deadline prevents an adapter-timeout regression from hanging the checks. Live mode remains unavailable until exact account rates and a bound covering billed reasoning/output are established.
 
-## Vyce follow-up, 2026-10-14
+## Vyce follow-up, 2026-10-14 (historical)
 
 The user supplied dashboard model cards, but the displayed rate unit could not be verified. One request using the selected `deepseek-v4-flash` model and synthetic fixture `SYN-01` was sent through the application adapter, with no retry and a 1,536-token output cap. Vyce returned HTTP429 `rate_limit_error` / `rate_limit_exceeded`; no token usage or output was returned. Application schema acceptance therefore did not occur. Actual debit is unknown. The request's conditional token-price estimate is not a billing cap because the rate unit and any billable reasoning scope are unverified.
 
@@ -48,6 +48,10 @@ Vyce displayed `glm-5.3-flash` as included at $0 per million tokens, with 10 mil
 
 Two bounded HTTP 200 pilots exposed missing nested-field instructions and a Markdown JSON wrapper despite JSON mode. The adapter now names the exact shape and accepts bare JSON or one anchored lowercase `json` fence, retaining strict DTO, response, timeout and authority boundaries. The subsequent baseline accepted 20 standard and 2 hostile outputs. Independent review scored 1/20 strict complete cases,29/46 labeled ambiguities and31/51 expected questions. T01 FAIL; T14 incomplete 2/10. A timeout stopped the batch before INJ-03 returned.
 
-A reviewed three-instruction correction now prohibits unsupported assumptions, preserves source timing/counts and requests separate material clarifications. Its fresh pilot also timed out, so improved quality is unverified. One minimal provider diagnostic then returned HTTP 402 `insufficient_balance` in 752 ms. The same key metadata still reported enabled, positive credit, US$1/6request limits and 0 spend; its request counter also remained 0 despite real responses, so it is not invoice proof. No further inference is being attempted.
+A reviewed three-instruction correction now prohibits unsupported assumptions, preserves source timing/counts and requests separate material clarifications. Its fresh pilot also timed out, so improved quality is unverified. One minimal provider diagnostic then returned HTTP 402 `insufficient_balance` in 752 ms. The same key metadata still reported enabled, positive credit, US$1/6request limits and 0 spend; its request counter also remained 0 despite real responses, so it is not invoice proof. A later access recheck returned HTTP 402 in 409 ms, also without usage.
 
-Across these GLM experiments: 27 chat-completion dispatches,22 accepted outputs,35,857reported tokens,2 timeouts without responses and1 HTTP 402 without usage. Failed STOP/claim evidence is immutable. Private quota accounting retains conservative holds for missing usage. No original financial database or PayPal provider was used by the isolated AI harness. Free judge AI access, the latest prompt rubric and final project submission remain incomplete.
+Across these GLM experiments: 28 chat-completion dispatches,22 schema-accepted outputs,35,857 reported tokens,2 timeouts without responses and2 HTTP 402 responses without usage. Failed STOP/claim evidence is immutable. Private quota accounting retains conservative holds for missing usage. No original financial database or PayPal provider was used by the isolated AI harness. Free judge AI access, the latest prompt rubric and final project submission remain incomplete.
+
+Published source 1a5247f extends only the AI whole-fetch/body deadline to 45 seconds, preserving PayPal timeouts and strict validation. Independent TypeScript/security reviews and 172/172 local tests, TypeScript and production build PASS under Node24.21.0. This local deadline verification supplies no accepted latest-prompt output and does not explain or fix HTTP 402. Codex IAB currently works with authenticated Vyce. The reviewed 177.00-second video is published UNLISTED at https://youtu.be/tdFlgzJ0MXY; both YouTube checks completed with No issues, and Save confirmed publication at 2:57. The watch page confirms UNLISTED and working playback (177.021-second duration, no player error). Devpost accepted the video embed and saved the story, tags, GitHub URL and video through Save & continue, DRAFT 4/5. Additional information persisted on readback. No final project submission or judge-key sharing has occurred. Published source is 1a5247f, including the reviewed deadline change.
+
+Authorized support email was sent to hello@vyceai.com about the unresolved HTTP 402; response pending. No API secret or account-balance amount was sent. This support contact does not establish restored provider access or change the incomplete AI acceptance/judge-access status.

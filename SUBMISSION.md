@@ -1,8 +1,8 @@
 # Scope to Deposit
 
-October 16 AI status: GLM produced 20 schema-valid ordinary outputs, but semantic T01 failed and T14 remains incomplete. Latest quality prompt timed out; provider diagnostic returned HTTP 402, cause unresolved, so no further inference; private judge access remains unprovided.
+October 16 AI status: 28 dispatches, 22 schema-accepted outputs and 35,857 reported tokens; two timeouts and two HTTP 402 responses lack usage. T01 FAIL (1/20), T14 incomplete (2/10); latest prompt has no accepted real output. Fresh access recheck returned HTTP 402 in 409 ms, cause unresolved. Source 1a5247f includes the 45-second AI deadline, PayPal unchanged; 172/172 tests, TypeScript and build PASS. Codex IAB works with authenticated Vyce. The reviewed 177.00-second video is published UNLISTED at https://youtu.be/tdFlgzJ0MXY; both YouTube checks completed with No issues, and Save confirmed publication at 2:57. The watch page confirms UNLISTED and working playback (177.021-second duration, no player error). Devpost accepted the video embed and saved the story, tags, GitHub URL and video through Save & continue, DRAFT 4/5. Additional information persisted on readback. No final project submission or judge-key sharing has occurred.
 
-**Status: entry draft, updated October 16.** Source repository is public and Devpost event registration is complete. Additional-information fields were filled but UNSAVED; project entry remains unsubmitted. New 177.00-second evidence video is reviewed and unpublished, with no YouTube URL.
+**Status: entry draft, updated October 16.** Source 1a5247f is public and Devpost registration is complete. The reviewed 177.00-second video is published UNLISTED at https://youtu.be/tdFlgzJ0MXY; both YouTube checks completed with No issues, and Save confirmed publication at 2:57. The watch page confirms UNLISTED and working playback (177.021-second duration, no player error). Devpost accepted the video embed and saved the story, tags, GitHub URL and video through Save & continue, DRAFT 4/5. Additional information persisted on readback. No final project submission or judge-key sharing has occurred.
 
 ## One-line pitch
 
@@ -31,7 +31,7 @@ Scope to Deposit keeps the sequence visible: capture the brief, review scope and
 - Buyer route designed around a fragment capability stored per tab and sent only in `X-Checkout-Token`.
 - PayPal Sandbox Orders, capture verification, reconciliation and durable webhook receipt services implemented. All3 genuine captures and3 authentic completion webhooks verified on2026-10-15; T05 and T15 PASS. Broader provider fault criteria remain incomplete.
 - Vyce AI extraction has an exact GLM/DeepSeek allowlist and strict nested JSON shape. Real v1 outputs passed schema for 20 ordinary and 2 hostile cases, but semantic T01 failed and T14 is incomplete. Latest prompt has no accepted real output; generation stays disabled after timeout and unresolved provider HTTP 402.
-- Local verification: final latest-prompt run passed 169/169 tests in 5.32s, TypeScript and production build under Node24.21.0. Historical checks passed 15/15 production HTTP, 23/23 browser UI and a 33.59-second fresh-checkout setup/build/health run.
+- Local verification: current source run passed 172/172 tests, TypeScript and production build under Node24.21.0. Historical checks passed 15/15 production HTTP, 23/23 browser UI and a 33.59-second fresh-checkout setup/build/health run.
 
 ## Use of PayPal
 
@@ -49,5 +49,5 @@ The entrant source is MIT licensed. Five small UI primitives were adapted from o
 
 - Resolve provider HTTP 402, then verify the reviewed quality correction and complete semantic acceptance before any working-AI claim. No further inference now; historical DeepSeek billing uncertainty is separate from the verified free GLM UI rate.
 - Review the demo against all3 verified Sandbox captures and authentic receipts. USD1 screenshot remains private; USD2/3 paid states were observed through normal buyer returns, with no exported PNG files.
-- Entrant declarations are complete: individual entry, adult/Greece, conflict/support response and ownership/required rights. Devpost event registration is verified complete; YouTube Studio upload availability was verified October 15. Browser worked earlier October 16; current root IAB is unavailable after interruption, with panel reconnection pending. Official rules permit complete local setup/run instructions for judging; a hosted app is optional.
-- Record and review final provider-backed evidence before video publication and project submission. Publication/submission are authorized; the draft still needs an actual demo video URL and final saved details.
+- Entrant declarations are complete: individual entry, adult/Greece, conflict/support response and ownership/required rights. Devpost event registration is verified complete; YouTube Studio upload availability was verified October 15. Codex IAB currently works with authenticated Vyce; browser reconnection is no longer a blocker. Devpost additional information and project details are saved, DRAFT 4/5; embed acceptance and persistence are verified. Official rules permit complete local setup/run instructions for judging; a hosted app is optional.
+- Reviewed evidence video is published UNLISTED at https://youtu.be/tdFlgzJ0MXY (2:57); both checks completed with No issues and publication Save was confirmed. Devpost accepted the embed and saved story, tags, GitHub URL and video, DRAFT 4/5. Final entry submission and free judge access remain incomplete.
