@@ -1,6 +1,6 @@
 # Scope to Deposit
 
-Scope to Deposit turns a client brief into an editable scope, a human-approved quote, and a buyer checkout link. The local build uses a real sandbox-only payment boundary. Three genuine PayPal Sandbox deposits and their authentic completion webhooks are verified. Manual scope editing and quote approval work; AI generation remains disabled pending accepted app output and verified usage limits.
+Scope to Deposit turns a client brief into an editable scope, a human-approved quote, and a buyer checkout link. Three genuine PayPal Sandbox deposits and their authentic completion webhooks are verified. The real AI adapter accepted 22 benchmark drafts, but its strict quality target failed. AI remains disabled by default; current provider access returns HTTP 402 despite positive credit metadata. Manual scope editing and quote approval work independently.
 
 This is a local hackathon prototype. It is not a production payment service, contract system, accounting tool, or legal/tax advisor.
 
@@ -20,6 +20,8 @@ Open `http://127.0.0.1:3000`. The setup command creates an owner named `owner` u
 `APP_ORIGIN` and the browser Host must match exactly. Keep the default `http://127.0.0.1:3000`; `localhost` and other aliases are rejected by the authentication boundary. Local database defaults to `.data/scope.sqlite`.
 
 The sample brief is synthetic. AI extraction remains disabled unless authorized model usage and configuration are supplied. No API key is required to use manual editing, quote approval, or local tests.
+
+The exact allowed AI models are `deepseek-v4-flash` and `glm-5.3-flash`, configured with `VYCEAI_MODEL`. Vyce displayed GLM as included at $0 per million tokens with a 10-million-token daily allowance on October 16. A dedicated limited test key was provisioned privately. Current provider access is unresolved, so free judge AI access is not yet established. Never enable a paid model or run the stock evaluation script without a separate usage budget and request guard. AI drafts require human review; the latest prompt correction has not passed a fresh live quality evaluation.
 
 ## Commands
 
@@ -82,4 +84,4 @@ Five adapted shadcn/ui primitives are attributed in source and covered by [THIRD
 
 See [RESULTS.md](RESULTS.md) for evidence and the acceptance ledger. On 2026-10-15, all 3/3 genuine Sandbox deposits (USD 1/2/3 against approved USD 10/20/30 quotes) were verified against canonical order, capture, merchant, amount and currency evidence. Three authentic completion webhooks were persisted and processed as paid. Normal buyer returns for the USD 2/3 checkouts visibly showed server-verified payment; the USD 1 paid-state screenshot is retained privately. The temporary webhook listener is not durable judge hosting.
 
-The latest full local run was 2026-10-12: 141/141 tests, TypeScript and production build passed. Historical production-browser checks passed 23/23 with zero unexpected console errors. A fresh checkout on Node.js 25.8.1/npm 11.11.0 completed install, owner setup, TypeScript, production build and health 200 in 33.59 seconds. A direct Vyce synthetic smoke returned valid JSON, but the latest bounded application-adapter request returned HTTP429 with no usage metadata. Accepted AI app output and rubric evaluation remain NOT RUN; AI stays disabled and actual charges are unknown. See [AI_SMOKE_RESULTS.md](AI_SMOKE_RESULTS.md) and [PAYPAL_SETUP.md](PAYPAL_SETUP.md).
+The October 16 local run passed 169/169 service tests, TypeScript and production build. Historical production-browser checks passed 23/23 with zero unexpected console errors; the fresh-checkout setup benchmark completed in 33.59 seconds. The real GLM baseline generated all 20 standard cases and two hostile cases before a timeout stopped the batch. Independent review scored 1/20 strict complete passes and 29/46 labeled ambiguities resolved. The remaining hostile cases and the revised prompt remain unvalidated. See [RESULTS.md](RESULTS.md), [AI_SMOKE_RESULTS.md](AI_SMOKE_RESULTS.md) and [PAYPAL_SETUP.md](PAYPAL_SETUP.md).

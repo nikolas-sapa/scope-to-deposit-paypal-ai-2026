@@ -1,6 +1,8 @@
 # Judge sandbox access handoff
 
-**Status2026-10-15: local app implemented; judge usability remains unverified.** App architecture is Next.js/SQLite. Public source and publication/submission are authorized. All3 genuine Sandbox deposits and3 authentic completion webhooks are verified; T05/T15 PASS. Own-sandbox local setup is the intended judge route, allowed by official rules. No credential values belong in this file or public README.
+October 16 AI status: GLM produced 20 schema-valid ordinary outputs, but semantic T01 failed and T14 remains incomplete. Latest quality prompt timed out; provider diagnostic returned HTTP 402, cause unresolved, so no further inference; private judge access remains unprovided.
+
+**Status 2026-10-16: local app implemented; judge usability remains unverified.** App architecture is Next.js/SQLite. Source is public; publication/submission are authorized. All 3 genuine Sandbox deposits and 3 authentic completion webhooks are verified; T05/T15 PASS. Own-sandbox local setup is the intended judge route, allowed by official rules. Free judge AI access remains unresolved. No credential values belong in this file or public README.
 
 ## Access paths for later decision
 
@@ -8,7 +10,7 @@
 
 **Private hosted route:** entrant hosts a sandbox-only judge instance and grants access through a private channel. This needs a separate approval for hosting, account ownership, judge authentication, retention, and private credential delivery. Never put access tokens, passwords, session secrets, or private app credentials in a public README, issue, or source file. No hosted route authorized.
 
-The selected judge route is own-sandbox local setup. No hosted judge instance has been provisioned.
+The selected judge route remains own-sandbox local setup; no hosted judge instance exists. Free GLM UI rate was verified, but semantic T01 failed, T14 incomplete and current provider HTTP 402 remains unresolved. A user-approved dedicated capped key exists privately; permission to share it in a private Devpost field remains unanswered. No judge key has been delivered and free judge AI access is not complete.
 
 ## Credential and identifier custody
 
@@ -47,13 +49,14 @@ Only PayPal account and buyer-account provisioning are outside the 15-minute fre
 - **T08, judge setup:** fresh checkout in under 15 minutes, excluding account provisioning, with setup transcript and runtime versions. Local install, owner setup, typecheck, production build, start, and health check completed in 33.59s on Node 25.8.1/npm 11.11.0. PayPal credential setup/OAuth and judge usability were not exercised; overall T08 remains **NOT RUN**.
 - **T15, authentic webhook:** **PASS**,3 authentic capture events passed registered webhook verification and converged on their existing captures. Simulator is not qualifying evidence. Broader fault/restart criteria remain separate and incomplete.
 
-## Cannot verify yet
+## Confirmed declarations and remaining gaps
 
-1. Other participants' residence, majority and eligibility, plus any participant's disqualifying judge/organizer/support conflicts. Adult status and Greece residence are confirmed for the human entrant only; other participants need not reside in Greece.
+1. Presented entrant declarations are complete: individual entry, adult/Greece, no organization connection in response to the question covering judge/organizer/sponsor, family/household and funding/support conflicts, and ownership/required rights. No teammates declared or additional unstated attestations inferred.
 2. Who owns or controls the PayPal Developer account, sandbox Business merchant, app credentials, Personal buyer account, and any webhook registration. Access and ownership remain unconfirmed.
 3. Whether the selected own-sandbox local route meets full provider-backed judge usability; no hosted instance or judge credentials issued. The entrant's3 verified transactions establish T05/T15, not judge usability.
 4. Whether fresh-checkout setup with authorized PayPal credentials and judge access meets T08's full acceptance criteria. Local install/build/bootstrap took33.59s; provider setup and judge usability were not measured. Overall T08 remains **NOT RUN**.
 5. Broader real-provider fault, replay and crash/restart acceptance remains incomplete. Temporary receiver has been closed; its historical success does not establish durable hosting.
+6. Free judge AI access remains unverified. The latest quality prompt timed out and minimal diagnostic returned HTTP 402, despite enabled-key metadata; cause unresolved, no further inference. Current root browser unavailable after interruption; panel reconnection pending, native access denied/no fallback.
 
 ## Primary references
 

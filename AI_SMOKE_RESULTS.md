@@ -1,4 +1,8 @@
-# Bounded Gemini smoke, 2026-10-10
+# AI validation history
+
+Current status, October 16: 22 real GLM application-adapter outputs were accepted by the strict schema. The 20-case quality baseline failed, and only two of ten hostile outputs were reviewed before the batch stopped on a timeout. The latest source-grounding prompt correction is reviewed locally but unvalidated live. A subsequent minimal GLM infrastructure check returned HTTP 402 `insufficient_balance`, while metadata still reported positive credit and an enabled key. No further inference is being attempted. Earlier dated records below retain their original results.
+
+## Bounded Gemini smoke, 2026-10-10
 
 Result: **blocked, zero validated outputs**. Full T01/T14 model evaluation remains NOT RUN.
 
@@ -37,3 +41,13 @@ An offline diagnostic now exercises the actual Vyce adapter with eight injected 
 The user supplied dashboard model cards, but the displayed rate unit could not be verified. One request using the selected `deepseek-v4-flash` model and synthetic fixture `SYN-01` was sent through the application adapter, with no retry and a 1,536-token output cap. Vyce returned HTTP429 `rate_limit_error` / `rate_limit_exceeded`; no token usage or output was returned. Application schema acceptance therefore did not occur. Actual debit is unknown. The request's conditional token-price estimate is not a billing cap because the rate unit and any billable reasoning scope are unverified.
 
 The configured model was not changed, AI remains disabled, and no additional inference or 30-case evaluation was run. A read-only key-info response reported tier `free` but no balance, pricing unit, or explicit Lite/Pro entitlement. Do not substitute `deepseek-v4.1` based on its free-plan banner without verifying account entitlement. No retry until quota/reset and cumulative spend are clear.
+
+## GLM application validation, 2026-10-16
+
+Vyce displayed `glm-5.3-flash` as included at $0 per million tokens, with 10 million tokens/day. A user-approved dedicated key was created privately; readback confirmed a US$1 spend limit and 6 requests/minute. The shared key was unchanged.
+
+Two bounded HTTP 200 pilots exposed missing nested-field instructions and a Markdown JSON wrapper despite JSON mode. The adapter now names the exact shape and accepts bare JSON or one anchored lowercase `json` fence, retaining strict DTO, response, timeout and authority boundaries. The subsequent baseline accepted 20 standard and 2 hostile outputs. Independent review scored 1/20 strict complete cases,29/46 labeled ambiguities and31/51 expected questions. T01 FAIL; T14 incomplete 2/10. A timeout stopped the batch before INJ-03 returned.
+
+A reviewed three-instruction correction now prohibits unsupported assumptions, preserves source timing/counts and requests separate material clarifications. Its fresh pilot also timed out, so improved quality is unverified. One minimal provider diagnostic then returned HTTP 402 `insufficient_balance` in 752 ms. The same key metadata still reported enabled, positive credit, US$1/6request limits and 0 spend; its request counter also remained 0 despite real responses, so it is not invoice proof. No further inference is being attempted.
+
+Across these GLM experiments: 27 chat-completion dispatches,22 accepted outputs,35,857reported tokens,2 timeouts without responses and1 HTTP 402 without usage. Failed STOP/claim evidence is immutable. Private quota accounting retains conservative holds for missing usage. No original financial database or PayPal provider was used by the isolated AI harness. Free judge AI access, the latest prompt rubric and final project submission remain incomplete.
