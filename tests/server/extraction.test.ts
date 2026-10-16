@@ -45,15 +45,19 @@ beforeEach(() => {
 afterEach(() => { db.close(); vi.useRealTimers(); });
 
 describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => {
-  it("accepts 1 valid draft, makes 0 database writes and 0 payment calls", async () => {
+  it.each(["deepseek-v4-flash", "glm-5.3-flash"])("%s accepts 1 valid draft, makes 0 database writes and 0 payment calls", async (model) => {
+    ctx.config.vyceModel = model;
     expect(await extractScope(ctx, "Build three accessible website pages.")).toEqual(extraction);
     expect(db.prepare("SELECT * FROM private_data").all()).toEqual([{ secret: "private-database-secret" }]);
+    expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
     expect(paymentActions).toHaveBeenCalledTimes(0);
     expect(transport).toHaveBeenCalledTimes(1);
   });
 
-  it("sends 1 fixed Vyce request, 0 tools, 0 context secrets, API key only in header", async () => {
+  it.each(["deepseek-v4-flash", "glm-5.3-flash"])("%s sends 1 fixed Vyce request, 0 tools, 0 context secrets, API key only in header", async (model) => {
+    ctx.config.vyceModel = model;
     await extractScope(ctx, "Build three accessible website pages.");
+    expect(transport).toHaveBeenCalledTimes(1);
     const [url, options] = transport.mock.calls[0];
     expect(url).toBe("https://vyceai.com/v1/chat/completions");
     expect(options?.method).toBe("POST");
@@ -70,14 +74,21 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
     const body = JSON.parse(bodyText);
     expect(body.tools).toBeUndefined();
     expect(body.toolConfig).toBeUndefined();
-    expect(body).toMatchObject({ model: "deepseek-v4-flash", response_format: { type: "json_object" }, max_tokens: 1536 });
+    expect(body).toMatchObject({ model, response_format: { type: "json_object" }, max_tokens: 1536 });
     expect(body.messages[0]).toMatchObject({ role: "system", content: expect.stringContaining("untrusted") });
+    expect(body.messages[0].content).toContain('{"goal":"string","deliverables":["string"],"timing":null,"constraints":["string"],"assumptions":["string"],"questions":[{"id":"string","text":"string","blocking":true,"answer":null}]}');
+    expect(body.messages[0].content).toContain("timing may be a string or null");
+    expect(body.messages[0].content).toContain("Use raw JSON only, without Markdown fences or prose.");
     expect(body.messages[1]).toEqual({ role: "user", content: "Build three accessible website pages." });
   });
 
   it.each([
     { aiUsageEnabled: false }, { vyceApiKey: "" }, { vyceApiKey: "   " },
     { vyceModel: "" }, { vyceModel: "   " }, { vyceModel: "gpt-6-luna" },
+    { vyceModel: "deepseek-v4-flash " }, { vyceModel: "DeepSeek-v4-flash" },
+    { vyceModel: "glm-5.3" }, { vyceModel: "glm-5.3-flash-preview" },
+    { vyceModel: " glm-5.3-flash" }, { vyceModel: "glm-5.3-flash " },
+    { vyceModel: "GLM-5.3-flash" }, { vyceModel: "glm-5.3-flash\n" },
   ])("rejects unauthorized/missing configuration %j with 0 transport calls", async (change) => {
     Object.assign(ctx.config, change);
     await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({ code: "CONFIG_REQUIRED", status: 503 });
@@ -130,6 +141,52 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
   ])("strict real validator rejects malformed output %#", async (output) => {
     transport.mockResolvedValue(responseFor(output));
     await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE" });
+  });
+
+  it.each([
+    { id: "content", question: "Who supplies content?", blocking: true, answer: null },
+    { ...extraction.questions[0], question: "Who supplies content?" },
+  ])("rejects question alias %# from HTTP 200/stop with 0 database writes and 0 payment calls", async (question) => {
+    transport.mockResolvedValue(responseFor({ ...extraction, questions: [question] }));
+    await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE", status: 503 });
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect(paymentActions).toHaveBeenCalledTimes(0);
+    expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
+  });
+
+  it.each([
+    JSON.stringify(extraction),
+    `\`\`\`json\n${JSON.stringify(extraction)}\n\`\`\``,
+    ` \n\`\`\`json\r\n${JSON.stringify(extraction)}\r\n\`\`\`\t\n`,
+  ])("accepts bare JSON or 1 exact json fence %# with 0 database writes and 0 payment calls", async (content) => {
+    transport.mockResolvedValue(Response.json({ choices: [{ finish_reason: "stop", message: { content } }] }));
+    expect(await extractScope(ctx, "Website brief")).toEqual(extraction);
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect(paymentActions).toHaveBeenCalledTimes(0);
+    expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
+  });
+
+  const fencedDraft = `\`\`\`json\n${JSON.stringify(extraction)}\n\`\`\``;
+  it.each([
+    `Here is your draft:\n${fencedDraft}`,
+    `${fencedDraft}\nDone.`,
+    `${fencedDraft}\n${fencedDraft}`,
+    fencedDraft.replace("```json", "```javascript"),
+    fencedDraft.replace("```json", "```JSON"),
+    fencedDraft.replace("```json", "```"),
+    `\`\`\`json${JSON.stringify(extraction)}\`\`\``,
+    `\`\`\`json\n${fencedDraft}\n\`\`\``,
+    "```json\nnot JSON\n```",
+    `\`\`\`json\n${JSON.stringify({ ...extraction, approved: true })}\n\`\`\``,
+    `\`\`\`json\n${JSON.stringify({ ...extraction, questions: [{ id: "content", question: "Who supplies content?", blocking: true, answer: null }] })}\n\`\`\``,
+    `\`\`\`json\n${JSON.stringify({ ...extraction, questions: [{ ...extraction.questions[0], question: "Who supplies content?" }] })}\n\`\`\``,
+    `\`\`\`json\n${" ".repeat(32768)}${JSON.stringify(extraction)}\n\`\`\``,
+  ])("rejects malformed/oversized wrapper or invalid fenced DTO %# with 0 database writes and 0 payment calls", async (content) => {
+    transport.mockResolvedValue(Response.json({ choices: [{ finish_reason: "stop", message: { content } }] }));
+    await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE", status: 503 });
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect(paymentActions).toHaveBeenCalledTimes(0);
+    expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
   });
 
   it.each([400, 401, 429, 500, 302])("HTTP %i leaks 0 provider response fields", async (status) => {
