@@ -81,6 +81,7 @@ expect(() => transaction(db, () => Promise.resolve())).toThrow();
 - [x] Implement Gemini REST adapter using selected model/key, structured response schema, strict validation and bounded input/output. `extractScope(ctx,brief): Promise<ScopeExtraction>` returns facts/questions only; no model tools or payment credentials. Model output never saves/approves commercial terms automatically.
 - [x] Gate actual generation with AI_USAGE_ENABLED, false by default until explicit approved usage. Missing permission/config returns CONFIG_REQUIRED. No fixture is displayed as real extraction.
 - [x] Run tests with labeled transport fixtures and real validator; genuine 20-case T01 requires approved usage. Save report; main verifies/reviews/commits.
+- AI deadline update (2026-10-16): use one 45,000 ms deadline for extraction fetch and body consumption. Verify exact 44,999/45,000 ms hung-fetch/body boundaries, 20,000 ms valid response, late-response rejection and immediate HTTP 402/401/429 failure with 1 dispatch and 0 retries/payment actions. Preserve prompt, strict schema, caps and source-grounded draft behavior. A separately reviewed new private evaluation guard uses 44,000 ms; stopped experiments remain immutable. PayPal retains its 15-second timeout and 30-second lease.
 
 ## Task 5: Owner and buyer UI, Luna frontend
 

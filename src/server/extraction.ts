@@ -5,7 +5,7 @@ import { AppError } from "./errors";
 
 const ENDPOINT = "https://vyceai.com/v1/chat/completions";
 const MODELS = new Set(["deepseek-v4-flash", "glm-5.3-flash"]);
-const TIMEOUT_MS = 15000;
+const TIMEOUT_MS = 45000;
 const MAX_RESPONSE_BYTES = 65536;
 const MAX_OUTPUT_CHARS = 32768;
 const MAX_OUTPUT_TOKENS = 1536;

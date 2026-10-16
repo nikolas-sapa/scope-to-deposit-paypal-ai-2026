@@ -189,11 +189,18 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
     expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
   });
 
-  it.each([400, 401, 429, 500, 302])("HTTP %i leaks 0 provider response fields", async (status) => {
+  it.each([400, 401, 402, 429, 500, 302])("HTTP %i fails immediately with 1 dispatch, 0 retries and 0 provider response fields", async (status) => {
+    vi.useFakeTimers();
+    const startedAt = Date.now();
     transport.mockResolvedValue(new Response("private-vyce-key provider debug", { status }));
     await expect(extractScope(ctx, "Website brief")).rejects.toMatchObject({
       code: "PROVIDER_UNAVAILABLE", message: "Scope extraction is unavailable.",
     });
+    expect(Date.now()).toBe(startedAt);
+    expect(vi.getTimerCount()).toBe(0);
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect(paymentActions).toHaveBeenCalledTimes(0);
+    expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
   });
 
   it.each([
@@ -246,26 +253,89 @@ describe("Scope extraction, real Zod validator with LOCAL_FIXTURE fetch", () => 
     });
   });
 
-  it("stalled fetch aborts at 15000ms, rejects exactly 1 generic failure", async () => {
+  it("stalled fetch stays pending at 44999ms and aborts at 45000ms with 1 dispatch", async () => {
     vi.useFakeTimers();
     transport.mockImplementation(() => new Promise(() => {}));
     const promise = extractScope(ctx, "Website brief");
+    const settled = vi.fn();
+    void promise.then(settled, settled);
     const assertion = expect(promise).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE" });
-    await vi.advanceTimersByTimeAsync(15000);
+    await vi.advanceTimersByTimeAsync(44999);
+    expect(settled).toHaveBeenCalledTimes(0);
+    expect(transport.mock.calls[0][1]?.signal?.aborted).toBe(false);
+    await vi.advanceTimersByTimeAsync(1);
     await assertion;
+    expect(settled).toHaveBeenCalledTimes(1);
     expect(transport.mock.calls[0][1]?.signal?.aborted).toBe(true);
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect(paymentActions).toHaveBeenCalledTimes(0);
+    expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
   });
 
-  it("stalled response stream cancels at 15000ms", async () => {
+  it("body after 20000ms fetch shares deadline, stays pending at 44999ms and cancels once at 45000ms", async () => {
     vi.useFakeTimers();
     const cancel = vi.fn();
-    transport.mockResolvedValue(new Response(new ReadableStream({ start() {}, cancel }), {
-      headers: { "content-type": "application/json" },
+    transport.mockImplementation(() => new Promise((resolve) => {
+      setTimeout(() => resolve(new Response(new ReadableStream({ start() {}, cancel }), {
+        headers: { "content-type": "application/json" },
+      })), 20000);
     }));
     const promise = extractScope(ctx, "Website brief");
+    const settled = vi.fn();
+    void promise.then(settled, settled);
     const assertion = expect(promise).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE" });
-    await vi.advanceTimersByTimeAsync(15000);
+    await vi.advanceTimersByTimeAsync(44999);
+    expect(settled).toHaveBeenCalledTimes(0);
+    expect(cancel).toHaveBeenCalledTimes(0);
+    await vi.advanceTimersByTimeAsync(1);
     await assertion;
+    expect(settled).toHaveBeenCalledTimes(1);
     expect(cancel).toHaveBeenCalledTimes(1);
+    expect(transport.mock.calls[0][1]?.signal?.aborted).toBe(true);
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect(paymentActions).toHaveBeenCalledTimes(0);
+    expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
+  });
+
+  it("valid response at 20000ms passes strict validation with 1 dispatch and 0 privileged actions", async () => {
+    vi.useFakeTimers();
+    transport.mockImplementation(() => new Promise((resolve) => {
+      setTimeout(() => resolve(responseFor(extraction)), 20000);
+    }));
+    const promise = extractScope(ctx, "Website brief");
+    const settled = vi.fn();
+    void promise.then(settled, settled);
+    await vi.advanceTimersByTimeAsync(19999);
+    expect(settled).toHaveBeenCalledTimes(0);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(await promise).toEqual(extraction);
+    expect(vi.getTimerCount()).toBe(0);
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect(paymentActions).toHaveBeenCalledTimes(0);
+    expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
+  });
+
+  it("ignored-abort transport resolving after 45000ms cannot accept late content or retry", async () => {
+    vi.useFakeTimers();
+    let resolveLate!: (response: Response) => void;
+    transport.mockImplementation(() => new Promise((resolve) => { resolveLate = resolve; }));
+    const promise = extractScope(ctx, "Website brief");
+    const accepted = vi.fn();
+    const rejected = vi.fn();
+    void promise.then(accepted, rejected);
+    const assertion = expect(promise).rejects.toMatchObject({ code: "PROVIDER_UNAVAILABLE" });
+    await vi.advanceTimersByTimeAsync(45000);
+    await assertion;
+    const cancel = vi.fn();
+    resolveLate(new Response(new ReadableStream({ start() {}, cancel }), {
+      headers: { "content-type": "application/json" },
+    }));
+    await vi.advanceTimersByTimeAsync(1);
+    expect(accepted).toHaveBeenCalledTimes(0);
+    expect(rejected).toHaveBeenCalledTimes(1);
+    expect(cancel).toHaveBeenCalledTimes(1);
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect(paymentActions).toHaveBeenCalledTimes(0);
+    expect(db.prepare("SELECT total_changes() AS changes").get()).toEqual({ changes: 1 });
   });
 });
