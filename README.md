@@ -32,7 +32,7 @@ The exact allowed AI models are `deepseek-v4-flash` and `glm-5.3-flash`, configu
 | `npm run start` | Start the production build on loopback |
 | `npm run typecheck` | Run TypeScript checks |
 | `npm test` | Run local service and boundary tests |
-| `npm run test:e2e` | Runs Playwright specs under `tests/e2e`; none are currently checked in. Recorded production-browser verification is in [RESULTS.md](RESULTS.md). |
+| `npm run test:e2e` | Runs the Playwright specs under `tests/e2e`: anonymous-rejection plus the owner sign-in → scope edit → quote approval path, with the checkout control asserted against live `/api/health` sandbox state. Recorded production-browser verification is in [RESULTS.md](RESULTS.md). |
 | `npm run setup:owner` | Provision the first local owner and private access file |
 | `npm run check:access` | Check sandbox OAuth only when credentials exist; never creates an order or capture |
 | `npm run evaluate` | Run the 30-case model evaluation only when authorized AI usage is enabled; otherwise records `NOT RUN` |
